@@ -1,0 +1,158 @@
+.tab {
+    padding: 10px 15px;
+    cursor: pointer;
+    background: rgb(27, 43, 43);
+    color: white;
+    border-radius: 5px;
+}
+
+.tab.active {
+    background: darkcyan;
+}
+
+#form-container {
+    margin-top: 20px;
+}
+
+#form-container-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+#overall-form-container {
+    margin-top: 1rem;
+    background: rgba(0, 128, 128, 0.463);
+    padding: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    width: 600px;
+    text-align: center;
+}
+
+#form-container-nav h2 {
+    font-size: 1.2rem;
+    color: var(--dark-prime);
+}
+
+.tab-buttons {
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 20px;
+    list-style: none;
+    padding: 5px;
+}
+
+.tab-buttons li {
+    padding: 8px 8px;
+    border: none;
+    border-radius: 30px;
+    background: var(--primary-color);
+    color: var(--text-1);
+    cursor: pointer;
+    font-size: 10px;
+}
+
+.tab-buttons li.active {
+    padding: 8px 8px;
+    border: none;
+    border-radius: 30px;
+    background: var(--color-11);
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 10px;
+}
+
+.tab-buttons button {
+    all: unset;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* #overall-form-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 20px;
+    border: none;
+} */
+
+.submit-btn {
+    all: unset;
+    display: block;
+    margin: auto;
+    background: var(--primary-color);
+    color: var(--color-11);
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 30%;
+}
+
+.submit-btn:hover {
+    background-color: var(--dark-prime);
+    transition: 0.5s;
+
+}
+
+.form-wrapper {
+    height: 150px;
+    /* Restrict form height */
+    overflow-y: auto;
+    /* Enables scrolling when needed */
+    padding-right: 10px;
+    /* Prevents scroll overlap */
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.toggle-link {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--text-2);
+    cursor: pointer;
+    display: inline-block;
+}
+
+.toggle-link span {
+    color: var(--primary-color);
+}
+
+.toggle-link span:hover {
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+}
+
+.form-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.form-wrapper::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 4px;
+}
+
+.form-wrapper::-webkit-scrollbar-track {
+    background: #f4f4f4;
+}

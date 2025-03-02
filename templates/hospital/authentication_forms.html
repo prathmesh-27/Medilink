@@ -1,0 +1,122 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+</head>
+
+<div id="overall-form-container">
+
+    {% if error %}
+    <div id="error-message"
+        style="color: red; padding: 10px; border: 1px solid red; display: flex; justify-content: space-between; align-items: center;">
+        <p style="margin: 0;">{{ error }}</p>
+        <button onclick="document.getElementById('error-message').style.display='none'"
+            style="border: none; background: none; color: red; font-weight: bold; cursor: pointer;">&times;</button>
+    </div>
+    {% endif %}
+
+    <nav id="form-container-nav">
+        <h2 id="form-title" class="font-3">Login as an Admin</h2> <!-- Use heading for better structure -->
+
+        <ul class="tab-buttons">
+            <li class="tab active" data-form="admin"><button>Admin</button></li>
+            <li class="tab" data-form="patient"><button>Patient</button></li>
+            <li class="tab" data-form="doctor"><button>Doctor</button></li>
+        </ul>
+    </nav>
+    <div id="form-container">
+
+        <form method="POST" id="loginForm" action="{% url 'user_login' %}">
+
+            <div class="form-wrapper">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ loginform.username }}
+                </div>
+                <div class="form-group">
+                    {{ loginform.password }}
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+            <p class="toggle-link">Don't have an account? <span id="toggleFormLink" onclick="toggleForm()">Sign
+                    up</span></p>
+        </form>
+
+        <div id="changable">
+            {% include 'hospital/dummy/admin_form.html' %}
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    function toTitleCase(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function getActiveTab() {
+        let activeTab = document.querySelector(".tab.active"); // Select active tab
+        if (activeTab) {
+            let dataForm = activeTab.getAttribute("data-form"); // Get data-form attribute
+            console.log("Active tab data-form:", dataForm);
+            return dataForm;
+        }
+        return null;
+    }
+
+    function toggleForm() {
+        let loginForm = document.getElementById("loginForm");
+        let signupForm = document.getElementById("signupForm");
+        let title = document.getElementById("form-title");
+        let formattedFormType = toTitleCase(getActiveTab()); // Corrected function call
+        let article = ["Admin"].includes(formattedFormType) ? "an" : "a";
+
+        if (loginForm.classList.contains("hidden")) {
+            loginForm.classList.remove("hidden");
+            signupForm.classList.add("hidden");
+
+            title.textContent = `Login as ${article} ${formattedFormType}`; // Update title for login
+        } else {
+            loginForm.classList.add("hidden");
+            signupForm.classList.remove("hidden");
+            title.textContent = `Signup as ${article} ${formattedFormType}`; // Update title for signup
+        }
+    }
+    var loadFormUrl = "{% url 'load_form' %}";  // Django renders this correctly
+
+    $(document).ready(function () {
+        $(".tab").click(function () {
+            $("#loginForm").removeClass("hidden");
+            $("#signupForm").addClass("hidden")
+            $(".tab").removeClass("active");  // Remove active class from all tabs
+            $(this).addClass("active");  // Add active class to clicked tab
+
+            let formType = $(this).data("form");  // Get selected form type
+            let title = document.getElementById("form-title");
+            let loginForm = document.getElementById("loginForm");
+
+            let formattedFormType = toTitleCase(formType); // Corrected function call
+
+            let article = ["Admin"].includes(formattedFormType) ? "an" : "a";// Adjust if needed
+
+            if (loginForm.classList.contains("hidden")) {
+                title.textContent = `Signup as ${article} ${formattedFormType}`;
+            } else {
+                title.textContent = `Login as ${article} ${formattedFormType}`;
+            }
+
+            $.ajax({
+                url: loadFormUrl,  // Django URL to fetch the form
+                type: "GET",
+                data: { form_type: formType },
+                success: function (response) {
+                    $("#changable").html(response);
+                }
+            });
+        });
+    });
+</script>

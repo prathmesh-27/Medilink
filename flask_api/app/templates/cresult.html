@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Information</title>
+</head>
+
+<body>
+    <h1>Your Health Information</h1>
+
+    <p><strong>Gender:</strong> {{ data['gender'] }}</p>
+    <p><strong>Age:</strong> {{ data['age'] }} years</p>
+    <p><strong>Height:</strong> {{ data['height'] }} cm</p>
+    <p><strong>Weight:</strong> {{ data['weight'] }} kg</p>
+    <p><strong>Exercise Level:</strong> {{ data['exercise'] }}</p>
+
+    <h2>BMI Information</h2>
+    <p><strong>BMI:</strong> {{ data['BMI'] }}</p>
+    <p><strong>BMI Category:</strong> {{ data['BMI_category'] }}</p>
+
+    <h2>Calories Information</h2>
+    <p><strong>BMR:</strong> {{ data['BMR'] }} kcal/day</p>
+    <p><strong>Daily Calories Needed:</strong> {{ data['calories'] }} kcal/day</p>
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+{% load widget_tweaks %}
+
+<form method="POST" id="signupForm" class="hidden" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-wrapper">
+        <div class="form-group">
+            {% render_field signupform.user.first_name class="form-control" placeholder="First Name" %}
+        </div>
+        <div class="form-group">
+            {% render_field signupform.user.last_name class="form-control" placeholder="Last Name" %}
+        </div>
+        <div class="form-group">
+            {% render_field signupform.user.username class="form-control" placeholder="Username" %}
+        </div>
+        <div class="form-group">
+            {% render_field signupform.user.password class="form-control" placeholder="Password" %}
+        </div>
+
+        <div class="form-group">
+            {% render_field signupform.patient.symptoms class="form-control" placeholder="Symptoms" %}
+        </div>
+        <div class="form-group">
+            {% render_field signupform.patient.profile_pic class="form-control"%}
+        </div>
+
+        <div class="form-group">
+            {% render_field signupform.patient.mobile class="form-control"%}
+            <!-- {{patientForm.mobile}} -->
+        </div>
+        <div class="form-group">
+            {% render_field signupform.patient.assignedDoctorId class="form-control" placeholder="Doctor" %}
+        </div>
+        <div class="form-group">
+            {% render_field signupform.patient.address class="form-control" placeholder="Address" %}
+        </div>
+
+    </div>
+    <button type="submit" class="submit-btn">Sign Up</button>
+    <p class="toggle-link">Already have an account? <span onclick="toggleForm()">Login</span></p>
+</form>

@@ -1,0 +1,10 @@
+{% extends 'hospital/homebase.html' %}
+{% load static %}
+{% block content %}
+
+<section id="navbar-section">
+  {% include "hospital/other/navbar.html" %}
+  {% include "hospital/authentication_forms.html"%}
+</section>
+
+{% endblock content %}

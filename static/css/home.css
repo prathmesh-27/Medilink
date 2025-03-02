@@ -1,0 +1,151 @@
+.section {
+    padding: 50px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* From Here styling starts for Section containing image and other info about medilink */
+.background-primary {
+    background-color: var(--primary-color);
+}
+
+.image-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    width: 300px;
+    height: 300px;
+
+}
+
+.image-container div {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Prevents overflow */
+    display: block;
+}
+
+/* Large left image */
+.large-image {
+    grid-row: span 2;
+    /* Takes up both rows */
+    height: 100%;
+    /* Ensures it fills container */
+}
+
+.text-container {
+    flex: 1;
+    color: white;
+    max-width: 400px;
+    text-align: center;
+}
+
+.text-container h1 {
+    font-size: 2rem;
+}
+
+.text-container p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.text-container ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.text-container ul li {
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+/* Second Section: Mission, Vision, Motto */
+.section-cards {
+    background-color: var(--secondar-color);
+    padding: 50px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 280px;
+    min-height: 300px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:nth-child(odd) {
+    background-color: var(--color-11);
+}
+
+.card:nth-child(even) {
+    background-color: var(--secondar-color);
+}
+
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 12px;
+    color: var(--text-2);
+}
+
+.border {
+    border: 2px solid black;
+    border-radius: 10px;
+    min-height: 300px;
+    padding: 5px;
+}
+
+@media (max-width: 600px) {
+    .card {
+        width: 100%;
+        /* Stacks all cards on smaller screens */
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .section-cards {
+        flex-direction: column;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .image-container {
+        width: 100%;
+        height: auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+}

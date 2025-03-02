@@ -1,0 +1,53 @@
+{%extends '../base.html' %}
+{% block title %} Medilink-Get Diet {% endblock %}
+{% block content %}
+<main>
+
+    <form id="dietForm" action="{% url 'get_diet'%}" method="POST">
+        {% csrf_token %}
+        <div class="section">
+            <h2>Select Nutrients</h2>
+            <div class="grid">
+                <!-- Generate 16 nutrients checkboxes -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Select Health Condition</h2>
+            <div class="grid">
+                <!-- Generate 12 health conditions checkboxes -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Gender</h2>
+            <div class="grid">
+                <div class="radio-wrapper">
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+                </div>
+                <div class="radio-wrapper">
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Diet Type</h2>
+            <div class="grid">
+                <div class="radio-wrapper">
+                    <input type="radio" id="veg" name="diet" value="veg">
+                    <label for="veg">Vegetarian</label>
+                </div>
+                <div class="radio-wrapper">
+                    <input type="radio" id="nonveg" name="diet" value="non-veg">
+                    <label for="nonveg">Non Vegetarian</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Get Diet Plan</button>
+    </form>
+</main>
+{% endblock content %}

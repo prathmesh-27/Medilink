@@ -1,0 +1,55 @@
+{% load static %}
+<div class="bs-example">
+  <nav class="navbar navbar-expand-md navbar-dark" style="background:#337AB7;">
+    <a href="/" class="navbar-brand">MedLink</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+      <div class="navbar-nav">
+
+        <a href="/adminclick" class="nav-item nav-link">Admin</a>
+        <a href="/doctorclick" class="nav-item nav-link">Doctor</a>
+        <a href="/patientclick" class="nav-item nav-link">Patient</a>
+        <a href="#" class="nav-item nav-link">Get Diet Plan</a>
+
+
+      </div>
+
+      <div class="navbar-nav">
+        <a href="/aboutus" class="nav-item nav-link">About Us</a>
+        <a href="/contactus" class="nav-item nav-link">Contact Us</a>
+      </div>
+
+    </div>
+  </nav>
+</div>
+<div class="home-navbar">
+  <ul class="home-navbar-upper">
+    <li>
+      <div class="logo">
+        <span><img src="{% static 'images/Med.png' %}" /></span>
+        <span class="logo-text font-1">MEDILINK</span>
+      </div>
+    </li>
+    <!-- <li>
+            <div><i class="fa fa-phone"></i></div>
+            <div>
+                <p>Emergency</p>
+            </div>
+        </li>
+        <li><i class="fa fa-envelope"></i>Email</li> -->
+    <li><button class="appointment-btn">Make Appointment</button></li>
+  </ul>
+  <div class="separator"></div>
+  <ul class="home-navbar-lower">
+    <li><a href="/">Home</a></li>
+    <li><a href="#">About Us</a></li>
+    <li><a href="{% url 'contactus' %}">Contact</a></li>
+    <li><a href="{% url 'get_diet' %}">Get Diet Plan</a></li>
+  </ul>
+</div>
+<!--
+  developed By : Prathmesh Vairale
+  -->

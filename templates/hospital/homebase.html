@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %} Home {% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="{% static 'css/form.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <main>
+    {% block content %}
+    {% endblock content %}
+    <!-- Second Section: Mission, Vision, Motto -->
+    <section class="section-cards">
+      <div class="card font-2">
+        <div class="border">
+          <h3 class="font-1">Mission</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra, dolor sit amet consequat
+            molestie, ex diam dictum lectus, ac euismod urna ipsum sit amet erat. Sed ut metus neque. Proin sed
+            arcu eleifend, interdum sapien a, iaculis neque. Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Suspendisse eu mauris pulvinar, viverra urna suscipit, pretium ligula. Ut ut elit in justo
+            efficitur interdum id vel ex. Aliquam a mollis tellus. Mauris et neque justo. In hac habitasse
+            platea dictumst.</p>
+        </div>
+
+      </div>
+      <div class="card">
+        <div class="border">
+          <h3 class="font-1">Vision</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra, dolor sit amet consequat
+            molestie, ex diam dictum lectus, ac euismod urna ipsum sit amet erat. Sed ut metus neque. Proin sed
+            arcu eleifend, interdum sapien a, iaculis neque. Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Suspendisse eu mauris pulvinar, viverra urna suscipit, pretium ligula. Ut ut elit in justo
+            efficitur interdum id vel ex. Aliquam a mollis tellus. Mauris et neque justo. In hac habitasse
+            platea dictumst.</p>
+        </div>
+
+      </div>
+      <div class="card">
+        <div class="border">
+          <h3 class="font-1">Motto</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra, dolor sit amet consequat
+            molestie, ex diam dictum lectus, ac euismod urna ipsum sit amet erat. Sed ut metus neque. Proin sed
+            arcu eleifend, interdum sapien a, iaculis neque. Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Suspendisse eu mauris pulvinar, viverra urna suscipit, pretium ligula. Ut ut elit in justo
+            efficitur interdum id vel ex. Aliquam a mollis tellus. Mauris et neque justo. In hac habitasse
+            platea dictumst.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section containing image and other info about medilink -->
+    <section class="section background-primary">
+      <div class="image-container">
+        <div class="large-image">
+          <img src="https://picsum.photos/id/237/200/300" alt="Large Image">
+        </div>
+        <div><img src="https://picsum.photos/id/237/200/300" alt="Small Image 1"></div>
+        <div><img src="https://picsum.photos/id/237/200/300" alt="Small Image 2"></div>
+
+
+      </div>
+      <div class="text-container">
+        <h1 class="font-1">MEDILINK</h1>
+        <p class="font-1">Simplifying management, Connecting Care</p>
+        <div class="font-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra, dolor sit amet
+          consequat
+          molestie, ex diam dictum lectus, ac euismod urna ipsum sit amet erat. Sed ut metus neque. Proin sed arcu
+          eleifend, interdum sapien a, iaculis neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Suspendisse eu mauris pulvinar, viverra urna suscipit, pretium ligula. </div>
+      </div>
+    </section>
+    <!-- Template includes Footer -->
+    {% include "hospital/other/footer.html" %}
+  </main>
+
+</body>
+
+
+</html>

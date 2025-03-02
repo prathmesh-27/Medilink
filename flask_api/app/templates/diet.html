@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Nutrients and Health Conditions</title>
+</head>
+
+<body>
+    <h1>Select Nutrients and Health Conditions</h1>
+
+    <form method="POST">
+        <div>
+            <h3>Select Nutrients</h3>
+            {% for nutrient in nutrients %}
+            <label>
+                <input type="checkbox" name="nutrients" value="{{ nutrient }}">
+                {{ nutrient }}
+            </label><br>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h3>Select Health Conditions</h3>
+            {% for condition in health_conditions %}
+            <label>
+                <input type="checkbox" name="health_conditions" value="{{ condition }}">
+                {{ condition }}
+            </label><br>
+            {% endfor %}
+        </div>
+        <div>
+            <h3>Select Gender</h3>
+            <label>
+                <input type="radio" name="gender" value="male" required>
+                Male
+            </label><br>
+            <label>
+                <input type="radio" name="gender" value="female" required>
+                Female
+            </label><br>
+        </div>
+
+        <div>
+            <h3>Select Type</h3>
+            <label>
+                <input type="radio" name="foodtype" value="veg" required>
+                Veg
+            </label><br>
+            <label>
+                <input type="radio" name="foodtype" value="non-veg" required>
+                Non Veg
+            </label><br>
+        </div>
+
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Recommendation System</title>
+</head>
+
+<body>
+    <h1>Diet Recommendation</h1>
+
+    <form method="POST">
+        <label for="diet">Diet:</label>
+        <input type="text" name="diet"><br>
+        <label for="disease">Disease:</label>
+        <input type="text" name="disease"><br>
+        <label for="nutrient">Nutrient:</label>
+        <input type="text" name="nutrient"><br>
+        <label for="food_type">Food Type:</label>
+        <input type="text" name="food_type"><br>
+        <label for="favorite_food">Favorite Food:</label>
+        <input type="text" name="favorite_food"><br>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if recommendations %}
+    <h2>Recommended Foods</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Nutrient</th>
+            <th>Price</th>
+            <th>Review</th>
+            <th>Description</th>
+        </tr>
+        {% for item in recommendations.iterrows() %}
+        <tr>
+            <td>{{ item[1]['Name'] }}</td>
+            <td>{{ item[1]['Nutrient'] }}</td>
+            <td>{{ item[1]['Price'] }}</td>
+            <td>{{ item[1]['Review'] }}</td>
+            <td>{{ item[1]['description'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+
+</html>
