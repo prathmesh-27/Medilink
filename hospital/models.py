@@ -10,12 +10,32 @@ departments=[('Cardiologist','Cardiologist'),
 ('Colon and Rectal Surgeons','Colon and Rectal Surgeons')
 ]
 
+# Gender Choices (Defined Outside the Model)
+GENDER_CHOICES = [
+    ('Male', 'Male'),
+    ('Female', 'Female'),
+]
+
+# Appointment Day Choices
+DAY_CHOICES = [
+    ('Sunday', 'Sunday'),
+    ('Monday', 'Monday'),
+    ('Tuesday', 'Tuesday'),
+    ('Wednesday', 'Wednesday'),
+    ('Thursday', 'Thursday'),
+    ('Friday', 'Friday'),
+    ('Saturday', 'Saturday'),
+]
+
+
+
 class Doctor(models.Model):
     user= models.OneToOneField(User,on_delete=models.CASCADE)
     profile_pic = models.ImageField(upload_to='profile_pic/DoctorProfilePic/',null=True,blank=True)
     address = models.CharField(max_length=40)
     mobile = models.CharField(max_length=20,null=True)
     department= models.CharField(max_length=50,choices=departments,default='Cardiologist')
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True, blank=True)
     status=models.BooleanField(default=False)
     @property
     def get_name(self):
@@ -26,8 +46,6 @@ class Doctor(models.Model):
     def __str__(self):
         return "{} ({})".format(self.user.first_name,self.department)
 
-
-
 class Patient(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     profile_pic= models.ImageField(upload_to='profile_pic/PatientProfilePic/',null=True,blank=True)
@@ -36,6 +54,7 @@ class Patient(models.Model):
     symptoms = models.CharField(max_length=100,null=False)
     assignedDoctorId = models.PositiveIntegerField(null=True)
     admitDate=models.DateField(auto_now=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True, blank=True)
     status=models.BooleanField(default=False)
     @property
     def get_name(self):
@@ -53,6 +72,7 @@ class Appointment(models.Model):
     patientName=models.CharField(max_length=40,null=True)
     doctorName=models.CharField(max_length=40,null=True)
     appointmentDate=models.DateField(auto_now=True)
+    appointment_day = models.CharField(max_length=10, choices=DAY_CHOICES, null=True)
     description=models.TextField(max_length=500)
     status=models.BooleanField(default=False)
 
@@ -75,5 +95,20 @@ class PatientDischargeDetails(models.Model):
     doctorFee=models.PositiveIntegerField(null=False)
     OtherCharge=models.PositiveIntegerField(null=False)
     total=models.PositiveIntegerField(null=False)
+    
+class DoctorAvailability(models.Model):
+    doctor = models.ForeignKey('Doctor', on_delete=models.CASCADE)
+    day_of_week = models.CharField(max_length=10, choices=DAY_CHOICES)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    
+    def __str__(self):
+        return f"Availability - {self.doctor} on {self.day_of_week}"    
 
+class UserHealth(models.Model):
+    user = models.ForeignKey('Patient', on_delete=models.CASCADE, null=True)
+    height = models.FloatField(null=True, blank=True)
+    weight = models.FloatField(null=True, blank=True)
+    def __str__(self):
+        return f"UserHealth - {self.user}"
 
