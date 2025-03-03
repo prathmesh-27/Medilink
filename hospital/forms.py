@@ -19,7 +19,7 @@ class AdminSigupForm(forms.ModelForm):
         }
 
 
-#for student related form
+#for Doctor related form
 class DoctorUserForm(forms.ModelForm):
     class Meta:
         model=User
@@ -35,12 +35,13 @@ class DoctorUserForm(forms.ModelForm):
 class DoctorForm(forms.ModelForm):
     class Meta:
         model = models.Doctor
-        fields=['address','mobile','department','status','profile_pic']
+        fields=['address','mobile','department','status','gender','profile_pic']
         widgets = {
             'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Address'}),
             'mobile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile'}),
             'department': forms.Select(attrs={'class': 'form-control'}),
             'status': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'gender': forms.Select(attrs={'class': 'form-control'}), 
             'profile_pic': forms.FileInput(attrs={'class': 'form-control'}),
         }
 

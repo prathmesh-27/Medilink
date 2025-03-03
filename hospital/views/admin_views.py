@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect,reverse
 from hospital import forms, models
 from django.contrib.auth.models import Group
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
-from django.conf import settings
-from datetime import datetime,timedelta,date
+# from django.conf import settings
+from datetime import date
+from django.utils.http import urlencode
 
 
 def is_admin(user):
@@ -175,17 +177,19 @@ def admin_patient_view(request):
     return render(request,'hospital/admin/admin_patient.html')
 
 def admin_signup_view(request):
-    form= forms.AdminSigupForm()
+    loginform = forms.LoginForm()
+    signupform = forms.AdminSigupForm()
     if request.method=='POST':
-        form=forms.AdminSigupForm(request.POST)
+        form = forms.AdminSigupForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.set_password(user.password)
             user.save()
             my_admin_group = Group.objects.get_or_create(name='ADMIN')
             my_admin_group[0].user_set.add(user)
-            return HttpResponseRedirect('adminlogin')
-    return render(request,'hospital/admin/adminsignup.html',{'form':form})
+            messages.success(request, "Admin successfully logged in!")
+            return HttpResponseRedirect('/')
+    return render(request,'hospital/index.html',{'loginform':loginform,'signupform':signupform})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -279,7 +283,7 @@ def discharge_patient_view(request,pk):
         pDD.admitDate=patient.admitDate
         pDD.releaseDate=date.today()
         pDD.daySpent=int(d)
-        pDD.medicineCost=int(request.POST['medicineCost'])
+        pDD.medicineCost= int(request.POST['medicineCost'])
         pDD.roomCharge=int(request.POST['roomCharge'])*int(d)
         pDD.doctorFee=int(request.POST['doctorFee'])
         pDD.OtherCharge=int(request.POST['OtherCharge'])

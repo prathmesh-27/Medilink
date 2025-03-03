@@ -41,7 +41,14 @@
       {% for d in doctors %}
       <tr>
         <td> {{d.get_name}}</td>
-        <td> <img src="{% static d.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>
+          {% if doctor.profile_pic %}
+          <img src="{{ doctor.profile_pic.url }}" alt="Profile Picture" height="40px" width="40px">
+          {% else %}
+          <img src="{% static 'profile_pic\DoctorProfilePic\fire.jpg' %}" alt="Default Profile Picture" height="40px"
+            width="40px">
+          {% endif %}
+        </td>
         <td>{{d.mobile}}</td>
         <td>{{d.address}}</td>
         <td>{{d.department}}</td>

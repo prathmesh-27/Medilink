@@ -50,8 +50,9 @@ urlpatterns+=[
     # path('admin-add-doctor', views.admin_add_doctor_view,name='admin-add-doctor'),
     path('admin-approve-doctor', admin_views.admin_approve_doctor_view,name='admin-approve-doctor'),
     path('admin-view-doctor-specialisation',admin_views.admin_view_doctor_specialisation_view,name='admin-view-doctor-specialisation'),
-    path('adminsignup', admin_views.admin_signup_view),
+    path('adminsignup', admin_views.admin_signup_view,name='adminsignup'),
     path('adminclick', admin_views.adminclick_view),
+    path('admin-discharge-patient',admin_views.discharge_patient_view) #To be Corrected
     
 ]
 

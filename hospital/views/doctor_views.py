@@ -4,6 +4,7 @@ from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
+from django.contrib import messages
 
 def is_doctor(user):
     return user.groups.filter(name='DOCTOR').exists()
@@ -60,9 +61,11 @@ def doctor_patient_view(request):
     return render(request,'hospital/doctor/doctor_patient.html',context=mydict)
 
 def doctor_signup_view(request):
-    userForm=forms.DoctorUserForm()
-    doctorForm=forms.DoctorForm()
-    mydict={'userForm':userForm,'doctorForm':doctorForm}
+    doctorForm = forms.DoctorForm()
+    userForm = forms.DoctorUserForm()
+    signupform = {"doctor":doctorForm,"user":userForm}
+    loginform = forms.LoginForm()
+    # print(signupform)
     if request.method=='POST':
         userForm=forms.DoctorUserForm(request.POST)
         doctorForm=forms.DoctorForm(request.POST,request.FILES)
@@ -75,8 +78,11 @@ def doctor_signup_view(request):
             doctor=doctor.save()
             my_doctor_group = Group.objects.get_or_create(name='DOCTOR')
             my_doctor_group[0].user_set.add(user)
-        return HttpResponseRedirect('doctorlogin')
-    return render(request,'hospital/doctor/doctorsignup.html',context=mydict)
+            messages.warning(request, "Doctor Registered Successfully. Wait For Admin Approval")
+            # print("Doctor Registered Successfully")
+        return HttpResponseRedirect('/')
+    
+    return render(request,'hospital/index.html',{'loginform':loginform,'signupform':signupform})
 
 @login_required(login_url='doctorlogin')
 @user_passes_test(is_doctor)

@@ -1,5 +1,5 @@
 {% load widget_tweaks %}
-<form method="POST" id="signupForm" class="hidden">
+<form method="POST" id="signupForm" class="hidden" action="{% url 'adminsignup' %}">
     {% csrf_token %}
     <div class="form-wrapper">
         <div class="form-group">
@@ -13,6 +13,9 @@
         </div>
         <div class="form-group">
             {% render_field signupform.password class="form-control" placeholder="Password" %}
+        </div>
+        <div class="form-group">
+            {% render_field signupform.email class="form-control" placeholder="Email" %}
         </div>
     </div>
     <button type="submit" class="submit-btn">Sign Up</button>

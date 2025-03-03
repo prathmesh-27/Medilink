@@ -116,7 +116,8 @@ label {
     font-size: 14px;
 }
 
-input {
+input,
+select {
     width: 100%;
     padding: 8px;
     margin-top: 5px;

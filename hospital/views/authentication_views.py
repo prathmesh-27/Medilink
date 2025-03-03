@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import logout,authenticate,login
 from datetime import datetime,timedelta,date
 from django.conf import settings
+from django.contrib import messages
 from django.db.models import Q
 
 
@@ -36,11 +37,11 @@ def user_login(request):
                 login(request, user)  # Log the user in
                 return redirect("afterlogin")  # Redirect to some page after login
             else:
-                return render(request, "hospital/index.html", {"loginform": loginform, "error": "Invalid credentials"})
+                messages.error(request,"Invalid Credentials")
+                return render(request, "hospital/index.html", {"loginform": loginform})
 
     else:
         loginform = forms.LoginForm()
-
     return render(request, "hospital/index.html", {"loginform": loginform})
 
 

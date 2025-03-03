@@ -6,21 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 </head>
+<style>
+    .message-box {
+        display: flex;
+        padding: 5px;
+        margin-bottom: 5px;
+        justify-content: space-between;
+    }
+
+    .success-message {
+        color: green;
+        border: 1px solid green;
+        background: #d4eddaa8;
+    }
+
+    .error-message {
+        color: red;
+        border: 1px solid red;
+        background: #f8d7daa8;
+    }
+
+    #alert-message button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+</style>
 
 <div id="overall-form-container">
 
-    {% if error %}
-    <div id="error-message"
-        style="color: red; padding: 10px; border: 1px solid red; display: flex; justify-content: space-between; align-items: center;">
-        <p style="margin: 0;">{{ error }}</p>
-        <button onclick="document.getElementById('error-message').style.display='none'"
-            style="border: none; background: none; color: red; font-weight: bold; cursor: pointer;">&times;</button>
+    {% if messages %}
+    {% for message in messages %}
+    <div id="alert-message"
+        class="message-box {% if message.tags == 'success' %}success-message{% else %}error-message{% endif %}">
+        <p>{{ message }}</p>
+        <button onclick="document.getElementById('alert-message').style.display='none'">
+            &times;
+        </button>
     </div>
+    {% endfor %}
     {% endif %}
 
     <nav id="form-container-nav">
-        <h2 id="form-title" class="font-3">Login as an Admin</h2> <!-- Use heading for better structure -->
-
+        <h2 id="form-title" class="font-3">Login as an Admin</h2>
         <ul class="tab-buttons">
             <li class="tab active" data-form="admin"><button>Admin</button></li>
             <li class="tab" data-form="patient"><button>Patient</button></li>
