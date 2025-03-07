@@ -1,4 +1,4 @@
-{% extends 'hospital/admin/admin_base.html' %}
+{% extends 'hospital/patient/patient_base.html' %}
 {% load widget_tweaks %}
 {% block content %}
 
@@ -47,7 +47,16 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <br><br>
-<!------ add appointment page---------->
+{% if message %}
+<script>
+  var a = "{{message}}";
+  alert(a);
+</script>
+
+{% endif %}
+
+
+<!------ add appointment page by patient(sumit)  ---------->
 <form method="post">
   {% csrf_token %}
   <div class="container register-form">
@@ -64,9 +73,9 @@
             <div class="form-group">
               {% render_field appointmentForm.doctorId class="form-control" placeholder="doctor" %}
             </div>
-            <div class="form-group">
-              {% render_field appointmentForm.patientId class="form-control" placeholder="patient" %}
-            </div>
+
+
+
 
           </div>
 
@@ -76,7 +85,11 @@
     </div>
   </div>
 </form>
-
+<!--
+developed By : sumit kumar
+facebook : fb.com/sumit.luv
+youtube : youtube.com/lazycoders
+-->
 
 
 {% endblock content %}

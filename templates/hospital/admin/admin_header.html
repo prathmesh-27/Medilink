@@ -1,0 +1,13 @@
+<!-- This admin Header is to be stylized -->
+
+<header>
+    <h1>Hello World</h1>
+    {% if user.is_authenticated %}
+    {% if user.email %}
+    <p>Signed in as: {{ user.email }}</p>
+    {% else %}
+    <p>No email found</p>
+    {% endif %}
+    <a href="{% url 'logout' %}">Logout</a>
+    {% endif %}
+</header>

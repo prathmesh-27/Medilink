@@ -30,7 +30,7 @@ def approve_appointment_view(request,pk):
     appointment=models.Appointment.objects.get(id=pk)
     appointment.status=True
     appointment.save()
-    return redirect(reverse('admin-approve-appointment'))
+    return redirect(reverse('admin-appointment'))
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -38,7 +38,7 @@ def approve_patient_view(request,pk):
     patient=models.Patient.objects.get(id=pk)
     patient.status=True
     patient.save()
-    return redirect(reverse('admin-approve-patient'))
+    return redirect(reverse('admin-patient'))
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -47,7 +47,7 @@ def reject_patient_view(request,pk):
     user=models.User.objects.get(id=patient.user_id)
     user.delete()
     patient.delete()
-    return redirect('admin-approve-patient')
+    return redirect('admin-patient')
 
 
 @login_required(login_url='adminlogin')

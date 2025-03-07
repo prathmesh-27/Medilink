@@ -191,25 +191,74 @@ button:active {
 }
 
 
+/***********************Style for admin,,patient and doctor base pages*************/
 
+/* Header spans full width */
+.header {
+  width: 100%;
+  background: #337AB7;
+  color: white;
+  padding: 15px 20px;
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Main layout: Sidebar on left, Content on right */
+.afterlogin-wrapper {
+  display: flex;
+  flex: 1;
+  background: url("images/background_img.jpg") no-repeat center center fixed;
+}
+
+/* Sidebar Navigation */
+.menu {
+  width: 250px;
+  background: #2C3E50;
+  color: white;
+  padding: 20px;
+  height: 100%;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+/* Main content */
+main {
+  flex: 1;
+  background: #F5F5F5;
+  overflow-y: auto;
+}
+
+/* Navbar inside header */
+.header .nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+}
 
 
 /*Old Written Code*/
-main {
-  position: relative;
-  height: 100vh;
-}
-
-.menu {
-  background: #5bc995;
-  height: 100vh;
-  width: 240px;
-  position: fixed;
-  top: 0px;
-  left: 0;
-  z-index: 5;
-  outline: none;
-}
 
 .menu .avatar {
   background: rgba(0, 0, 0, 0.1);

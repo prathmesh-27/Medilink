@@ -52,7 +52,7 @@ def search_doctor_view(request):
     # whatever user write in search box we get in query
     query = request.GET['query']
     doctors=models.Doctor.objects.all().filter(status=True).filter(Q(department__icontains=query)| Q(user__first_name__icontains=query))
-    return render(request,'hospital/patient_view_doctor.html',{'patient':patient,'doctors':doctors})
+    return render(request,'hospital/patient/patient_view_doctor.html',{'patient':patient,'doctors':doctors})
 
 def load_form(request):
     form_type = request.GET.get('form_type')

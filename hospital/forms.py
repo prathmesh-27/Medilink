@@ -57,6 +57,21 @@ class PatientUserForm(forms.ModelForm):
         }
         
 class PatientForm(forms.ModelForm):
+    GENDER_CHOICES = [
+        ("Male", "Male"),
+        ("Female", "Female"),
+    ]
+
+    dob = forms.DateField(
+        widget=forms.DateInput(
+            attrs={'class': 'form-control', 'type': 'date'}
+        )
+    )
+
+    gender = forms.ChoiceField(
+        choices=GENDER_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
     mobile = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -66,16 +81,11 @@ class PatientForm(forms.ModelForm):
             }
         )
     )    
-    
-    # profile_pic = 
-    
-    #this is the extrafield for linking patient and their assigend doctor
-    #this will show dropdown __str__ method doctor model is shown on html so override it
-    #to_field_name this will fetch corresponding value  user_id present in Doctor model and return it
     assignedDoctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(status=True),empty_label="Name and Department", to_field_name="user_id")
+    
     class Meta:
         model=models.Patient
-        fields=['address','mobile','status','symptoms','profile_pic']
+        fields=['address','mobile','status','symptoms','profile_pic','dob','gender']
         
 
 
@@ -120,3 +130,36 @@ class ContactusForm(forms.Form):
         })
     )
     
+
+class UserHealthForm(forms.ModelForm):
+    ACTIVITY_CHOICES = [
+        ("sedentary", "Sedentary (Little to no exercise)"),
+        ("light", "Light (1-3 days/week)"),
+        ("moderate", "Moderate (3-5 days/week)"),
+        ("very_active", "Very Active (6-7 days/week)"),
+        ("super_active", "Super Active (Athlete or physical job)"),
+    ]
+    
+    GOAL_CHOICES = [
+        ("maintain", "Maintain Weight"),
+        ("lose", "Lose Weight"),
+        ("gain", "Gain Weight"),
+    ]
+
+    activity_level = forms.ChoiceField(
+        choices=ACTIVITY_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    
+    goal = forms.ChoiceField(
+        choices=GOAL_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
+    class Meta:
+        model = models.UserHealth
+        fields = ['weight', 'height', 'activity_level', 'goal']
+        widgets = {
+            'weight': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter weight (kg)'}),
+            'height': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter height (cm)'}),
+        }

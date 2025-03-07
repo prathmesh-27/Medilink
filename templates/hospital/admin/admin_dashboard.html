@@ -1,71 +1,117 @@
 {% extends 'hospital/admin/admin_base.html' %}
 {% load static %}
 {% block content %}
-{%include 'hospital/admin/admin_dashboard_cards.html'%}
-<br><br><br><br>
-<div class="container">
-  <div class="row">
-    <div class="panel panel-primary col-md-5" style="margin-left:2%;">
-      <div class="panel-heading" style="text-align:center;">
-        <h6 class="panel-title">Recent Doctors</h6>
-      </div>
-      <table class="table table-hover" id="dev-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Department</th>
-            <th>Mobile</th>
-            <th>Status</th>
+<title>Admin Dashboard</title>
 
-          </tr>
-        </thead>
-        {% for d in doctors %}
-        <tr>
-          <td> {{d.get_name}}</td>
-          <td>{{d.department}}</td>
-          <td>{{d.mobile}}</td>
-          {%if d.status%}
-          <td> <span class="label label-primary">Permanent</span></td>
-          {% else %}
-          <td> <span class="label label-success">On Hold</span></td>
-          {% endif %}
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 
-        </tr>
-        {% endfor %}
-      </table>
+<div class="dashboard">
+  <!-- Charts Section -->
+  <div class="charts">
+    <div class="card">
+      <h3>Patients per Division</h3>
+      <canvas id="patientsDivisionChart"></canvas>
     </div>
+    <div class="card">
+      <h3>Patients By Age</h3>
+      <canvas id="patientsAgeChart"></canvas>
+    </div>
+    <div class="card">
+      <h3>Patient Admissions (Monthly)</h3>
+      <canvas id="admissionsChart"></canvas>
+    </div>
+    <div class="card">
+      <h3>Doctors per Department</h3>
+      <canvas id="doctorsChart"></canvas>
+    </div>
+  </div>
 
-    <div class="panel panel-primary col-md-5" style="margin-left:5%;">
-      <div class="panel-heading" style="text-align:center;">
-        <h6 class="panel-title">Recent Patient</h6>
-      </div>
-      <table class="table table-hover" id="dev-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Symptoms</th>
-            <th>Mobile</th>
-            <th>Address</th>
-            <th>Status</th>
-
-          </tr>
-        </thead>
-        {% for p in patients %}
-        <tr>
-          <td> {{p.get_name}}</td>
-          <td>{{p.symptoms}}</td>
-          <td>{{p.mobile}}</td>
-          <td>{{p.address}}</td>
-          {%if p.status%}
-          <td> <span class="label label-primary">Admitted</span></td>
-          {% else %}
-          <td> <span class="label label-success">On Hold</span></td>
-          {% endif %}
-
-        </tr>
-        {% endfor %}
-      </table>
+  <!-- Stats Section -->
+  <div class="stats">
+    <div class="stat-box">
+      <h4>Total Doctors</h4>
+      <h2>{{doctorcount}}</h2>
+      <p>Approval Required: {{pendingdoctorcount}}</p>
+    </div>
+    <div class="stat-box">
+      <h4>Total Patients</h4>
+      <h2>{{patientcount}}</h2>
+      <p>Wants to Admit: {{pendingpatientcount}}</p>
+    </div>
+    <div class="stat-box">
+      <h4>Total Appointments</h4>
+      <h2>{{appointmentcount}}</h2>
+      <p>Approve Appointments: {{pendingappointmentcount}}</p>
+    </div>
+    <div class="stat-box">
+      <h4>Bed Occupancy Rate</h4>
+      <h2>100%</h2>
+      <p>50 Occupied | 50 Total Beds</p>
+    </div>
+    <div class="stat-box gauge">
+      <h4>Appointment Rate</h4>
+      <h2>7 per day</h2>
     </div>
   </div>
 </div>
+<script>
+  // Patients per Division Chart
+  const patientsDivisionChart = new Chart(document.getElementById('patientsDivisionChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Dept 1', 'Dept 2', 'Dept 3', 'Dept 4'],
+      datasets: [{
+        label: 'Male',
+        data: [10, 20, 35, 5],
+        backgroundColor: 'lightblue'
+      },
+      {
+        label: 'Female',
+        data: [5, 10, 15, 3],
+        backgroundColor: 'pink'
+      }]
+    }
+  });
+
+  // Patients By Age Chart
+  const patientsAgeChart = new Chart(document.getElementById('patientsAgeChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Age Group 1', 'Age Group 2', 'Age Group 3', 'Age Group 4'],
+      datasets: [{
+        data: [25, 30, 15, 30],
+        backgroundColor: ['#3498db', '#2ecc71', '#e74c3c', '#f1c40f']
+      }]
+    }
+  });
+
+  // Patient Admissions Monthly Chart
+  const admissionsChart = new Chart(document.getElementById('admissionsChart'), {
+    type: 'line',
+    data: {
+      labels: ['March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+        label: 'Admissions',
+        data: [10, 20, 18, 30, 35],
+        borderColor: 'blue',
+        fill: false
+      }]
+    }
+  });
+
+  // Doctors per Department Chart
+  const doctorsChart = new Chart(document.getElementById('doctorsChart'), {
+    type: 'pie',
+    data: {
+      labels: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'],
+      datasets: [{
+        data: [20, 20, 20, 20, 20],
+        backgroundColor: ['#1abc9c', '#3498db', '#9b59b6', '#f39c12', '#e74c3c']
+      }]
+    }
+  });
+</script>
+
 {% endblock content %}

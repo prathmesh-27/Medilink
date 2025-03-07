@@ -1,70 +1,20 @@
 {% extends 'hospital/doctor/doctor_base.html' %}
+
 {% load static %}
+{% load widget_tweaks %}
+{%block title%}Doctor-Patient{% endblock title %}
+
+{% block pic %}
+{% if doctor.profile_pic %}
+<img src="{% static doctor.profile_pic %}" alt="Profile Picture" style="width: 80px; border-radius: 50%;">
+{% else %}
+<img src="{% static 'images/doctor.jpg' %}" alt="Default Profile Picture" style="width: 80px; border-radius: 50%;">
+{% endif %}
+{% endblock %}
+
+
 {% block content %}
-<br><br>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-
-  <style type="text/css">
-    a:link {
-      text-decoration: none;
-    }
-
-    .menu {
-      top: 50px;
-    }
-
-    h6 {
-      color: white;
-    }
-
-    .order-card {
-      color: #fff;
-    }
-
-    .bg-c-blue {
-      background: linear-gradient(45deg, #4099ff, #73b4ff);
-    }
-
-    .bg-c-green {
-      background: linear-gradient(45deg, #2ed8b6, #59e0c5);
-    }
-
-    .card {
-      border-radius: 5px;
-      -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
-      box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
-      border: none;
-      margin-bottom: 30px;
-      -webkit-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .card .card-block {
-      padding: 25px;
-    }
-
-    .order-card i {
-      font-size: 26px;
-    }
-
-    .f-left {
-      float: left;
-    }
-
-    .f-right {
-      float: right;
-    }
-  </style>
-</head>
-
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
   <div class="row">
     <div class="col-md-4 col-xl-6">
@@ -74,8 +24,6 @@
             <h6 class="m-b-20">View Your Appointment</h6>
           </a>
           <br>
-          <h2 class="text-right"><i class="fas fa-calendar f-left"></i></h2>
-
         </div>
       </div>
     </div>
@@ -87,7 +35,6 @@
             <h6 class="m-b-20">Delete Appointment</h6>
           </a>
           <br>
-          <h2 class="text-right"><i class="fas fa-eject f-left"></i></h2>
         </div>
       </div>
     </div>
@@ -96,5 +43,83 @@
   </div>
 </div>
 
-<br><br><br><br><br><br><br>
-{% endblock content %}
+
+
+<h2>Doctor</h2>
+<div class="tabs">
+  <button class="tab-button active" onclick="switchTab('appointments')">View Your Appointments</button>
+  <button class="tab-button" onclick="switchTab('delete')">Delete Appointment</button>
+</div>
+
+<div id="appointments" class="content show">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">Your Appointments</h6>
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Picture</th>
+          <th>Description</th>
+          <th>Mobile</th>
+          <th>Address</th>
+          <th>Appointment Date</th>
+        </tr>
+      </thead>
+      {% for a,p in appointments %}
+      <tr>
+        <td>{{a.patientName}}</td>
+        <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{a.description}}</td>
+        <td>{{p.mobile}}</td>
+        <td>{{p.address}}</td>
+        <td>{{a.appointmentDate}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+
+<div id="delete" class="content">
+  <h3>Delete Appointment</h3>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Picture</th>
+          <th>Description</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      {% for a,p in appointments %}
+      <tr>
+        <td>{{a.patientName}}</td>
+        <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{a.description}}</td>
+        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-appointment' a.id  %}"><span
+              class="glyphicon glyphicon-trash"></span></a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<script>
+  function switchTab(tabName) {
+    document.querySelectorAll('.content').forEach(content => {
+      content.classList.remove('show');
+    });
+    document.getElementById(tabName).classList.add('show');
+
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.classList.remove('active');
+    });
+    event.currentTarget.classList.add('active');
+  }
+</script>
+{% endblock %}

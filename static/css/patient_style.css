@@ -1,0 +1,68 @@
+/* styling for fitness Page */
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.edit-icon {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.info div {
+    width: 48%;
+    margin-bottom: 10px;
+}
+
+.info span {
+    font-weight: bold;
+    color: #007b9a;
+}
+
+.gauge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.bmi-indicator {
+    width: 150px;
+    height: 80px;
+    background: conic-gradient(green 0deg 90deg, yellow 90deg 180deg, red 180deg 270deg);
+    border-radius: 100px 100px 0 0;
+    position: relative;
+}
+
+.needle {
+    width: 5px;
+    height: 40px;
+    background-color: black;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform-origin: bottom;
+    transform: rotate(-45deg);
+}
+
+.btn {
+    background: #007b9a;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background: #005b70;
+}

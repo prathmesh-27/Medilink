@@ -1,137 +1,214 @@
 {% extends 'hospital/admin/admin_base.html' %}
 {% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Admin-Patient{% endblock title %}
+
 {% block content %}
-<br><br>
+<h2>Admin</h2>
 
-<head>
-  <meta charset="utf-8">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-
-  <style type="text/css">
-    a:link {
-      text-decoration: none;
-    }
-
-    .menu {
-      top: 50px;
-    }
-
-    h6 {
-      color: white;
-    }
-
-    .order-card {
-      color: #fff;
-    }
-
-    .bg-c-blue {
-      background: linear-gradient(45deg, #4099ff, #73b4ff);
-    }
-
-    .bg-c-green {
-      background: linear-gradient(45deg, #2ed8b6, #59e0c5);
-    }
-
-    .bg-c-yellow {
-      background: linear-gradient(45deg, #FFB64D, #ffcb80);
-    }
-
-    .bg-c-pink {
-      background: linear-gradient(45deg, #FF5370, #ff869a);
-    }
-
-
-    .card {
-      border-radius: 5px;
-      -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
-      box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
-      border: none;
-      margin-bottom: 30px;
-      -webkit-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .card .card-block {
-      padding: 25px;
-    }
-
-    .order-card i {
-      font-size: 26px;
-    }
-
-    .f-left {
-      float: left;
-    }
-
-    .f-right {
-      float: right;
-    }
-  </style>
-</head>
-
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
-  <div class="row">
-    <div class="col-md-4 col-xl-3">
-      <div class="card bg-c-blue order-card">
-        <div class="card-block">
-          <a href="/admin-view-patient">
-            <h6 class="m-b-20">Patient Record</h6>
-          </a>
-          <br>
-          <h2 class="text-right"><i class="fas fa-user-injured f-left"></i></h2>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 col-xl-3">
-      <div class="card bg-c-green order-card">
-        <div class="card-block">
-          <a href="/admin-add-patient">
-            <h6 class="m-b-20">Admit Patient</h6>
-          </a>
-          <br>
-          <h2 class="text-right"><i class="fas fa-user-plus f-left"></i></h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 col-xl-3">
-      <div class="card bg-c-yellow order-card">
-        <div class="card-block">
-          <a href="/admin-approve-patient">
-            <h6 class="m-b-20">Approve Patient</h6>
-          </a>
-          <br>
-          <h2 class="text-right"><i class="fas fa-check-circle f-left"></i></h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 col-xl-3">
-      <div class="card bg-c-pink order-card">
-        <div class="card-block">
-          <a href="/admin-discharge-patient">
-            <h6 class="m-b-20">Discharge Patient</h6>
-          </a>
-          <br>
-          <h2 class="text-right"><i class="fas fa-eject f-left"></i></h2>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Tab Navigation -->
+<div class="tabs">
+  <button class="tab-button active" onclick="switchTab('patients')">Patients</button>
+  <button class="tab-button" onclick="switchTab('add')">Add Patient</button>
+  <button class="tab-button" onclick="switchTab('approve')">Approve Patient</button>
+  <button class="tab-button" onclick="switchTab('discharge')">Discharge Patient</button>
 </div>
-<!--
-  developed By : sumit kumar
-  facebook : fb.com/sumit.luv
-  youtube : youtube.com/lazycoders
-  -->
-<br><br><br><br><br><br><br>
+
+<!-- Patient List Section -->
+<div id="patients" class="content show">
+  <h3>Patient List</h3>
+  {% if patients_approved %}
+  <div class="panel panel-primary">
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Profile Picture</th>
+          <th>Symptoms</th>
+          <th>Mobile</th>
+          <th>Address</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in patients_approved %}
+        <tr>
+          <td>{{ p.get_name }}</td>
+          <!-- Display patient's profile picture -->
+          <td><img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+          <td>{{ p.symptoms }}</td>
+          <td>{{ p.mobile }}</td>
+          <td>{{ p.address }}</td>
+          <!-- Update Patient Button -->
+          <td><a class="btn btn-primary btn-xs" href="{% url 'update-patient' p.id %}"><i class="fas fa-edit"></i></a>
+          </td>
+          <!-- Delete Patient Button -->
+          <td><a class="btn btn-danger btn-xs" href="{% url 'delete-patient-from-hospital' p.id %}"><i
+                class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="text-center text-muted">No records found.</p>
+  {% endif %}
+</div>
+
+<!-- Add Patient Section -->
+<div id="add" class="content">
+  <h3>Add Patient</h3>
+  <form method="post" enctype="multipart/form-data" action="{% url 'admin-add-patient' %}">
+    {% csrf_token %}
+    <div class="container register-form">
+      <div class="form">
+        <div class="note">
+          <p>Admit Patient To Hospital</p>
+        </div>
+        <div class="form-content">
+          <div class="row">
+
+            <!-- Left column: First Name, Username, Address, Symptoms, Profile Picture -->
+            <div class="form-group">
+              {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
+            </div>
+            <div class="form-group">
+              {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
+            </div>
+            <div class="form-group">
+              {% render_field userForm.username class="form-control" placeholder="Username" %}
+            </div>
+            <div class="form-group">
+              {% render_field patientForm.address class="form-control" placeholder="Address" %}
+            </div>
+            <div class="form-group">
+              {% render_field userForm.email class="form-control" placeholder="email" %}
+            </div>
+            <div class="form-group">
+              {% render_field patientForm.symptoms class="form-control" placeholder="Symptoms" %}
+            </div>
+            <div class="form-group">
+              <label for="id_profile_pic">Profile Picture</label>
+              {% render_field patientForm.profile_pic required="required" class="form-control"%}
+            </div>
+            <div class="form-group">
+              {% render_field patientForm.dob type="date" class="form-control" placeholder="Date of Birth" %}
+            </div>
+            <div class="form-group">
+              {% render_field patientForm.gender class="form-control" placeholder="Gender" %}
+            </div>
+            <div class="form-group">
+              {% render_field userForm.password class="form-control" placeholder="Password" %}
+            </div>
+            <div class="form-group">
+              {% render_field patientForm.mobile class="form-control" placeholder="Mobile" %}
+            </div>
+            <div class="form-group">
+              {% render_field patientForm.assignedDoctorId class="form-control" placeholder="Doctor" %}
+            </div>
+          </div>
+          <button type="submit" class="btnSubmit">Admit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Approve Patient Section -->
+<div id="approve" class="content">
+  <h3>Approve Patients</h3>
+  {% if patients_not_approved %}
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">Patients Awaiting Approval</h6>
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Profile Picture</th>
+          <th>Symptoms</th>
+          <th>Mobile</th>
+          <th>Address</th>
+          <th>Approve</th>
+          <th>Reject</th>
+        </tr>
+      </thead>
+      {% for p in patients_not_approved %}
+      <tr>
+        <td>{{ p.get_name }}</td>
+        <td><img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{ p.symptoms }}</td>
+        <td>{{ p.mobile }}</td>
+        <td>{{ p.address }}</td>
+        <!-- Approve Patient Button -->
+        <td><a class="btn btn-primary btn-xs" href="{% url 'approve-patient' p.id %}"><i
+              class="fa-solid fa-check"></i></a></td>
+        <!-- Reject Patient Button -->
+        <td><a class="btn btn-danger btn-xs" href="{% url 'reject-patient' p.id %}"><i class="fa fa-trash-o"
+              aria-hidden="true"></i></a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% else %}
+  <p class="text-center text-muted">No records found.</p>
+  {% endif %}
+</div>
+
+<!-- Discharge Patient Section -->
+<div id="discharge" class="content">
+  <h3>Discharge Patient</h3>
+  {% if patients_approved %}
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">Discharge Patient</h6>
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Symptoms</th>
+          <th>Mobile</th>
+          <th>Discharge</th>
+        </tr>
+      </thead>
+      {% for p in patients_approved %}
+      <tr>
+        <td> {{p.get_name}}</td>
+        <td>{{p.symptoms}}</td>
+        <td>{{p.mobile}}</td>
+        <td><a class="btn btn-primary btn-xs" href="{% url 'discharge-patient' p.id  %}">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+          </a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% else %}
+  <p class="text-center text-muted">No records found.</p>
+  {% endif %}
+</div>
+
+<!-- JavaScript to Handle Tab Switching -->
+<script>
+  function switchTab(tabName) {
+    // Hide all content sections
+    document.querySelectorAll('.content').forEach(content => {
+      content.classList.remove('show');
+    });
+    // Show selected tab content
+    document.getElementById(tabName).classList.add('show');
+
+    // Remove 'active' class from all tab buttons
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.classList.remove('active');
+    });
+    // Add 'active' class to the clicked tab
+    event.currentTarget.classList.add('active');
+  }
+</script>
+
 {% endblock content %}

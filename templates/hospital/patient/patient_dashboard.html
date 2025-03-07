@@ -1,0 +1,52 @@
+{% extends 'hospital/patient/patient_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{%block title%}Patient-Fitness{% endblock title %}
+
+
+{% block pic%}
+
+{%if patient.profile_pic %}
+<img src="{% static patient.profile_pic %}" alt="Profile Picture" style="width: 80px; border-radius: 50%;">
+{% else %}
+<img src="{% static 'images/patient.jpg' %}" alt="Profile Picture" style="width: 80px; border-radius: 50%;">
+{% endif %}
+
+
+{% endblock%}
+{% block content %}
+<h2>Patient-Fitness</h2>
+
+<div class="container">
+    <div class="header">
+        <div>
+            <button>Patient Name</button>
+            <button>Role</button>
+        </div>
+        <button>Make Appointment</button>
+    </div>
+    <div class="personal-info">
+        <h2>PERSONAL INFORMATION <span class="edit-icon">&#9998;</span></h2>
+        <div class="info-grid">
+            <div class="info-item"><strong>Name</strong> {{ user.first_name }} {{ user.last_name }}</div>
+            <div class="info-item"><strong>Gender</strong> {{patient.gender}} </div>
+            <div class="info-item"><strong>Date of Birth</strong> {{patient.dob}}</div>
+            <div class="info-item"><strong>Date of Admit</strong> {{patient.admitDate}}</div>
+            <div class="info-item"><strong>Symptoms</strong> {{patient.symptoms}}</div>
+            <div class="info-item"><strong>Patient Status</strong>
+                {% if patient.is_discharged%}
+                Discharged
+                {% else %}
+                Active
+                {% endif %}
+            </div>
+            <div class="info-item"><strong>Age</strong> {{patient_age}}</div>
+            <div class="info-item"><strong>Address</strong>{{patient.address}}</div>
+            <div class="info-item"><strong>Doctor</strong> {{doctorName}}</div>
+            <div class="info-item"><strong>City</strong> City</div>
+        </div>
+        <div class="heartbeat">&#x2665;&#xFE0F;</div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,130 +1,143 @@
 {% extends 'hospital/admin/admin_base.html' %}
+{%block title%}Admin-Doctor{% endblock title %}
+{% load widget_tweaks %}
 {% load static %}
 {% block content %}
-<br><br>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-
-  <style type="text/css">
-    a:link {
-      text-decoration: none;
-    }
-
-    .menu {
-      top: 50px;
-    }
-
-    h6 {
-      color: white;
-    }
-
-    .order-card {
-      color: #fff;
-    }
-
-    .bg-c-blue {
-      background: linear-gradient(45deg, #4099ff, #73b4ff);
-    }
-
-    .bg-c-green {
-      background: linear-gradient(45deg, #2ed8b6, #59e0c5);
-    }
-
-    .bg-c-yellow {
-      background: linear-gradient(45deg, #FFB64D, #ffcb80);
-    }
-
-    .bg-c-pink {
-      background: linear-gradient(45deg, #FF5370, #ff869a);
-    }
-
-
-    .card {
-      border-radius: 5px;
-      -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
-      box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
-      border: none;
-      margin-bottom: 30px;
-      -webkit-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .card .card-block {
-      padding: 25px;
-    }
-
-    .order-card i {
-      font-size: 26px;
-    }
-
-    .f-left {
-      float: left;
-    }
-
-    .f-right {
-      float: right;
-    }
-  </style>
-</head>
-
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
-  <div class="row">
-    <div class="col-md-4 col-xl-3">
-      <div class="card bg-c-blue order-card">
-        <div class="card-block">
-          <a href="/admin-view-doctor">
-            <h6 class="m-b-20">Doctor Record</h6>
-          </a>
-          <br>
-          <h2 class="text-right"><i class="fas fa-user-nurse f-left"></i></h2>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- <div class="col-md-4 col-xl-3">
-      <div class="card bg-c-green order-card">
-        <div class="card-block">
-          <a href="/admin-add-doctor">
-            <h6 class="m-b-20">Register Doctor</h6>
-          </a>
-          <br>
-          <h2 class="text-right"><i class="fas fa-user-plus f-left"></i></h2>
-        </div>
-      </div>
-    </div> -->
-
-    <div class="col-md-4 col-xl-3">
-      <div class="card bg-c-yellow order-card">
-        <div class="card-block">
-          <a href="/admin-approve-doctor">
-            <h6 class="m-b-20">Approve Doctor</h6>
-          </a>
-          <br>
-          <h2 class="text-right"><i class="fas fa-check-circle f-left"></i></h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 col-xl-3">
-      <div class="card bg-c-pink order-card">
-        <div class="card-block">
-          <a href="/admin-view-doctor-specialisation">
-            <h6 class="m-b-20">Doctor Specialisation</h6>
-          </a>
-          <br>
-          <h2 class="text-right"><i class="fas fa-user-md f-left"></i></h2>
-        </div>
-      </div>
-    </div>
-  </div>
+<h2>Admin</h2>
+<div class="tabs">
+  <button class="tab-button active" onclick="switchTab('doctors')">Doctors</button>
+  <button class="tab-button" onclick="switchTab('approve')">Approve Doctor</button>
+  <button class="tab-button" onclick="switchTab('specialisation')">Doctor Specialization</button>
 </div>
 
-<br><br><br><br><br><br><br>
+<div id="doctors" class="content show">
+  <h3>Doctor List</h3>
+  {% if doctors_approved%}
+  <div class="panel panel-primary">
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+
+          <th>Name</th>
+          <th>Profile Picture</th>
+          <th>Mobile</th>
+          <th>Address</th>
+          <th>Department</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      {% for d in doctors_approved %}
+      <tr>
+
+        <td> {{d.get_name}}</td>
+        <td>
+          {% if doctor.profile_pic %}
+          <img src="{{ doctor.profile_pic.url }}" alt="Profile Picture" height="40px" width="40px">
+          {% else %}
+          <img src="{% static 'profile_pic\DoctorProfilePic\fire.jpg' %}" alt="Default Profile Picture" height="40px"
+            width="40px">
+          {% endif %}
+        </td>
+        <td>{{d.mobile}}</td>
+        <td>{{d.address}}</td>
+        <td>{{d.department}}</td>
+        <td><a class="btn btn-primary btn-xs" href="{% url 'update-doctor' d.id  %}"><i class="fas fa-edit"></i></a>
+        </td>
+        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-doctor-from-hospital' d.id  %}"><i
+              class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% else %}
+  <p class="text-center text-muted">No records found.</p>
+  {% endif %}
+</div>
+
+<div id="approve" class="content">
+  <h3>Doctors Applied for Registration</h3>
+  {% if doctors_not_approved %}
+  <div class="panel panel-primary">
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Profile Picture</th>
+          <th>Mobile</th>
+          <th>Address</th>
+          <th>Department</th>
+          <th>Approve</th>
+          <th>Reject</th>
+        </tr>
+      </thead>
+      {% for d in doctors_not_approved %}
+      <tr>
+        <td> {{d.get_name}}</td>
+        <td>
+          {% if doctor.profile_pic %}
+          <img src="{{ doctor.profile_pic.url }}" alt="Profile Picture" height="40px" width="40px">
+          {% else %}
+          <img src="{% static 'profile_pic\DoctorProfilePic\fire.jpg' %}" alt="Default Profile Picture" height="40px"
+            width="40px">
+          {% endif %}
+        </td>
+        <td>{{d.mobile}}</td>
+        <td>{{d.address}}</td>
+        <td>{{d.department}}</td>
+        <td><a class="btn btn-primary btn-xs" href="{% url 'approve-doctor' d.id  %}"><i
+              class="fa-solid fa-check"></i></a></td>
+        <td><a class="btn btn-danger btn-xs" href="{% url 'reject-doctor' d.id  %}"><i class="fa fa-trash-o"
+              aria-hidden="true"></i></span></a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% else %}
+  <p class="text-center text-muted">No records found.</p>
+  {% endif %}
+</div>
+
+<div id="specialisation" class="content">
+  <h3>Doctors Specialization</h3>
+  {% if doctors_specialization%}
+  <div class="panel panel-primary">
+
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>Department</th>
+          <th>Doctor Name</th>
+          <th>Mobile</th>
+        </tr>
+      </thead>
+      {% for d in doctors_specialization %}
+      <tr>
+        <td>{{d.department}}</td>
+        <td> {{d.get_name}}</td>
+        <td>{{d.mobile}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% else %}
+  <p class="text-center text-muted">No records found.</p>
+  {% endif %}
+
+</div>
+
+<script>
+  function switchTab(tabName) {
+    document.querySelectorAll('.content').forEach(content => {
+      content.classList.remove('show');
+    });
+    document.getElementById(tabName).classList.add('show');
+
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.classList.remove('active');
+    });
+    event.currentTarget.classList.add('active');
+  }
+</script>
 {% endblock content %}

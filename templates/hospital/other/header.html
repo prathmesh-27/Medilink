@@ -1,0 +1,7 @@
+<header class="header">
+    <span>MedLink</span>
+    <div class="nav-links">
+        <span>{{ request.user.first_name }}</span>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+</header>

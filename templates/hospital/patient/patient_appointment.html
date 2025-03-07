@@ -1,13 +1,22 @@
-{% extends 'hospital/admin/admin_base.html' %}
-{% load widget_tweaks %}
+{% extends 'hospital/patient/patient_base.html' %}
 {% load static %}
-{%block title%}Admin-Appointment{%endblock title%}
+{% load widget_tweaks %}
+{%block title %}Patient-Appointment{%endblock%}
+
+{% block pic%}
+{%if patient.profile_pic %}
+<img src="{% static patient.profile_pic %}" alt="Profile Picture" style="width: 80px; border-radius: 50%;">
+{% else %}
+<img src="{% static 'images/patient.jpg' %}" alt="Profile Picture" style="width: 80px; border-radius: 50%;">
+{% endif %}
+{% endblock%}
+
+
 {% block content %}
-<h2>Admin-Appointments</h2>
+<h2>Patient-Appointment</h2>
 <div class="tabs">
   <button class="tab-button active" onclick="switchTab('appointments')">Appointments</button>
-  <button class="tab-button" onclick="switchTab('add')">Add Appointment</button>
-  <button class="tab-button" onclick="switchTab('approve')">Approve Appointment</button>
+  <button class="tab-button" onclick="switchTab('book-appointment')">Book Appointment</button>
 </div>
 
 <div id="appointments" class="content show">
@@ -15,23 +24,27 @@
   {% if appointments_approved %}
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h6 class="panel-title">Appointments</h6>
+      <h6 class="panel-title">Your Appointments</h6>
     </div>
     <table class="table table-hover" id="dev-table">
       <thead>
         <tr>
           <th>Doctor Name</th>
-          <th>Patient Name</th>
           <th>Description</th>
           <th>Date</th>
+          <th>Status</th>
         </tr>
       </thead>
       {% for a in appointments_approved %}
       <tr>
         <td> {{a.doctorName}}</td>
-        <td>{{a.patientName}}</td>
         <td>{{a.description}}</td>
         <td>{{a.appointmentDate}}</td>
+        {%if a.status%}
+        <td> <span class="label label-primary">Confirmed</span></td>
+        {% else %}
+        <td> <span class="label label-success">Pending</span></td>
+        {% endif %}
       </tr>
       {% endfor %}
     </table>
@@ -39,11 +52,19 @@
   {% else %}
   <p class="text-center text-muted">No records found.</p>
   {% endif %}
-
 </div>
-<div id="add" class="content">
-  <h3>Add Appointment</h3>
-  <form method="post" action="{% url 'admin-add-appointment'%}">
+
+<div id="book-appointment" class="content">
+  <h3>Book an Appointment</h3>
+  {% if message %}
+  <script>
+    var a = "{{message}}";
+    alert(a);
+  </script>
+
+  {% endif %}
+
+  <form method="post" action="{% url 'patient-book-appointment' %}">
     {% csrf_token %}
     <div class="container register-form">
       <div class="form">
@@ -59,9 +80,6 @@
               <div class="form-group">
                 {% render_field appointmentForm.doctorId class="form-control" placeholder="doctor" %}
               </div>
-              <div class="form-group">
-                {% render_field appointmentForm.patientId class="form-control" placeholder="patient" %}
-              </div>
 
             </div>
 
@@ -72,44 +90,6 @@
     </div>
   </form>
 </div>
-
-<div id="approve" class="content">
-  <h3>Approve Doctors</h3>
-  {% if appointments_not_approved%}
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title">Appointment Approvals Required</h6>
-    </div>
-    <table class="table table-hover" id="dev-table">
-      <thead>
-        <tr>
-          <th>Doctor Name</th>
-          <th>Patient Name</th>
-          <th>Description</th>
-          <th>Date</th>
-          <th>Approve</th>
-          <th>Reject</th>
-        </tr>
-      </thead>
-      {% for a in appointments_not_approved %}
-      <tr>
-        <td> {{a.doctorName}}</td>
-        <td>{{a.patientName}}</td>
-        <td>{{a.description}}</td>
-        <td>{{a.appointmentDate}}</td>
-        <td><a class="btn btn-primary btn-xs" href="{% url 'approve-appointment' a.id  %}"><i
-              class="fa-solid fa-check"></i></a></td>
-        <td><a class="btn btn-danger btn-xs" href="{% url 'reject-appointment' a.id  %}"><i class="fa fa-trash-o"
-              aria-hidden="true"></i></a></td>
-      </tr>
-      {% endfor %}
-    </table>
-  </div>
-  {% else %}
-  <p class="text-center text-muted">No records found.</p>
-  {% endif %}
-</div>
-
 <script>
   function switchTab(tabName) {
     document.querySelectorAll('.content').forEach(content => {
@@ -123,7 +103,4 @@
     event.currentTarget.classList.add('active');
   }
 </script>
-<!--
-  developed By : Prathmesh Vairale
-  -->
 {% endblock content %}

@@ -56,6 +56,10 @@ class Patient(models.Model):
     admitDate=models.DateField(auto_now=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True, blank=True)
     status=models.BooleanField(default=False)
+    dob = models.DateField(null=True, blank=True)
+    is_emergency = models.BooleanField(default=False)
+    is_discharged = models.BooleanField(default=False)
+    
     @property
     def get_name(self):
         return self.user.first_name+" "+self.user.last_name
@@ -103,12 +107,36 @@ class DoctorAvailability(models.Model):
     end_time = models.TimeField()
     
     def __str__(self):
-        return f"Availability - {self.doctor} on {self.day_of_week}"    
+        return f"Availability - {self.doctor} on {self.day_of_week}"  
+    
+
+ACTIVITY_LEVELS = {
+    "sedentary": 1.2,
+    "light": 1.375,
+    "moderate": 1.55,
+    "very_active": 1.725,
+    "super_active": 1.9,
+}    
+      
 
 class UserHealth(models.Model):
+    GOAL_CHOICES = [
+        ("maintain", "Maintain Weight"),
+        ("lose", "Lose Weight"),
+        ("gain", "Gain Weight"),
+    ]
+    
     user = models.ForeignKey('Patient', on_delete=models.CASCADE, null=True)
     height = models.FloatField(null=True, blank=True)
     weight = models.FloatField(null=True, blank=True)
+    activity_level = models.CharField(
+        max_length=20, 
+        choices=[(k, k.replace("_", " ").title()) for k in ACTIVITY_LEVELS.keys()],
+        default="sedentary"
+    )
+    goal = models.CharField(max_length=10, choices=GOAL_CHOICES, default="maintain")
+
+    
     def __str__(self):
         return f"UserHealth - {self.user}"
 

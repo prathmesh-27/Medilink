@@ -1,0 +1,91 @@
+/*Following styles is used in admin-patient page*/
+.tabs {
+    display: flex;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.active {
+    background-color: teal;
+    color: white;
+}
+
+.content {
+    display: none;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.show {
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: teal;
+    color: white;
+}
+
+/* Styling for Admin Dashboard */
+.dashboard {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stat-box {
+    background: #008080;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stat-box h2 {
+    margin: 5px 0;
+}
+
+.gauge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+}
