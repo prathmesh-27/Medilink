@@ -2,13 +2,19 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-departments=[('Cardiologist','Cardiologist'),
-('Dermatologists','Dermatologists'),
-('Emergency Medicine Specialists','Emergency Medicine Specialists'),
-('Allergists/Immunologists','Allergists/Immunologists'),
-('Anesthesiologists','Anesthesiologists'),
-('Colon and Rectal Surgeons','Colon and Rectal Surgeons')
+departments = [
+    ('Cardiologist', 'Cardio'),
+    ('Dermatologists', 'Derma'),
+    ('Allergists', 'Allergy'),
+    ('General Surgery', 'Gen Surg'),
+    ('Pediatricians', 'Pedia'),
+    ('Orthopedic Surgeons', 'Ortho'),
+    ('Neurologists', 'Neuro'),
+    ('Psychiatrists', 'Psych'),
+    ('Gynecologists', 'Gynae'),
+    ('Endocrinologists', 'Endo')
 ]
+
 
 # Gender Choices (Defined Outside the Model)
 GENDER_CHOICES = [

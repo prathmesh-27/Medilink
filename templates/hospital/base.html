@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Base {% endblock %}</title>
+    <title>{% block title %} Home {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'css/diet.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,7 +18,6 @@
     {% if df_html %}
     <div class="container mt-5">
         <h3>Diet Results</h3>
-        <!-- Display the DataFrame HTML -->
         <div>
             {{ df_html | safe }}
         </div>
@@ -64,12 +63,6 @@
 
             generateCheckboxes('.section:nth-of-type(1) .grid', nutrients, "nutrients");
             generateCheckboxes('.section:nth-of-type(2) .grid', health_conditions, "health_conditions");
-
-            // // Form submission handler
-            // document.getElementById('dietForm')?.addEventListener('submit', function (e) {
-            //     e.preventDefault();
-            //     console.log('Form submitted');
-            // });
         });
 
     </script>

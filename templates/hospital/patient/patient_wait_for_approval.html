@@ -1,47 +1,18 @@
-<!DOCTYPE html>
+{% extends 'hospital/homebase.html' %}
+{% block title %} Wait Till Confirmation {% endblock %}
+{% load static %}
+{% block content %}
 
-<html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Wait Till Confirmation</title>
-
-
-  <style media="screen">
-    .jumbotron {
-      margin-top: 0px;
-      margin-bottom: 0px;
-    }
-
-    .jumbotron h1 {
-      text-align: center;
-    }
-
-    .alert {
-      margin: 0px;
-    }
-  </style>
-</head>
-
-<body>
+<section id="navbar-section">
   {% include "hospital/other/navbar.html" %}
-  <br>
-  <br>
-
-  <div class="jumbotron" style="margin-top: 0px;
-    margin-bottom: 0px;">
-    <h1 class="display-4">Hello {{request.user.first_name}}</h1>
-    <p class="lead">Your Account is not approved till now <br><br>Our Team is checking your profile <br><br> Soon your
-      account will be confirmed !!!</p>
-    <hr class="my-4">
-    <p>Check Later</p>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" href="/logout" role="button">Logout For Now</a>
+  <section class="pending-box">
+    <h1>Welcome, {{ request.user.first_name }}!</h1>
+    <p>Your account is currently under review. Our team is verifying your profile, and we’ll confirm your account soon.
     </p>
-  </div>
+    <hr>
+    <p>Thank you for your patience. Please check back later.</p>
+    <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+  </section>
+</section>
 
-  {% include "hospital/other/footer.html" %}
-</body>
-
-</html>
+{% endblock content %}

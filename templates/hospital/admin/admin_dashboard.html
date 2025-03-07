@@ -45,70 +45,103 @@
       <h2>{{appointmentcount}}</h2>
       <p>Approve Appointments: {{pendingappointmentcount}}</p>
     </div>
-    <div class="stat-box">
-      <h4>Bed Occupancy Rate</h4>
-      <h2>100%</h2>
-      <p>50 Occupied | 50 Total Beds</p>
-    </div>
+
     <div class="stat-box gauge">
       <h4>Appointment Rate</h4>
-      <h2>7 per day</h2>
+      <h2>{{appointment_rate}}%</h2>
     </div>
   </div>
 </div>
 <script>
   // Patients per Division Chart
+  var patientsDivisionChartData = JSON.parse('{{ patient_by_division|escapejs }}');
+
   const patientsDivisionChart = new Chart(document.getElementById('patientsDivisionChart'), {
     type: 'bar',
     data: {
-      labels: ['Dept 1', 'Dept 2', 'Dept 3', 'Dept 4'],
-      datasets: [{
-        label: 'Male',
-        data: [10, 20, 35, 5],
-        backgroundColor: 'lightblue'
+      labels: patientsDivisionChartData.labels,
+      datasets: [
+        {
+          label: 'Male',
+          data: patientsDivisionChartData.male_data,
+          backgroundColor: 'lightblue'
+        },
+        {
+          label: 'Female',
+          data: patientsDivisionChartData.female_data,
+          backgroundColor: 'pink'
+        }
+      ]
+    },
+    options: {
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: 10 // Reduce font size
+            },
+            maxRotation: 90, // Rotate labels to be vertical
+            minRotation: 90
+          }
+        },
+        y: {
+          beginAtZero: true
+        }
       },
-      {
-        label: 'Female',
-        data: [5, 10, 15, 3],
-        backgroundColor: 'pink'
-      }]
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 9 // Adjust legend font size
+            }
+          }
+        }
+      }
     }
   });
 
   // Patients By Age Chart
+  var ageGroups = JSON.parse('{{ age_groups|escapejs }}'); // Ensure safe parsing
+
   const patientsAgeChart = new Chart(document.getElementById('patientsAgeChart'), {
     type: 'doughnut',
     data: {
-      labels: ['Age Group 1', 'Age Group 2', 'Age Group 3', 'Age Group 4'],
+      labels: ageGroups.labels,  // Using parsed JSON data
       datasets: [{
-        data: [25, 30, 15, 30],
-        backgroundColor: ['#3498db', '#2ecc71', '#e74c3c', '#f1c40f']
+        data: ageGroups.data,
+        backgroundColor: ["#b3ebeb", "#80dfdf", "#4dd3d3", "#26c6c6"]
       }]
     }
   });
 
   // Patient Admissions Monthly Chart
+  var line_graph = JSON.parse('{{line_graph|escapejs}}');
+
   const admissionsChart = new Chart(document.getElementById('admissionsChart'), {
     type: 'line',
     data: {
-      labels: ['March', 'April', 'May', 'June', 'July'],
+      labels: line_graph.labels,
       datasets: [{
         label: 'Admissions',
-        data: [10, 20, 18, 30, 35],
-        borderColor: 'blue',
+        data: line_graph.data,
+        borderColor: "#004d4d",
         fill: false
       }]
     }
   });
 
   // Doctors per Department Chart
+  var doctorsChartdata = JSON.parse('{{pie_chart|escapejs}}')
   const doctorsChart = new Chart(document.getElementById('doctorsChart'), {
     type: 'pie',
     data: {
-      labels: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'],
+      labels: doctorsChartdata.labels,
       datasets: [{
-        data: [20, 20, 20, 20, 20],
-        backgroundColor: ['#1abc9c', '#3498db', '#9b59b6', '#f39c12', '#e74c3c']
+        data: doctorsChartdata.data,
+        backgroundColor: [
+          "#e0f7f7", "#b3ebeb", "#80dfdf", "#4dd3d3", "#26c6c6",
+          "#00baba", "#009e9e", "#008282", "#006666", "#004d4d"
+        ]
       }]
     }
   });

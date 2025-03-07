@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 # from django.conf import settings
 from datetime import date
 from django.utils.http import urlencode
+from ..utility import get_age_groups,get_admissions_by_month,get_doctors_by_departments,get_patients_division_data,get_appointment_rate
+
+
 
 
 def is_admin(user):
@@ -126,15 +129,15 @@ def admin_appointment_view(request):
     
     return render(request,'hospital/admin/admin_appointment.html',context)
 
-# @login_required(login_url='adminlogin')
-# @user_passes_test(is_admin)
-# def admin_approve_patient_view(request):
-#     patients=models.Patient.objects.all().filter(status=False)
-#     return render(request,'hospital/admin/admin_approve_patient.html',{'patients':patients})
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_dashboard_view(request):
+    
+    age_groups  = get_age_groups()
+    line_graph =  get_admissions_by_month()
+    pie_chart = get_doctors_by_departments()
+
     #for both table in admin dashboard
     doctors=models.Doctor.objects.all().order_by('-id')
     patients=models.Patient.objects.all().order_by('-id')
@@ -147,6 +150,8 @@ def admin_dashboard_view(request):
 
     appointmentcount=models.Appointment.objects.all().filter(status=True).count()
     pendingappointmentcount=models.Appointment.objects.all().filter(status=False).count()
+    
+    
     mydict={
     'doctors':doctors,
     'patients':patients,
@@ -156,6 +161,12 @@ def admin_dashboard_view(request):
     'pendingpatientcount':pendingpatientcount,
     'appointmentcount':appointmentcount,
     'pendingappointmentcount':pendingappointmentcount,
+    'age_groups': age_groups,
+    'line_graph': line_graph,
+    'pie_chart':pie_chart,
+    'patient_by_division':get_patients_division_data(),
+    'appointment_rate':get_appointment_rate(),
+ 
     }
     return render(request,'hospital/admin/admin_dashboard.html',context=mydict)
 

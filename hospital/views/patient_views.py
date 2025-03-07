@@ -119,12 +119,8 @@ def patient_signup_view(request):
             messages.warning(request, "Your account has been created successfully! Pending verification.")
 
             return HttpResponseRedirect('/')
-
-    else:
-        userForm = forms.PatientUserForm()
-        patientForm = forms.PatientForm()
-
-    return render(request, '/', {'userForm': userForm, 'patientForm': patientForm})
+        
+    return render(request, '/')
 
 @login_required(login_url='patientlogin')
 @user_passes_test(is_patient)

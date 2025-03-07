@@ -1,6 +1,6 @@
 {% load widget_tweaks %}
 
-<form method="POST" id="signupForm" class="hidden" enctype="multipart/form-data">
+<form method="POST" id="signupForm" class="hidden" enctype="multipart/form-data" action="{% url 'patient-signup' %}">
     {% csrf_token %}
     <div class="form-wrapper">
         <div class="form-group">
@@ -11,6 +11,9 @@
         </div>
         <div class="form-group">
             {% render_field signupform.user.username class="form-control" placeholder="Username" %}
+        </div>
+        <div class="form-group">
+            {% render_field signupform.user.email class="form-control" placeholder="Email" %}
         </div>
         <div class="form-group">
             {% render_field signupform.user.password class="form-control" placeholder="Password" %}
@@ -25,7 +28,6 @@
 
         <div class="form-group">
             {% render_field signupform.patient.mobile class="form-control"%}
-            <!-- {{patientForm.mobile}} -->
         </div>
         <div class="form-group">
             {% render_field signupform.patient.assignedDoctorId class="form-control" placeholder="Doctor" %}

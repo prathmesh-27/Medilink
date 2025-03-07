@@ -1,7 +1,13 @@
-<header class="header">
-    <span>MedLink</span>
+{%load static %}
+<header class="header common_header">
+    <div class="header_log">
+        <img src="{% static 'images/Med.png' %}" alt="Profile Picture" style="width: 50px; border-radius: 50%;">
+        <span>MedLink</span>
+    </div>
+
+
     <div class="nav-links">
-        <span>{{ request.user.first_name }}</span>
+        <p>Signed In as <span>{{ request.user.email }}</span> </p>
         <a href="{% url 'logout' %}">Logout</a>
     </div>
 </header>

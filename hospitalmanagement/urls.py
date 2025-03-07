@@ -16,6 +16,7 @@ urlpatterns = [
     path('reject-patient/<int:pk>', appointment_views.reject_patient_view,name='reject-patient'),
     path('approve-appointment/<int:pk>', appointment_views.approve_appointment_view,name='approve-appointment'),
     path('reject-appointment/<int:pk>', appointment_views.reject_appointment_view,name='reject-appointment'),
+    path('delete-appointment/<int:pk>',appointment_views.delete_appointment,name='delete-appointment'),
 ]
 
 urlpatterns+=[
@@ -58,16 +59,14 @@ urlpatterns +=[
 
 #---------FOR PATIENT RELATED URLS-------------------------------------
 urlpatterns +=[
-
     path('patient-dashboard', patient_views.patient_dashboard_view,name='patient-dashboard'),
     path('patient-appointment', patient_views.patient_appointment_view,name='patient-appointment'),
     path('patient-book-appointment', patient_views.patient_book_appointment_view,name='patient-book-appointment'),
     path('patient-view-doctor', patient_views.patient_view_doctor_view,name='patient-view-doctor'),
     path('patient-discharge', patient_views.patient_discharge_view,name='patient-discharge'),
     path('patientclick', patient_views.patientclick_view),
-    path('patientsignup', patient_views.patient_signup_view),
+    path('patientsignup', patient_views.patient_signup_view,name='patient-signup'),
     path('patient-fitness', patient_views.patient_fitness,name='patient-fitness'),
-
 ]
 
 

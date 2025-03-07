@@ -12,8 +12,7 @@ def is_admin(user):
     return user.groups.filter(name='ADMIN').exists()
 def is_doctor(user):
     return user.groups.filter(name='DOCTOR').exists()
-# def is_patient(user):
-#     return user.groups.filter(name='PATIENT').exists()
+
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -21,7 +20,7 @@ def approve_doctor_view(request,pk):
     doctor= models.Doctor.objects.get(id=pk)
     doctor.status=True
     doctor.save()
-    return redirect(reverse('admin-approve-doctor'))
+    return redirect(reverse('admin-doctor'))
 
 
 @login_required(login_url='adminlogin')
@@ -57,14 +56,14 @@ def reject_doctor_view(request,pk):
     user=models.User.objects.get(id=doctor.user_id)
     user.delete()
     doctor.delete()
-    return redirect('admin-approve-doctor')
+    return redirect('admin-doctor')
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def reject_appointment_view(request,pk):
     appointment=models.Appointment.objects.get(id=pk)
     appointment.delete()
-    return redirect('admin-approve-appointment')
+    return redirect('admin-appointment')
 
 @login_required(login_url='doctorlogin')
 @user_passes_test(is_doctor)
@@ -79,3 +78,11 @@ def delete_appointment_view(request,pk):
     patients=models.Patient.objects.all().filter(status=True,user_id__in=patientid)
     appointments=zip(appointments,patients)
     return render(request,'hospital/doctor/doctor_delete_appointment.html',{'appointments':appointments,'doctor':doctor})
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def delete_appointment(request,pk):
+    appointment=models.Appointment.objects.get(id=pk)
+    appointment.delete()
+    return redirect('admin-appointment')
