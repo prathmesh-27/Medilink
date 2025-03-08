@@ -6,7 +6,8 @@
 {% block pic%}<img src="{% static doctor_pic.profile_pic %}" alt="Profile Picture"
   style="width: 80px; border-radius: 50%;">{% endblock%}
 {% block content %}
-<h2>Doctor</h2>
+{% include 'hospital/other/name_role_header.html'%}
+<br>
 <div class="tabs">
   <button class="tab-button active" onclick="switchTab('patients')">Patients</button>
   <button class="tab-button" onclick="switchTab('discharge')">Discharge Patient</button>
@@ -31,7 +32,13 @@
       {% for p in patients %}
       <tr>
         <td> {{p.get_name}}</td>
-        <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>
+          {%if p.profile_pic %}
+          <img src="{% static p.profile_pic %}" alt="Profile Picture" style="width: 40px;">
+          {% else %}
+          <img src="{% static 'images/patient.jpg' %}" alt="Profile Picture" style="width: 40px; ">
+          {% endif %}
+        </td>
         <td>{{p.symptoms}}</td>
         <td>{{p.mobile}}</td>
         <td>{{p.address}}</td>
@@ -44,7 +51,31 @@
 
 <div id="discharge" class="content">
   <h3>Your Discharge Patient</h3>
-  <h3>Discharging of Patient Logic Goes here</h3>
+  <table class="table table-hover" id="discharge-dev-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Profile Picture</th>
+        <th>Symptoms</th>
+        <th>Mobile</th>
+        <th>Address</th>
+      </tr>
+    </thead>
+    {% for p in discharged_patient %}
+    <tr>
+      <td> {{p.get_name}}</td>
+      <td> {%if p.profile_pic %}
+        <img src="{% static p.profile_pic %}" alt="Profile Picture" style="width: 40px; ">
+        {% else %}
+        <img src="{% static 'images/patient.jpg' %}" alt="Profile Picture" style="width: 40px;">
+        {% endif %}
+      </td>
+      <td>{{p.symptoms}}</td>
+      <td>{{p.mobile}}</td>
+      <td>{{p.address}}</td>
+    </tr>
+    {% endfor %}
+  </table>
 </div>
 
 

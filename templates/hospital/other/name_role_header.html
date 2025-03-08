@@ -1,0 +1,10 @@
+<div class="header">
+    <div>
+        <p>{{request.user.first_name}}</p>
+        <p>{{ role }}</p>
+    </div>
+
+    {% if role == 'Patient' %}
+    <a href="/patient-appointment"><button>Make Appointment</button></a>
+    {% endif %}
+</div>

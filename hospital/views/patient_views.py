@@ -19,10 +19,12 @@ def patient_appointment_view(request):
     appointments_approved =models.Appointment.objects.all().filter(patientId=request.user.id)
     appointmentForm=forms.PatientAppointmentForm()
     patient=models.Patient.objects.get(user_id=request.user.id) #for profile picture of patient in sidebar
-
+    role = request.user.groups.first().name.title() if request.user.groups.exists() else None
+    
     context = {'patient':patient,
                'appointments_approved':appointments_approved,
-               'appointmentForm':appointmentForm,}
+               'appointmentForm':appointmentForm,
+               'role':role,}
     
     return render(request,'hospital/patient/patient_appointment.html',context)
 
@@ -50,6 +52,7 @@ def patient_book_appointment_view(request):
 def patient_dashboard_view(request):
     patient=models.Patient.objects.get(user_id=request.user.id)
     doctor=models.Doctor.objects.get(user_id=patient.assignedDoctorId)
+    role = request.user.groups.first().name.title() if request.user.groups.exists() else None
     mydict={
     'patient':patient,
     'patient_age':calculate_age(patient.dob),
@@ -59,6 +62,7 @@ def patient_dashboard_view(request):
     'symptoms':patient.symptoms,
     'doctorDepartment':doctor.department,
     'admitDate':patient.admitDate,
+    'role':role,
     }
     return render(request,'hospital/patient/patient_dashboard.html',context=mydict)
 
@@ -129,23 +133,20 @@ def patient_view_appointment_view(request):
     appointments=models.Appointment.objects.all().filter(patientId=request.user.id)
     return render(request,'hospital/patient/patient_view_appointment.html',{'appointments':appointments,'patient':patient})
 
+
 def patient_view_doctor_view(request):
     doctors=models.Doctor.objects.all().filter(status=True)
-    patient=models.Patient.objects.get(user_id=request.user.id) #for profile picture of patient in sidebar
-    return render(request,'hospital/patient/patient_view_doctor.html',{'patient':patient,'doctors':doctors})
+    patient=models.Patient.objects.get(user_id=request.user.id) 
+    role = request.user.groups.first().name.title() if request.user.groups.exists() else None
+    return render(request,'hospital/patient/patient_view_doctor.html',{'patient':patient,'doctors':doctors,'role':role})
 
-
-#for showing signup/login button for patient
-def patientclick_view(request):
-    if request.user.is_authenticated:
-        return HttpResponseRedirect('afterlogin')
-    return render(request,'hospital/patient/patientclick.html')
 
 @login_required(login_url='patientlogin')
 @user_passes_test(is_patient)
 def patient_fitness(request):
     patient=models.Patient.objects.get(user_id=request.user.id) 
     user_health = models.UserHealth.objects.filter(user=patient).first()
+    role = request.user.groups.first().name.title() if request.user.groups.exists() else None
     
     if request.method == "POST":
         # Pass instance=user_health to update existing record
@@ -184,7 +185,30 @@ def patient_fitness(request):
         'user_health_form': form,
         'patient':patient,
         'user_health': user_health,
-        'fitness_info':fitness_info
+        'fitness_info':fitness_info,
+        'role':role,
     }
     return render(request,'hospital/patient/patient_fitness.html',context)
+
+
+def update_userhealth(request):
+    patient=models.Patient.objects.get(user_id=request.user.id)
+    user_health, created = models.UserHealth.objects.get_or_create(user=patient)
+    role = request.user.groups.first().name.title() if request.user.groups.exists() else None
+
+    if request.method == "POST":
+        user_health_form = forms.UserHealthForm(request.POST, instance=user_health)  
+        if user_health_form.is_valid():
+            user_health_form.save()  #
+            return redirect('patient-fitness')  
+    else:
+        user_health_form = forms.UserHealthForm(instance=user_health)  # Pre-fill form with existing data
+     
+    
+    context = {
+        'patient':patient,
+        'user_health_form':user_health_form,
+        'role':role,
+    }
+    return render(request, "hospital/patient/update_patient_health.html",context)
 

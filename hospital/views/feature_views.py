@@ -2,29 +2,6 @@ import requests
 from django.shortcuts import render
 from django.http import JsonResponse
 
-def send_to_flask(request):
-    response_data = None  # Default empty response
-    error_message = None   # Store any error messages
-    if request.method == 'POST':
-        name = request.POST.get("name")
-        flask_url = "http://127.0.0.1:5000/process-data"
-        
-        try:
-            response = requests.post(flask_url, json={"name": name}, timeout=5)  # Set timeout
-            response.raise_for_status()  # Raise error for 4xx/5xx responses
-            
-            response_data = response.json()  # Get processed data from Flask
-        except requests.Timeout:
-            error_message = "The server took too long to respond. Please try again later."
-        except requests.ConnectionError:
-            error_message = "Could not connect to the server. Please check your connection."
-        except requests.HTTPError as err:
-            error_message = f"API returned an error: {err.response.status_code}"
-        except Exception as e:
-            error_message = f"Something went wrong: {str(e)}"
-
-    return render(request, 'hospital/example.html', {"response_data": response_data, "error_message": error_message})
-
 
 def get_diet(request):
     if request.method == "POST":

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 
 departments = [
@@ -108,10 +109,11 @@ class PatientDischargeDetails(models.Model):
     
 class DoctorAvailability(models.Model):
     doctor = models.ForeignKey('Doctor', on_delete=models.CASCADE)
+    date_available = models.DateField(default=now) 
     day_of_week = models.CharField(max_length=10, choices=DAY_CHOICES)
     start_time = models.TimeField()
     end_time = models.TimeField()
-    
+
     def __str__(self):
         return f"Availability - {self.doctor} on {self.day_of_week}"  
     

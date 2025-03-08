@@ -15,34 +15,10 @@
 <br>
 <div class="container">
     <div class="header">
-        <span class="title">FITNESS INFORMATION</span>
-        <span class="edit-icon"> <a href="{% url 'update-userhealth' %}"><i class="fas fa-edit"></i></a></span>
+        <span class="title">UPDATE YOUR FITNESS INFORMATION</span>
+        <span class="edit-icon"></span>
     </div>
 
-    {%if user_health %}
-    <div class="info">
-        <div><span>AGE:</span> {{age}}</div>
-        <div><span>Gender:</span>{{patient.gender}}</div>
-        <div><span>Weight:</span>{{user_health.weight}} kg </div>
-        <div><span>height:</span>{{user_health.height}} cm </div>
-        <div><span>Date of Admit:</span> {{patient.admitDate}}</div>
-        <div><span>Body Mass Index (BMI):</span> {{fitness_info.bmi}}</div>
-        <div><span>BMI Indicator:</span> {{fitness_info.bmi_indicator}}</div>
-        <div><span>Activity Level:</span> {{user_health.activity_level}}</div>
-        <div><span>Goal:</span> {{user_health.goal}}</div>
-        <div><span>Body Metabolic Rate (BMR):</span> {{fitness_info.bmr}} kcal/day</div>
-        <div><span>Calories Needed Daily:</span> {{fitness_info.tdee}} kcal/day</div>
-        <div><span>Calories You Need:</span> {{fitness_info.calories_need}} kcal/day</div>
-
-
-    </div>
-
-    <div class="gauge">
-        <div class="bmi-indicator">
-            <div class="needle"></div>
-        </div>
-    </div>
-    {% else %}
     <div>Enter Height and Weight for Fitness Calculation</div>
     <form method="post" action="{% url 'patient-fitness' %}">
         {% csrf_token %}
@@ -67,12 +43,11 @@
                         </div>
 
                     </div>
-                    <button type="submit" class="btnSubmit">Submit</button>
+                    <button type="submit" class="btnSubmit">Update</button>
                 </div>
             </div>
         </div>
     </form>
-    {% endif%}
 </div>
 
 {% endblock content %}

@@ -1,6 +1,9 @@
 {% extends 'hospital/doctor/doctor_base.html' %}
 {% load static %}
 {% block content %}
+
+{% include 'hospital/other/name_role_header.html'%}
+
 {%include 'hospital/doctor/doctor_dashboard_cards.html'%}
 <br><br><br><br>
 <div class="container">

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Patient Dashboard{% endblock title %}</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   {% load static %}
@@ -24,8 +24,13 @@
     <!-- Sidebar Navigation -->
     <nav class="menu">
       <header class="avatar">
-        {% block pic%}<img src="{% static doctor.profile_pic.url %}" alt="Profile Picture"
-          style="width: 80px; border-radius: 50%;">{% endblock%}
+        {% block pic%}
+        {%if patient.profile_pic %}
+        <img src="{% static patient.profile_pic %}" alt="Profile Picture" style="width: 80px; border-radius: 50%;">
+        {% else %}
+        <img src="{% static 'images/patient.jpg' %}" alt="Profile Picture" style="width: 80px; border-radius: 50%;">
+        {% endif %}
+        {% endblock%}
         <br><br>
         <h6>Patient</h6>
         <h2>{{ request.user.first_name }}</h2>

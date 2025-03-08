@@ -1,0 +1,64 @@
+{% extends 'hospital/doctor/doctor_base.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+{%block title%}Doctor-Patient{% endblock title %}
+
+{% block pic %}
+{% if doctor.profile_pic %}
+<img src="{% static doctor.profile_pic %}" alt="Profile Picture" style="width: 80px; border-radius: 50%;">
+{% else %}
+<img src="{% static 'images/doctor.jpg' %}" alt="Default Profile Picture" style="width: 80px; border-radius: 50%;">
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+{% include 'hospital/other/name_role_header.html'%}
+<h1>Hello this is the doctor availability Page</h1>
+<a href="{% url '' %}">back</a>
+
+{% if availabilities %}
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="reset" onclick="return confirm('Are you sure you want to reset all availability?');">
+        Reset Availability
+    </button>
+</form>
+
+<h2>Doctor Availability</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Date Available</th>
+            <th>Day</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for availability in availabilities %}
+        <tr>
+            <td>{{ availability.date_available }}</td>
+            <td>{{ availability.day_of_week }}</td>
+            <td>{{ availability.start_time }}</td>
+            <td>{{ availability.end_time }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No availability set yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<form method="post" action="{% url 'doctor-availability' %}">
+    {% csrf_token %}
+    {{ availabilityform.as_p }}
+    <button type="submit">Save Availability</button>
+</form>
+{% endif %}
+
+{% endblock %}

@@ -14,37 +14,7 @@
 
 
 {% block content %}
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-4 col-xl-6">
-      <div class="card bg-c-blue order-card">
-        <div class="card-block">
-          <a href="/doctor-view-appointment">
-            <h6 class="m-b-20">View Your Appointment</h6>
-          </a>
-          <br>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 col-xl-6">
-      <div class="card bg-c-green order-card">
-        <div class="card-block">
-          <a href="/doctor-delete-appointment">
-            <h6 class="m-b-20">Delete Appointment</h6>
-          </a>
-          <br>
-        </div>
-      </div>
-    </div>
-
-
-  </div>
-</div>
-
-
-
+{% include 'hospital/other/name_role_header.html'%}
 <h2>Doctor</h2>
 <div class="tabs">
   <button class="tab-button active" onclick="switchTab('appointments')">View Your Appointments</button>
@@ -56,7 +26,8 @@
     <div class="panel-heading">
       <h6 class="panel-title">Your Appointments</h6>
     </div>
-    <table class="table table-hover" id="dev-table">
+    {% if appointments %}
+    <table class="table table-hover" id="view-dev-table">
       <thead>
         <tr>
           <th>Patient Name</th>
@@ -70,7 +41,13 @@
       {% for a,p in appointments %}
       <tr>
         <td>{{a.patientName}}</td>
-        <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>
+          {% if p.profile_pic %}
+          <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" />
+          {% else %}
+          <img src="{% static 'images/patient.jpg' %}" alt="Profile Pic" height="40px" width="40px" />
+          {% endif %}
+        </td>
         <td>{{a.description}}</td>
         <td>{{p.mobile}}</td>
         <td>{{p.address}}</td>
@@ -78,6 +55,9 @@
       </tr>
       {% endfor %}
     </table>
+    {% else %}
+    <p>No Records Found</p>
+    {% endif%}
   </div>
 </div>
 
@@ -85,9 +65,8 @@
 <div id="delete" class="content">
   <h3>Delete Appointment</h3>
   <div class="panel panel-primary">
-    <div class="panel-heading">
-    </div>
-    <table class="table table-hover" id="dev-table">
+    {% if appointments %}
+    <table class="table table-hover" id="delete-dev-table">
       <thead>
         <tr>
           <th>Patient Name</th>
@@ -101,11 +80,14 @@
         <td>{{a.patientName}}</td>
         <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
         <td>{{a.description}}</td>
-        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-appointment' a.id  %}"><span
-              class="glyphicon glyphicon-trash"></span></a></td>
+        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-appointment' a.id  %}"><i class="fa fa-trash-o"
+              aria-hidden="true"></i></a></td>
       </tr>
       {% endfor %}
     </table>
+    {% else %}
+    <p>No Records Found</p>
+    {% endif%}
   </div>
 </div>
 

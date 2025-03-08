@@ -77,7 +77,7 @@ def delete_appointment_view(request,pk):
         patientid.append(a.patientId)
     patients=models.Patient.objects.all().filter(status=True,user_id__in=patientid)
     appointments=zip(appointments,patients)
-    return render(request,'hospital/doctor/doctor_delete_appointment.html',{'appointments':appointments,'doctor':doctor})
+    return render(request,'hospital/doctor/doctor_appointment.html',{'appointments':appointments,'doctor':doctor})
 
 
 @login_required(login_url='adminlogin')

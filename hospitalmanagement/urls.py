@@ -8,6 +8,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("user_login/", authentication_views.user_login, name="user_login"),
     path('afterlogin', authentication_views.afterlogin_view,name='afterlogin'),
+    path('adminlogin', LoginView.as_view(template_name='hospital/adminlogin.html')),
+    path('doctorlogin', LoginView.as_view(template_name='hospital/doctorlogin.html')),
+    path('patientlogin', LoginView.as_view(template_name='hospital/patientlogin.html')),
     path('logout', authentication_views.logout_view,name='logout'),
     path('delete-doctor-from-hospital/<int:pk>', misc_views.delete_doctor_from_hospital_view,name='delete-doctor-from-hospital'),
     path('approve-doctor/<int:pk>', appointment_views.approve_doctor_view,name='approve-doctor'),
@@ -16,7 +19,7 @@ urlpatterns = [
     path('reject-patient/<int:pk>', appointment_views.reject_patient_view,name='reject-patient'),
     path('approve-appointment/<int:pk>', appointment_views.approve_appointment_view,name='approve-appointment'),
     path('reject-appointment/<int:pk>', appointment_views.reject_appointment_view,name='reject-appointment'),
-    path('delete-appointment/<int:pk>',appointment_views.delete_appointment,name='delete-appointment'),
+    path('delete-appointment/<int:pk>',appointment_views.delete_appointment_view,name='delete-appointment'),
 ]
 
 urlpatterns+=[
@@ -43,7 +46,6 @@ urlpatterns+=[
     path('admin-notification',admin_views.admin_notification,name='admin-notification'),
     path('discharge-patient/<int:pk>', admin_views.discharge_patient_view,name='discharge-patient'),#To be Corrected
     # path('admin-discharge-patient',admin_views.admin_discharge_patient_view),
-    
 ]
 
 #---------FOR DOCTOR RELATED URLS-------------------------------------
@@ -52,9 +54,10 @@ urlpatterns +=[
     path('doctor-patient', doctor_views.doctor_patient_view,name='doctor-patient'),
     path('doctor-view-discharge-patient',doctor_views.doctor_view_discharge_patient_view,name='doctor-view-discharge-patient'),
     path('doctor-appointment', doctor_views.doctor_appointment_view,name='doctor-appointment'),
-    path('doctor-delete-appointment',doctor_views.doctor_delete_appointment_view,name='doctor-delete-appointment'),
     path('doctorsignup', doctor_views.doctor_signup_view,name='doctorsignup'),
-    path('delete-appointment/<int:pk>', appointment_views.delete_appointment_view,name='delete-appointment'),
+    path('doctor-availability',doctor_views.doctor_availability,name='doctor-availability'),
+    path('reset-availability',doctor_views.reset_availability,name='reset-availability'),
+    path('delete-appointment/<int:pk>', appointment_views.delete_appointment,name='delete-appointment'),
 ]
 
 #---------FOR PATIENT RELATED URLS-------------------------------------
@@ -64,19 +67,14 @@ urlpatterns +=[
     path('patient-book-appointment', patient_views.patient_book_appointment_view,name='patient-book-appointment'),
     path('patient-view-doctor', patient_views.patient_view_doctor_view,name='patient-view-doctor'),
     path('patient-discharge', patient_views.patient_discharge_view,name='patient-discharge'),
-    path('patientclick', patient_views.patientclick_view),
     path('patientsignup', patient_views.patient_signup_view,name='patient-signup'),
     path('patient-fitness', patient_views.patient_fitness,name='patient-fitness'),
+    path('update-userhealth',patient_views.update_userhealth,name='update-userhealth')
 ]
 
 
 urlpatterns+=[
     path('download-pdf/<int:pk>', report_views.download_pdf_view,name='download-pdf'),
-    path('age-pie-chart', report_views.age_pie_chart, name='age_pie_chart'),
-    path('dashboard', report_views.generate_charts, name='dashboard'),
+    path('get-diet/',feature_views.get_diet,name='get_diet'),
 ]
 
-urlpatterns += [
-    path('get-diet/',feature_views.get_diet,name='get_diet'),
-    path('send-to-flask/', feature_views.send_to_flask, name='send_to_flask'),
-]
