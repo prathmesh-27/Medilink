@@ -1,40 +1,113 @@
 {% extends 'hospital/doctor/doctor_base.html' %}
+
 {% load static %}
+{% load widget_tweaks %}
+{%block title%}Doctor-Patient{% endblock title %}
+{% block pic %}
+{% if doctor.profile_pic %}
+<img src="{% static doctor.profile_pic %}" alt="Profile Picture" style="width: 80px; border-radius: 50%;">
+{% else %}
+<img src="{% static 'images/doctor.jpg' %}" alt="Default Profile Picture" style="width: 80px; border-radius: 50%;">
+{% endif %}
+{% endblock %}
+
 {% block content %}
 
-{% include 'hospital/other/name_role_header.html'%}
+{% include 'hospital/other/name_role_header.html' %}
 
-{%include 'hospital/doctor/doctor_dashboard_cards.html'%}
-<br><br><br><br>
-<div class="container">
-  <div class="row">
-    <div class="panel panel-primary" style="margin-left:15%;">
-      <div class="panel-heading" style="text-align:center;">
-        <h6 class="panel-title">Recent Appointments For You</h6>
-      </div>
-      <table class="table table-hover" id="dev-table">
-        <thead>
-          <tr>
-            <th>Patient Name</th>
-            <th>Picture</th>
-            <th>Description</th>
-            <th>Mobile</th>
-            <th>Address</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        {% for a,p in appointments %}
-        <tr>
-          <td>{{a.patientName}}</td>
-          <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-          <td>{{a.description}}</td>
-          <td>{{p.mobile}}</td>
-          <td>{{p.address}}</td>
-          <td>{{a.appointmentDate}}</td>
-        </tr>
-        {% endfor %}
-      </table>
+<div class="dashboard-container">
+  <!-- Statistics Cards -->
+  <div class="cards-container">
+    <div class="card">
+      <h3>Patients</h3>
+      <p>{{ patientcount }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Appointments</h3>
+      <p>{{ appointmentcount }}</p>
+    </div>
+    <div class="card">
+      <h3>Discharged Patients</h3>
+      <p>{{ patientdischarged }}</p>
     </div>
   </div>
+
+  <!-- Today's Appointments -->
+  <div class="table-container">
+    <h2>Today's Appointments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Picture</th>
+          <th>Description</th>
+          <th>Mobile</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a, p in today_appointments %}
+        <tr>
+          <td>{{ p.name }}</td>
+          <td>
+            {% if p.profile_pic.url %}
+            <img src="{{ p.profile_pic.url }}" alt="Profile Pic" height="40px" width="40px" />
+            {% else %}
+            <img src="{% static 'images/patient.jpg' %}" alt="Profile Picture" height="40px" width="40px">
+            {% endif %}
+          </td>
+          <td>{{ a.description }}</td>
+          <td>{{ p.mobile }}</td>
+          <td>{{ p.address }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" class="no-data">No appointments for today.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Upcoming Appointments -->
+  <div class="table-container">
+    <h2>Upcoming Appointments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Picture</th>
+          <th>Description</th>
+          <th>Mobile</th>
+          <th>Address</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a, p in upcoming_appointments %}
+        <tr>
+          <td>{{ p.name }}</td>
+          <td>
+            {% if p.profile_pic.url %}
+            <img src="{{ p.profile_pic.url }}" alt="Profile Pic" height="40px" width="40px" />
+            {% else %}
+            <img src="{% static 'images/patient.jpg' %}" alt="Profile Picture" height="40px" width="40px">
+            {% endif %}
+
+          </td>
+          <td>{{ a.description }}</td>
+          <td>{{ p.mobile }}</td>
+          <td>{{ p.address }}</td>
+          <td>{{ a.appointmentDate }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7" class="no-data">No upcoming appointments.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
+
 {% endblock content %}

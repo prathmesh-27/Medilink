@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{% static 'style.css' %}">
   <link rel="stylesheet" href="{% static 'css/home.css' %}">
   <link rel="stylesheet" href="{% static 'css/form.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'images/Med.ico' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -61,10 +62,10 @@
     <section class="section background-primary">
       <div class="image-container">
         <div class="large-image">
-          <img src="https://picsum.photos/id/237/200/300" alt="Large Image">
+          <img src="{% static 'images/home3.jpg' %}" alt="Large Image">
         </div>
-        <div><img src="https://picsum.photos/id/237/200/300" alt="Small Image 1"></div>
-        <div><img src="https://picsum.photos/id/237/200/300" alt="Small Image 2"></div>
+        <div><img src="{% static 'images/home1.jpg' %}" alt="Small Image 1"></div>
+        <div><img src="{% static 'images/home2.jpg' %}" alt="Small Image 2"></div>
 
 
       </div>

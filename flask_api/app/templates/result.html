@@ -10,47 +10,9 @@
 </head>
 
 <body>
-    <h1>Selected Nutrients and Health Conditions</h1>
-
-    <h3>Selected Nutrients:</h3>
-    <ul>
-
-        <li>{{ data['diet_labels'] }}</li>
-
-    </ul>
-
-    <h3>Selected Gender:</h3>
-    <ul>
-
-        <li>{{ data['gender'] }}</li>
-
-    </ul>
-
-    <h3>Selected type:</h3>
-    <ul>
-
-        <li>{{ data['food_type'] }}</li>
-
-    </ul>
-
-    <h3>Selected flatten:</h3>
-    <ul>
-
-        <li>{{ data['flattened_data'] }}</li>
-
-    </ul>
-
-
-    <div class="container mt-5">
-        <h3>Diet Results</h3>
-        <!-- Display the DataFrame HTML -->
-        <div>
-            {{ df_html | safe }}
-        </div>
+    <div>
+        {{ df_html | safe }}
     </div>
-
-
-    <a href="/">Back</a>
 </body>
 
 </html>

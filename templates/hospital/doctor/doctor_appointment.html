@@ -91,17 +91,4 @@
   </div>
 </div>
 
-<script>
-  function switchTab(tabName) {
-    document.querySelectorAll('.content').forEach(content => {
-      content.classList.remove('show');
-    });
-    document.getElementById(tabName).classList.add('show');
-
-    document.querySelectorAll('.tab-button').forEach(button => {
-      button.classList.remove('active');
-    });
-    event.currentTarget.classList.add('active');
-  }
-</script>
 {% endblock %}

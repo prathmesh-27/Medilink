@@ -3,9 +3,16 @@
 {% load static %}
 {% load widget_tweaks %}
 {%block title%}Doctor-Patient{% endblock title %}
-{% block pic%}<img src="{% static doctor_pic.profile_pic %}" alt="Profile Picture"
-  style="width: 80px; border-radius: 50%;">{% endblock%}
+{% block pic %}
+{% if doctor.profile_pic %}
+<img src="{% static doctor.profile_pic %}" alt="Profile Picture" style="width: 80px; border-radius: 50%;">
+{% else %}
+<img src="{% static 'images/doctor.jpg' %}" alt="Default Profile Picture" style="width: 80px; border-radius: 50%;">
+{% endif %}
+{% endblock %}
+
 {% block content %}
+
 {% include 'hospital/other/name_role_header.html'%}
 <br>
 <div class="tabs">
@@ -78,18 +85,4 @@
   </table>
 </div>
 
-
-<script>
-  function switchTab(tabName) {
-    document.querySelectorAll('.content').forEach(content => {
-      content.classList.remove('show');
-    });
-    document.getElementById(tabName).classList.add('show');
-
-    document.querySelectorAll('.tab-button').forEach(button => {
-      button.classList.remove('active');
-    });
-    event.currentTarget.classList.add('active');
-  }
-</script>
 {% endblock content %}

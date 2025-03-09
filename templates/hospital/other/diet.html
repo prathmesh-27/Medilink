@@ -2,8 +2,18 @@
 {% block title %} Medilink-Get Diet {% endblock %}
 {% block content %}
 <main>
-
-    <form id="dietForm" action="{% url 'get_diet'%}" method="POST">
+    {% if df_html %}
+    <!-- Show the Diet Table if df_html is available -->
+    <section class="diet-results">
+        <h2>Recommended Diet Plan</h2>
+        <div class="diet-table">
+            {{ df_html|safe }}
+        </div>
+        <a href="{% url 'get_diet' %}" class="appointment-btn">Go Back</a>
+    </section>
+    {% else %}
+    <!-- Show the Form if No Diet Data is Available -->
+    <form id="dietForm" action="{% url 'get_diet' %}" method="POST">
         {% csrf_token %}
         <div class="section">
             <h2>Select Nutrients</h2>
@@ -49,5 +59,6 @@
 
         <button type="submit" class="submit-btn">Get Diet Plan</button>
     </form>
+    {% endif %}
 </main>
-{% endblock content %}
+{% endblock %}

@@ -16,7 +16,6 @@
 
 <head>
   <meta charset="utf-8">
-  <title>A simple, clean, and responsive HTML invoice template</title>
 
   <style>
     .invoice-box {
@@ -244,7 +243,8 @@
 </div>
 <br><br>
 <div class="download">
-  <a style="background:red; width:500px;" href="{% url 'download-pdf' patientId  %}">Download</a>
+  <a style="background:red; width:500px;" href="{% url 'download-pdf' patientId  %}"
+    class="appointment-btn">Download</a>
 </div>
 
 

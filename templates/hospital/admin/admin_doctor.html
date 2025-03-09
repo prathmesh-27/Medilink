@@ -3,7 +3,7 @@
 {% load widget_tweaks %}
 {% load static %}
 {% block content %}
-
+{% include 'hospital/other/name_role_header.html' %}
 <h2>Admin</h2>
 <div class="tabs">
   <button class="tab-button active" onclick="switchTab('doctors')">Doctors</button>
@@ -126,18 +126,4 @@
   {% endif %}
 
 </div>
-
-<script>
-  function switchTab(tabName) {
-    document.querySelectorAll('.content').forEach(content => {
-      content.classList.remove('show');
-    });
-    document.getElementById(tabName).classList.add('show');
-
-    document.querySelectorAll('.tab-button').forEach(button => {
-      button.classList.remove('active');
-    });
-    event.currentTarget.classList.add('active');
-  }
-</script>
 {% endblock content %}

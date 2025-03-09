@@ -196,8 +196,8 @@ button:active {
 /* Header spans full width */
 .header {
   width: 100%;
-  background: #337AB7;
-  color: white;
+  background: var(--primary-color-3);
+  color: var(--text-1);
   padding: 15px 20px;
   text-align: left;
   font-size: 20px;
@@ -212,6 +212,7 @@ button:active {
   display: flex;
   flex: 1;
   background: url("images/background_img.jpg") no-repeat center center fixed;
+  padding: 10px;
 }
 
 /* Sidebar Navigation */
@@ -292,4 +293,62 @@ main {
 
 .logout-btn:hover {
   background-color: var(--dark-prime);
+}
+
+
+/** Styling for time and date block in header **/
+
+.header-inner {
+  width: 100%;
+  background: var(--primary-color-3);
+  color: var(--text-1);
+  padding: 15px 20px;
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-inner>a {
+  text-decoration: none;
+  /* Removes underline */
+  color: inherit;
+  /* Makes it use the parent’s text color */
+  cursor: pointer;
+}
+
+.header-inner>.right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-time-box {
+  display: flex;
+  align-items: center;
+  color: white;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.date-time-box>.item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.date-time-box>.item i {
+  font-size: 24px;
+  margin-right: 5px;
+}
+
+.date-time-box>.label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.date-time-box>.value {
+  font-weight: normal;
 }

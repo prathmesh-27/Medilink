@@ -5,6 +5,7 @@
 {% block title %}Admin-Patient{% endblock title %}
 
 {% block content %}
+{% include 'hospital/other/name_role_header.html' %}
 <h2>Admin</h2>
 
 <!-- Tab Navigation -->
@@ -191,24 +192,4 @@
   <p class="text-center text-muted">No records found.</p>
   {% endif %}
 </div>
-
-<!-- JavaScript to Handle Tab Switching -->
-<script>
-  function switchTab(tabName) {
-    // Hide all content sections
-    document.querySelectorAll('.content').forEach(content => {
-      content.classList.remove('show');
-    });
-    // Show selected tab content
-    document.getElementById(tabName).classList.add('show');
-
-    // Remove 'active' class from all tab buttons
-    document.querySelectorAll('.tab-button').forEach(button => {
-      button.classList.remove('active');
-    });
-    // Add 'active' class to the clicked tab
-    event.currentTarget.classList.add('active');
-  }
-</script>
-
 {% endblock content %}

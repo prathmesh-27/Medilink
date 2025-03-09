@@ -1,10 +1,33 @@
-<div class="header">
-    <div>
+<div class="header-inner">
+    <div class="left">
         <p>{{request.user.first_name}}</p>
         <p>{{ role }}</p>
     </div>
 
-    {% if role == 'Patient' %}
-    <a href="/patient-appointment"><button>Make Appointment</button></a>
-    {% endif %}
+    <div class="right">
+        {% if role == 'Patient' %}
+        <a href="/patient-appointment"><button class="appointment-btn">Make Appointment</button></a>
+        {% endif %}
+
+        <div class="date-time-box">
+            <div class="item">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="label">Date:</span>
+                <span class="value" id="current-date"></span>
+            </div>
+            <div class="item">
+                <i class="fas fa-clock"></i>
+                <span class="label">Time:</span>
+                <span class="value" id="current-time"></span>
+            </div>
+            <div class="item">
+                <span class="label">Day:</span>
+                <span class="value" id="current-day"></span>
+            </div>
+        </div>
+
+    </div>
+
+
+
 </div>

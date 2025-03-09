@@ -1,12 +1,14 @@
 {% extends 'hospital/admin/admin_base.html' %}
 {% load static %}
+
+
 {% block content %}
 <title>Admin Dashboard</title>
 
 <head>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
+{% include 'hospital/other/name_role_header.html' %}
 <div class="dashboard">
   <!-- Charts Section -->
   <div class="charts">
