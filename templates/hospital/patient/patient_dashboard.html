@@ -4,6 +4,7 @@
 {%block title%}Patient-Fitness{% endblock title %}
 
 
+
 {% block pic%}
 {%if patient.profile_pic %}
 <img src="{% static patient.profile_pic %}" alt="Profile Picture" style="width: 80px; border-radius: 50%;">
@@ -13,6 +14,84 @@
 {% endblock%}
 
 {% block content %}
+<style>
+    .personal-info {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 30px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: relative;
+  margin-top: 30px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.personal-info h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+}
+
+.info-item {
+  font-size: 15px;
+  color: #333;
+}
+
+.info-item strong {
+  display: block;
+  font-weight: 600;
+  color: #0e7572;
+  margin-bottom: 3px;
+}
+
+/* Heartbeat image styling */
+.heartbeat {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 150px;
+  height: auto;
+  opacity: 0.9;
+}
+
+.heartbeat img {
+  width: 100%;
+  animation: heartbeatPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes heartbeatPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .personal-info {
+    padding: 20px;
+  }
+
+  .heartbeat {
+    display: none;
+  }
+}
+
+</style>
 
 <div class="container">
     <!-- #Change its class and style inside include "hospital/other/name_role_header.html" -->

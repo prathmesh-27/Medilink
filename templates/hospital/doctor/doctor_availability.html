@@ -4,6 +4,8 @@
 {% load widget_tweaks %}
 {%block title%}Doctor-Patient{% endblock title %}
 
+
+
 {% block pic %}
 {% if doctor.profile_pic %}
 <img src="{% static doctor.profile_pic %}" alt="Profile Picture" style="width: 80px; border-radius: 50%;">
@@ -12,12 +14,115 @@
 {% endif %}
 {% endblock %}
 
-
 {% block content %}
+
+
+
+<style>
+
+
+  h1, h2 {
+    color: #2c3e50;
+  }
+  
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  table th, table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #0e7572;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  table td {
+    color: #333;
+  }
+  
+  /* Form Styles */
+  form {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  form button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  form button:hover {
+    background-color: #2980b9;
+  }
+  
+  form input, form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Reset Button */
+  #reset {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+  }
+  
+  #reset:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    table, form {
+      width: 100%;
+    }
+    table th, table td {
+      padding: 10px;
+    }
+  }
+  
+  </style>
+
 {% include 'hospital/other/name_role_header.html'%}
 <h1>Hello this is the doctor availability Page</h1>
 
 {% if availabilities %}
+
+
+
 <form method="post">
     {% csrf_token %}
     <button id="reset" type="submit" name="reset"
@@ -62,3 +167,5 @@
 {% endif %}
 
 {% endblock %}
+
+
