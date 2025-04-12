@@ -13,6 +13,179 @@
 
 
 {% block content %}
+
+<style>
+  /* Tabs */
+.tabs {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+
+.tab-button {
+  background-color: #e6f2f2;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #0e7572;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active,
+.tab-button:hover {
+  background-color: #0e7572;
+  color: white;
+}
+
+/* Tab Content */
+.content {
+  display: none;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.content.show {
+  display: block;
+}
+
+/* Appointments Table */
+.panel {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+}
+
+.panel-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0e7572;
+  margin-bottom: 10px;
+}
+
+#dev-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#dev-table th,
+#dev-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+#dev-table th {
+  background-color: #0e7572;
+  color: white;
+  font-weight: 600;
+}
+
+#dev-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Label Styles */
+.label {
+  padding: 5px 10px;
+  border-radius: 6px;
+  color: white;
+  font-size: 12px;
+}
+
+.label-primary {
+  background-color: #007bff;
+}
+
+.label-success {
+  background-color: #28a745;
+}
+
+/* Appointment Form Styling */
+.register-form {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.register-form .note p {
+  font-size: 16px;
+  color: #0e7572;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.register-form .form-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.register-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form input,
+.register-form select,
+.register-form textarea {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+}
+
+.btnSubmit {
+  width: 150px;
+  padding: 10px;
+  background-color: #0e7572;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.btnSubmit:hover {
+  background-color: #095f5c;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tabs {
+    flex-direction: column;
+  }
+
+  .register-form {
+    padding: 20px;
+  }
+
+  .btnSubmit {
+    width: 100%;
+  }
+}
+
+</style>
 {% include 'hospital/other/name_role_header.html'%}
 <h2>Patient-Appointment</h2>
 <div class="tabs">

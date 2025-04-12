@@ -3,6 +3,120 @@
 {% load static %}
 {% load widget_tweaks %}
 {%block title%}Doctor-Patient{% endblock title %}
+<style>
+
+  /* Header and Titles */
+  h2 {
+    color: #2d3436;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  h3,
+  h6 {
+    color: #0984e3;
+  }
+
+  /* Tabs Styling */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .tab-button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #dfe6e9;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  .tab-button.active,
+  .tab-button:hover {
+    background-color: #0984e3;
+    color: #fff;
+  }
+
+  /* Content Panels */
+  .content {
+    display: none;
+  }
+
+  .content.show {
+    display: block;
+  }
+
+  /* Tables Styling */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+
+  .table thead {
+    background-color: #0984e3;
+    color: #fff;
+  }
+
+  .table th,
+  .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .table tr:hover {
+    background-color: #f1f2f6;
+  }
+
+  /* Profile Picture Styling */
+  .table img {
+    border-radius: 50%;
+    border: 2px solid #0984e3;
+  }
+
+  /* Delete Button Styling */
+  .btn-danger {
+    background-color: #d63031;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+
+  .btn-danger:hover {
+    background-color: #c0392b;
+  }
+
+  /* Icons */
+  .fa-trash-o {
+    margin-right: 5px;
+  }
+
+  /* No Records Message */
+  p {
+    color: #636e72;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* Panel Styling */
+  .panel-primary {
+    border: 1px solid #0984e3;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #fff;
+  }
+
+  .panel-heading {
+    margin-bottom: 10px;
+  }
+</style>
 
 {% block pic %}
 {% if doctor.profile_pic %}

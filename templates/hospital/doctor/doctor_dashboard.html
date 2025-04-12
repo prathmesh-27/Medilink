@@ -13,6 +13,105 @@
 
 {% block content %}
 
+<style>
+
+.dashboard-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Cards Section */
+.cards-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  text-align: center;
+}
+
+.card h3 {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.card p {
+  font-size: 1.4em;
+  color: #00796b;
+}
+
+/* Appointments Section */
+.appointments-flex {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+/* Table Container Styling */
+.table-container {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  overflow: hidden;
+}
+
+.table-container h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #222;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead {
+  background-color: #00796b;
+  color: #fff;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.no-data {
+  text-align: center;
+  font-style: italic;
+  color: #777;
+}
+
+/* Profile Image Styling */
+table img {
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  object-fit: cover;
+}
+
+
+</style>
+
 {% include 'hospital/other/name_role_header.html' %}
 
 <div class="dashboard-container">

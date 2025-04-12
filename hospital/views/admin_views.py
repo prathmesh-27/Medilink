@@ -287,6 +287,7 @@ def discharge_patient_view(request,pk):
     patient=models.Patient.objects.get(id=pk)
     days=(date.today()-patient.admitDate) #2 days, 0:00:00
     assignedDoctor=models.User.objects.all().filter(id=patient.assignedDoctorId)
+    # print(assignedDoctor)
     d=days.days # only how many day that is 2
     patientDict={
         'patientId':pk,

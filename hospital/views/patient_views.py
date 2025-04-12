@@ -112,7 +112,9 @@ def patient_signup_view(request):
 
             patient = patientForm.save(commit=False)
             patient.user = user
-            patient.assignedDoctorId_id = request.POST.get('assignedDoctorId')  # Set doctor reference
+
+            # print(request.POST.get('assignedDoctorId'))
+            patient.assignedDoctorId = request.POST.get('assignedDoctorId')  # Set doctor reference
             patient.save()  # Save the patient instance
 
             # Add user to the 'PATIENT' group
@@ -122,9 +124,14 @@ def patient_signup_view(request):
             # ✅ Add warning message for verification
             messages.warning(request, "Your account has been created successfully! Pending verification.")
 
-            return HttpResponseRedirect('/')
+            # print("HELLO I'm failed user")
+            
+            # return HttpResponseRedirect('')
+            return redirect('')
+    messages.error(request, "Can not add patient. Form Issued occured")
+    return redirect('')
         
-    return render(request, '/')
+    # return render(request, '')
 
 @login_required(login_url='patientlogin')
 @user_passes_test(is_patient)

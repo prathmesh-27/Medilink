@@ -5,104 +5,111 @@
 <head>
   <meta charset="utf-8">
   <title>A simple, clean, and responsive HTML invoice template</title>
-
   <style>
+    /* General Invoice Styles */
     .invoice-box {
-      max-width: 800px;
-      margin: auto;
+      max-width: 900px;
+      margin: 50px auto;
       padding: 30px;
-      border: 1px solid #eee;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-      font-size: 16px;
-      line-height: 24px;
-      font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+      border: 1px solid #ddd;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      font-family: 'Arial', sans-serif;
       color: #555;
+      background-color: #fff;
     }
 
+    /* Main Table Styles */
     .invoice-box table {
       width: 100%;
-      line-height: inherit;
+      line-height: 1.6;
+      text-align: left;
+      border-collapse: collapse;
+    }
+
+    /* Header Section */
+    .invoice-box table tr.top td {
+      padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.top td:first-child {
+      width: 33%;
       text-align: left;
     }
 
-    .invoice-box table td {
-      padding: 5px;
-      vertical-align: top;
+    .invoice-box table tr.top td.title {
+      width: 33%;
+      text-align: center;
     }
 
-    .invoice-box table tr td:nth-child(2) {
+    .invoice-box table tr.top td:last-child {
+      width: 33%;
       text-align: right;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
-    .invoice-box table tr.top table td {
+    /* Medilink Title */
+    .invoice-box table tr.top h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #4a90e2;
+      text-transform: uppercase;
+    }
+
+    /* Date and Admit Info */
+    .invoice-box table tr.top td:last-child {
+      font-size: 14px;
+    }
+
+    /* Patient & Doctor Details */
+    .invoice-box table tr.information td {
       padding-bottom: 20px;
+      line-height: 1.6;
     }
 
-    .invoice-box table tr.top table td.title {
-      font-size: 45px;
-      line-height: 45px;
-      color: #333;
+    .invoice-box table tr.information td:last-child {
+      text-align: right;
+      white-space: nowrap;
     }
 
-    .invoice-box table tr.information table td {
-      padding-bottom: 40px;
-    }
-
+    /* Heading Styles */
     .invoice-box table tr.heading td {
-      background: #eee;
+      background: #4a90e2;
       border-bottom: 1px solid #ddd;
       font-weight: bold;
+      color: #fff;
+      text-align: left;
     }
 
-    .invoice-box table tr.details td {
-      padding-bottom: 20px;
-    }
-
+    /* Item and Input Sections */
     .invoice-box table tr.item td {
       border-bottom: 1px solid #eee;
     }
 
-    .invoice-box table tr.item.last td {
-      border-bottom: none;
+    .invoice-box table tr.item input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
     }
 
-    .invoice-box table tr.total td:nth-child(2) {
-      border-top: 2px solid #eee;
-      font-weight: bold;
+    /* Submit Button */
+    .invoice-box table tr.total input[type="submit"] {
+      background: #4a90e2;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 5px;
     }
 
-    @media only screen and (max-width: 600px) {
-      .invoice-box table tr.top table td {
-        width: 100%;
-        display: block;
-        text-align: center;
-      }
-
-      .invoice-box table tr.information table td {
-        width: 100%;
-        display: block;
-        text-align: center;
-      }
-    }
-
-    /** RTL **/
-    .rtl {
-      direction: rtl;
-      font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-    }
-
-    .rtl table {
-      text-align: right;
-    }
-
-    .rtl table tr td:nth-child(2) {
-      text-align: left;
-    }
-
-    .menu {
-      top: 50px;
+    .invoice-box table tr.total input[type="submit"]:hover {
+      background: #357ae8;
     }
   </style>
+
+
 </head>
 
 <br><br><br>
@@ -112,8 +119,11 @@
       <td colspan="2">
         <table>
           <tr>
+
             <td class="title">
-              <h1>Medilink</h1>
+              <h1>Medilink Invoice</h1>
+
+
             </td>
 
             <td>
@@ -138,7 +148,7 @@
             </td>
 
             <td>
-              Doctor Name :<br>
+              Doctor Name :
               {{assignedDoctorName}}<br>
 
             </td>

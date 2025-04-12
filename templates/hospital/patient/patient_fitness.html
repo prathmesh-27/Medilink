@@ -11,6 +11,140 @@
 
 {% endblock%}
 {% block content %}
+
+<style>
+/* FITNESS INFORMATION SECTION */
+.container {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: relative;
+  margin-top: 30px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+.header .title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+}
+
+.header .edit-icon a {
+  color: #222;
+  font-size: 18px;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+  color: #333;
+}
+
+.info div {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.info span {
+  display: block;
+  font-weight: 600;
+  color: #0e7572;
+  margin-bottom: 3px;
+}
+
+/* Heartbeat line + gauge image styles (bottom right) */
+.container::after {
+  content: '';
+  position: absolute;
+  bottom: 20px;
+  right: 160px;
+  background: url("{% static 'images/gauge.png' %}") no-repeat;
+  background-size: 100px 60px;
+  width: 100px;
+  height: 60px;
+  opacity: 0.95;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  background: url("{% static 'images/heartbeat.png' %}") no-repeat;
+  background-size: 150px 80px;
+  width: 150px;
+  height: 80px;
+  opacity: 0.9;
+}
+.register-form {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-top: 30px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.register-form .form-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px 40px;
+}
+
+.register-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form .form-group label {
+  font-weight: 600;
+  color: #0e7572;
+  margin-bottom: 5px;
+}
+
+.register-form input,
+.register-form select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+}
+
+.btnSubmit {
+  grid-column: span 2;
+  width: 200px;
+  padding: 10px;
+  margin: 20px auto 0;
+  display: block;
+  background-color: #0e7572;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btnSubmit:hover {
+  background-color: #095f5c;
+}
+
+
+
+</style>
+
 {% include 'hospital/other/name_role_header.html'%}
 <br>
 <div class="container">

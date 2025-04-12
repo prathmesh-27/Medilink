@@ -178,7 +178,7 @@ button:active {
   box-shadow: none !important;
   border: none !important;
 }
-
+/* 
 @media (max-width: 768px) {
   .home-navbar {
     flex-direction: column;
@@ -188,7 +188,7 @@ button:active {
   .login-container {
     width: 90%;
   }
-}
+} */
 
 
 /***********************Style for admin,,patient and doctor base pages*************/
@@ -207,16 +207,32 @@ button:active {
   align-items: center;
 }
 
+/* changes done by jeevika */
+.header_log {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0 50px;
+  gap: 2px;
+}
+
+.header_log img {
+  margin: 0 0 0 17px;
+
+}
+
+
+
 /* Main layout: Sidebar on left, Content on right */
 .afterlogin-wrapper {
   display: flex;
   flex: 1;
   background: url("images/background_img.jpg") no-repeat center center fixed;
   padding: 10px;
+  height: 84.7vh;
 }
 
 /* Sidebar Navigation */
-.menu {
+/* .menu {
   width: 250px;
   background: #2C3E50;
   color: white;
@@ -239,12 +255,90 @@ button:active {
   text-decoration: none;
   display: block;
 }
+ */
+
+
+/* changes done by jeevika */
+
+.menu {
+  width: 250px;
+  background: linear-gradient(135deg, #2C3E50, #34495E);
+  color: white;
+  padding: 20px;
+  /* height: 100vh; */
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+  border-radius: 0 10px 10px 0;
+  margin: 25px 0 0 50px;
+}
+
+.menu .avatar {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0 65px;
+
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  padding: 15px;
+  margin: 10px 0 0 45px;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.menu li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.menu a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.3s;
+}
+
+.menu a:hover {
+  color: #1ABC9C;
+}
+
+.menu a i {
+  font-size: 18px;
+}
+
+.menu header h2 {
+  font-size: 22px;
+  margin: 0 0 0 20px;
+  font-weight: bold;
+}
+
+.menu header h6 {
+  font-size: 14px;
+  color: #95A5A6;
+  margin: 0 0 10px 20px;
+}
+
+
+
+
 
 /* Main content */
 main {
   flex: 1;
   background: #F5F5F5;
   overflow-y: auto;
+  border-radius: 10px;
+  /* changes done by jeevika */
+  margin: 25px 50px 0 0;
 }
 
 /* Navbar inside header */
@@ -297,7 +391,7 @@ main {
 
 
 /** Styling for time and date block in header **/
-
+/* 
 .header-inner {
   width: 100%;
   background: var(--primary-color-3);
@@ -313,9 +407,7 @@ main {
 
 .header-inner>a {
   text-decoration: none;
-  /* Removes underline */
   color: inherit;
-  /* Makes it use the parent’s text color */
   cursor: pointer;
 }
 
@@ -351,4 +443,116 @@ main {
 
 .date-time-box>.value {
   font-weight: normal;
+} */
+
+
+/* Header Inner Container */
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: var(--primary-color-3);
+  color: var(--text-1);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d1d9e6;
+  margin-bottom: 15px;
+  width: 100%;
 }
+
+/* Left Section Styling */
+.header-inner .left p {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.header-inner .left p:first-child {
+  font-size: 16px;
+  color: var( --text-1);
+  margin-bottom: 4px;
+}
+
+/* Right Section Styling */
+.header-inner .right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Appointment Button Styling */
+.appointment-btn {
+  padding: 8px 16px;
+  background-color: #00796b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.appointment-btn:hover {
+  background-color: #004d40;
+}
+
+/* Date-Time Box Styling */
+.date-time-box {
+  display: flex;
+  gap: 12px;
+  padding: 10px 15px;
+  background-color: #f5f7fa;
+  border: 1px solid #d1d9e6;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual Date-Time Items */
+.date-time-box .item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.date-time-box .item i {
+  color: #00796b;
+  font-size: 14px;
+}
+
+.date-time-box .item .label {
+  font-size: 13px;
+  color: #2d3e50;
+  font-weight: 600;
+}
+
+.date-time-box .item .value {
+  font-size: 13px;
+  color: #607d8b;
+}
+
+/* Responsive Design */
+/* @media (max-width: 600px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .header-inner .right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .appointment-btn {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .date-time-box {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+} */

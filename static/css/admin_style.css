@@ -1,5 +1,5 @@
 /*Following styles is used in admin-patient page*/
-.tabs {
+/* .tabs {
     display: flex;
 }
 
@@ -39,10 +39,10 @@ td {
 th {
     background-color: teal;
     color: white;
-}
+} */
 
 /* Styling for Admin Dashboard */
-.dashboard {
+/* .dashboard {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 15px;
@@ -88,4 +88,314 @@ th {
     align-items: center;
     font-size: 24px;
     font-weight: bold;
+} */
+
+
+/* styling  done by Jeevika  */
+
+
+/* Overall Dashboard Styling */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    background: #f4f7f9;
 }
+
+/* Chart Section Styling */
+.charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+/* Card Styling for Charts */
+.card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+/* Stats Section Styling */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    padding: 10px;
+}
+
+/* Individual Stat Box */
+.stat-box {
+    background: var(--primary-color-3);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 1px solid #d1d9e6;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Stat Box Heading */
+.stat-box h4 {
+    font-size: 14px;
+    color: var(--text-2);
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+/* Stat Box Main Number */
+.stat-box h2 {
+    font-size: 26px;
+    color: var(--text-1);
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+/* Additional Information Text */
+.stat-box p {
+    font-size: 12px;
+    color: var(--text-2);
+    margin: 0;
+}
+
+/* Special Styling for Gauge Box */
+.stat-box.gauge {
+    background: #fff3e0;
+    border-color: #ffcc80;
+}
+
+.stat-box.gauge h2 {
+    color: #fb8c00;
+}
+
+/* Hover Effect for Gauge Box */
+.stat-box.gauge:hover {
+    box-shadow: 0 4px 12px rgba(251, 140, 0, 0.3);
+}
+
+
+
+/* Customizing Chart.js Canvas */
+canvas {
+    width: 100% !important;
+    height: 200px !important;
+    background: #f9f9f9;
+    border-radius: 6px;
+    padding: 5px;
+}
+
+
+h2{
+    padding: 20px;
+  }
+  /* Tabs Container */
+  .tabs {
+    display: flex;
+    gap: 10px;
+    margin: 0 0 20px 20px;
+  }
+  
+  /* Tab Buttons */
+  .tab-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #e0f2f1;
+    color: #004d40;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .tab-button.active {
+    background-color: #00796b;
+    color: #fff;
+  }
+  
+  .tab-button:hover {
+    background-color: #004d40;
+    color: #fff;
+  }
+  
+  /* Content Box */
+  .content {
+    display: none;
+  }
+  
+  .content.show {
+    display: block;
+  }
+  .content.show h3{
+    margin: 0 0 10px 20px;
+  }
+  /* Panel Styling */
+  .panel-primary {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #d1d9e6;
+  }
+  
+  /* Table Styling */
+  #dev-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  #dev-table th,
+  #dev-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #d1d9e6;
+    text-align: left;
+  }
+  
+  #dev-table th {
+    background-color: #00796b;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  #dev-table tr:nth-child(even) {
+    background-color: #f5f7fa;
+  }
+  
+  /* Table Images */
+  #dev-table img {
+    border-radius: 50%;
+    border: 1px solid #d1d9e6;
+    object-fit: cover;
+  }
+  
+  /* Button Styling */
+  .btn {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary {
+    background-color: #00796b;
+    color: #fff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #004d40;
+  }
+  
+  .btn-danger {
+    background-color: #e53935;
+    color: #fff;
+  }
+  
+  .btn-danger:hover {
+    background-color: #b71c1c;
+  }
+  
+  /* Empty Records Message */
+  .text-center.text-muted {
+    padding: 20px;
+    background-color: #e0f2f1;
+    border: 1px solid #d1d9e6;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  /* Container Styling */
+  .register-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #d1d9e6;
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  /* Form Heading */
+  .register-form .note {
+    background-color: #00796b;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+  
+  .register-form .note p {
+    margin: 0;
+    text-align: center;
+    font-weight: 600;
+    color: #fff;
+    font-size: 18px;
+  }
+  
+  /* Form Content Styling */
+  .form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Input Fields */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group .form-control {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #d1d9e6;
+    background-color: #f5f7fa;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group .form-control:focus {
+    border-color: #00796b;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 121, 107, 0.5);
+  }
+  
+  /* Submit Button */
+  .btnSubmit {
+    padding: 12px 20px;
+    background-color: #00796b;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btnSubmit:hover {
+    background-color: #004d40;
+  }
+  
+  /* Placeholder Styling */
+  .form-group .form-control::placeholder {
+    color: #9e9e9e;
+    font-size: 14px;
+  }
+  
