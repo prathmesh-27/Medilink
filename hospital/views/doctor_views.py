@@ -109,6 +109,7 @@ def doctor_patient_view(request):
     doctor=models.Doctor.objects.get(user_id=request.user.id)
     patients=models.Patient.objects.all().filter(status=True,assignedDoctorId=request.user.id,is_discharged = False)
     discharged_patient = models.Patient.objects.all().filter(status=True,assignedDoctorId=request.user.id,is_discharged = True)
+    
     mydict={
     'doctor':doctor,
     'patients':patients,

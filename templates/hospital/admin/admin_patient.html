@@ -23,7 +23,8 @@
   <h3>Patient List</h3>
   {% if patients_approved %}
   <div class="panel panel-primary">
-    <table class="table table-hover" id="dev-table">
+    <input type="text" id="Search" class="form-control mb-3" placeholder="Search Patient by name...">
+    <table class="table table-hover dev-table" id="searchable_table">
       <thead>
         <tr>
           <th>Name</th>
@@ -40,12 +41,21 @@
         <tr>
           <td>{{ p.get_name }}</td>
           <!-- Display patient's profile picture -->
-          <td><img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+          <td>
+            {% if p.profile_pic %}
+            <img src="{% static p.profile_pic.url %}" alt="Profile Picture" height="40px" width="40px">
+            {% else %}
+            <img src="{% static 'images/patient.jpg' %}" alt="Default Profile Picture" height="40px" width="40px">
+            {% endif %}
+
+          </td>
           <td>{{ p.symptoms }}</td>
           <td>{{ p.mobile }}</td>
           <td>{{ p.address }}</td>
           <!-- Update Patient Button -->
-          <td><a class="btn btn-primary btn-xs" href="{% url 'update-patient' p.id %}"><i class="fas fa-edit"></i></a>
+          <td>
+            <a class="btn btn-primary btn-xs" href="#"><i class="fas fa-edit"></i></a>
+            <!-- <a class="btn btn-primary btn-xs" href="{% url 'update-patient' p.id %}"><i class="fas fa-edit"></i></a> -->
           </td>
           <!-- Delete Patient Button -->
           <td><a class="btn btn-danger btn-xs" href="{% url 'delete-patient-from-hospital' p.id %}"><i
@@ -73,7 +83,6 @@
         <div class="form-content">
           <div class="row">
 
-            <!-- Left column: First Name, Username, Address, Symptoms, Profile Picture -->
             <div class="form-group">
               {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
             </div>
@@ -127,7 +136,7 @@
     <div class="panel-heading">
       <h6 class="panel-title">Patients Awaiting Approval</h6>
     </div>
-    <table class="table table-hover" id="dev-table">
+    <table class="table table-hover dev-table" id="searchable_table">
       <thead>
         <tr>
           <th>Name</th>
@@ -142,7 +151,13 @@
       {% for p in patients_not_approved %}
       <tr>
         <td>{{ p.get_name }}</td>
-        <td><img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>
+          {% if p.profile_pic %}
+          <img src="{% static p.profile_pic.url %}" alt="Profile Picture" height="40px" width="40px">
+          {% else %}
+          <img src="{% static 'images/patient.jpg' %}" alt="Default Profile Picture" height="40px" width="40px">
+          {% endif %}
+        </td>
         <td>{{ p.symptoms }}</td>
         <td>{{ p.mobile }}</td>
         <td>{{ p.address }}</td>
@@ -169,7 +184,7 @@
     <div class="panel-heading">
       <h6 class="panel-title">Discharge Patient</h6>
     </div>
-    <table class="table table-hover" id="dev-table">
+    <table class="table table-hover dev-table" id="searchable_table">
       <thead>
         <tr>
           <th>Name</th>

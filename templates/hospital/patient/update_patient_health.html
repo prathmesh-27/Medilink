@@ -18,8 +18,7 @@
         <span class="title">UPDATE YOUR FITNESS INFORMATION</span>
         <span class="edit-icon"></span>
     </div>
-
-    <div>Enter Height and Weight for Fitness Calculation</div>
+    <div class="center font-3">Enter Height and Weight for Fitness Calculation</div>
     <form method="post" action="{% url 'patient-fitness' %}">
         {% csrf_token %}
         <div class="container register-form">

@@ -1,68 +1,108 @@
-/* styling for fitness Page */
+  /* FITNESS INFORMATION SECTION */
+  .container {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      position: relative;
+  }
 
-.title {
-    font-size: 18px;
-    font-weight: bold;
-}
 
-.edit-icon {
-    font-size: 20px;
-    cursor: pointer;
-}
+  .register-form {
+      background-color: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-top: 30px;
+      font-family: 'Segoe UI', sans-serif;
+  }
 
-.info {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-    flex-wrap: wrap;
-}
+  .register-form .form-content {
+      grid-template-columns: 1fr 1fr;
+      gap: 25px 40px;
+  }
 
-.info div {
-    width: 48%;
-    margin-bottom: 10px;
-}
+  .register-form .form-group {
+      display: flex;
+      flex-direction: column;
+  }
 
-.info span {
-    font-weight: bold;
-    color: #007b9a;
-}
+  .register-form .form-group label {
+      font-weight: 600;
+      color: var(--text-1);
+      margin-bottom: 5px;
+  }
 
-.gauge {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
+  .register-form input,
+  .register-form select {
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      background-color: #f9f9f9;
+  }
 
-.bmi-indicator {
-    width: 150px;
-    height: 80px;
-    background: conic-gradient(green 0deg 90deg, yellow 90deg 180deg, red 180deg 270deg);
-    border-radius: 100px 100px 0 0;
-    position: relative;
-}
+  .btnSubmit {
+      grid-column: span 2;
+      width: 200px;
+      padding: 10px;
+      margin: 20px auto 0;
+      display: block;
+      background-color: #0e7572;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  }
 
-.needle {
-    width: 5px;
-    height: 40px;
-    background-color: black;
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform-origin: bottom;
-    transform: rotate(-45deg);
-}
+  .btnSubmit:hover {
+      background-color: #095f5c;
+  }
 
-.btn {
-    background: #007b9a;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
+  .title {
+      font-size: 18px;
+      font-weight: bold;
+  }
 
-.btn:hover {
-    background: #005b70;
-}
+  .edit-icon {
+      font-size: 20px;
+      cursor: pointer;
+  }
+
+  .info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      flex-wrap: wrap;
+      margin-left: 50px;
+  }
+
+  .info div {
+      width: 48%;
+      margin-bottom: 10px;
+  }
+
+  .info span,
+  .info strong {
+      font-weight: bold;
+      color: var(--dark-prime);
+  }
+
+  .btn {
+      background: var(--dark-prime);
+      color: var(--text-1);
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+  }
+
+  .btn:hover {
+      background: var(--primary-color);
+  }
+
+  .header-inner>.right>a {
+      text-decoration: none;
+  }

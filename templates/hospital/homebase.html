@@ -9,9 +9,11 @@
   <link rel="stylesheet" href="{% static 'style.css' %}">
   <link rel="stylesheet" href="{% static 'css/home.css' %}">
   <link rel="stylesheet" href="{% static 'css/form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
   <link rel="icon" type="image/x-icon" href="{% static 'images/Med.ico' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="{% static 'js/chatbot.js ' %}" defer></script>
 </head>
 
 <body>
@@ -79,6 +81,7 @@
           Suspendisse eu mauris pulvinar, viverra urna suscipit, pretium ligula. </div>
       </div>
     </section>
+    {%include 'hospital/other/chatbot.html' %}
     <!-- Template includes Footer -->
     {% include "hospital/other/footer.html" %}
   </main>

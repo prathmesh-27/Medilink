@@ -1,14 +1,29 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: system-ui, -apple-system, sans-serif;
+body {
+    position: relative;
+    min-height: 100vh;
+    background-color: var(--text-1);
+    /* Fallback color */
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-body {
-    background-color: #f0f8ff;
-    min-height: 100vh;
+/* Add a pseudo-element for the background image */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/diet_background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    /* Lower opacity of the background image */
+    z-index: -1;
+    /* Make sure content appears above the background */
 }
+
 
 header {
     background-color: #008B8B;
@@ -51,21 +66,23 @@ nav a.cta {
 }
 
 main {
-    max-width: 1000px;
+    max-width: 65%;
     margin: 2rem auto;
+    margin-bottom: 0;
     padding: 0 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 .section {
-    background: rgba(0, 139, 139, 0.1);
+    background: rgba(0, 139, 139, 0.4);
     border-radius: 20px;
     padding: 2rem;
     margin-bottom: 1.5rem;
 }
 
 h2 {
-    color: #2F4F4F;
-    margin-bottom: 1.5rem;
+    color: var(--dark-prime);
+    font-weight: 600 !important;
 }
 
 .grid {
@@ -113,4 +130,24 @@ label {
 
 .submit-btn::after {
     content: " →";
+}
+
+/* Add this to your diet.css or style.css */
+.warning-box {
+    border: 2px solid var(--warning-color-1);
+    background-color: #ffe6e6;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.warning-title {
+    color: var(--warning-color-1);
+    font-size: 1.1em;
+}
+
+.warning-list {
+    color: #660000;
+    margin-top: 10px;
+    padding-left: 20px;
 }

@@ -10,7 +10,8 @@
 
 /* Root color variables */
 :root {
-  --dark-prime: #056678;
+  --dark-prime: #056778;
+  --dark-prime-transparent: #05677878;
   --primary-color: #008C8C;
   /* Teal */
 
@@ -37,10 +38,12 @@
   /* Red-Orange */
   --color-11: #DDEEE8;
   /* Pale Green */
+  --warning-color-1: #b30000;
 }
 
 
 /*fonts*/
+/* font for title  */
 .font-1 {
   font-family: "Forum", serif;
   font-weight: 400;
@@ -178,6 +181,7 @@ button:active {
   box-shadow: none !important;
   border: none !important;
 }
+
 /* 
 @media (max-width: 768px) {
   .home-navbar {
@@ -208,17 +212,60 @@ button:active {
 }
 
 /* changes done by jeevika */
-.header_log {
+/* Changes Made By Prathmesh 
+Date: 12-08-25 */
+
+/* Styling for Header After login Starts */
+.common_header {
+  width: 100%;
+  /* font-family: 'Segoe UI', sans-serif; */
+}
+
+.top-bar {
   display: flex;
-  flex-direction: column;
-  margin: 0 0 0 50px;
-  gap: 2px;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--text-1);
+  padding: 10px 20px;
 }
 
-.header_log img {
-  margin: 0 0 0 17px;
-
+.bottom-bar {
+  height: 30px;
+  background-color: var(--primary-color);
+  /* Teal bottom */
 }
+
+.logo_in_header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo_in_header img {
+  height: 30px;
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--dark-prime);
+}
+
+.user-info {
+  text-align: right;
+  font-size: 14px;
+}
+
+.user-info a {
+  color: var(--dark-prime);
+  text-decoration: none;
+}
+
+.user-info .links {
+  font-size: 13px;
+}
+
+/* Styling for after login header ends */
 
 
 
@@ -228,35 +275,8 @@ button:active {
   flex: 1;
   background: url("images/background_img.jpg") no-repeat center center fixed;
   padding: 10px;
-  height: 84.7vh;
+  min-height: 90vh;
 }
-
-/* Sidebar Navigation */
-/* .menu {
-  width: 250px;
-  background: #2C3E50;
-  color: white;
-  padding: 20px;
-  height: 100%;
-}
-
-.menu ul {
-  list-style: none;
-  padding: 0;
-}
-
-.menu li {
-  padding: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.menu a {
-  color: white;
-  text-decoration: none;
-  display: block;
-}
- */
-
 
 /* changes done by jeevika */
 
@@ -265,17 +285,14 @@ button:active {
   background: linear-gradient(135deg, #2C3E50, #34495E);
   color: white;
   padding: 20px;
-  /* height: 100vh; */
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
-  border-radius: 0 10px 10px 0;
-  margin: 25px 0 0 50px;
+  margin-left: 25px;
 }
 
-.menu .avatar {
+.menu>.avatar {
   display: flex;
   flex-direction: column;
-  margin: 0 0 0 65px;
-
+  align-items: center;
 }
 
 .menu ul {
@@ -316,29 +333,31 @@ button:active {
 }
 
 .menu header h2 {
-  font-size: 22px;
-  margin: 0 0 0 20px;
+  font-size: 1.5rem;
   font-weight: bold;
+  width: 100%;
+  background: var(--primary-color);
+  border-radius: 5px;
+  text-align: center;
+  margin: 5px 0px;
 }
 
 .menu header h6 {
   font-size: 14px;
   color: #95A5A6;
-  margin: 0 0 10px 20px;
 }
 
 
 
-
+/* Changes Made By Prathmesh   
+Date: 12-04-25
+*/
 
 /* Main content */
 main {
   flex: 1;
   background: #F5F5F5;
   overflow-y: auto;
-  border-radius: 10px;
-  /* changes done by jeevika */
-  margin: 25px 50px 0 0;
 }
 
 /* Navbar inside header */
@@ -391,60 +410,6 @@ main {
 
 
 /** Styling for time and date block in header **/
-/* 
-.header-inner {
-  width: 100%;
-  background: var(--primary-color-3);
-  color: var(--text-1);
-  padding: 15px 20px;
-  text-align: left;
-  font-size: 20px;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header-inner>a {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
-
-.header-inner>.right {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.date-time-box {
-  display: flex;
-  align-items: center;
-  color: white;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.date-time-box>.item {
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-}
-
-.date-time-box>.item i {
-  font-size: 24px;
-  margin-right: 5px;
-}
-
-.date-time-box>.label {
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-.date-time-box>.value {
-  font-weight: normal;
-} */
-
 
 /* Header Inner Container */
 .header-inner {
@@ -452,11 +417,8 @@ main {
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  background: var(--primary-color-3);
+  background: var(--primary-color-2);
   color: var(--text-1);
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #d1d9e6;
   margin-bottom: 15px;
   width: 100%;
 }
@@ -470,7 +432,7 @@ main {
 
 .header-inner .left p:first-child {
   font-size: 16px;
-  color: var( --text-1);
+  color: var(--text-1);
   margin-bottom: 4px;
 }
 
@@ -484,8 +446,8 @@ main {
 /* Appointment Button Styling */
 .appointment-btn {
   padding: 8px 16px;
-  background-color: #00796b;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--text-1);
   border: none;
   border-radius: 6px;
   font-size: 14px;
@@ -494,7 +456,7 @@ main {
 }
 
 .appointment-btn:hover {
-  background-color: #004d40;
+  background-color: var(--dark-prime);
 }
 
 /* Date-Time Box Styling */
@@ -531,28 +493,6 @@ main {
   color: #607d8b;
 }
 
-/* Responsive Design */
-/* @media (max-width: 600px) {
-  .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .header-inner .right {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .appointment-btn {
-    width: 100%;
-    padding: 10px;
-  }
-
-  .date-time-box {
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-  }
-} */
+.center {
+  text-align: center;
+}

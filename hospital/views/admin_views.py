@@ -151,6 +151,8 @@ def admin_dashboard_view(request):
     appointmentcount=models.Appointment.objects.all().filter(status=True).count()
     pendingappointmentcount=models.Appointment.objects.all().filter(status=False).count()
     
+    role = request.user.groups.first().name.title() if request.user.groups.exists() else None
+    
     
     mydict={
     'doctors':doctors,
@@ -165,8 +167,8 @@ def admin_dashboard_view(request):
     'line_graph': line_graph,
     'pie_chart':pie_chart,
     'patient_by_division':get_patients_division_data(),
-    'appointment_rate':get_appointment_rate(),
- 
+    'appointment_rate':round(get_appointment_rate()*100,2),
+ 'role':role,
     }
     return render(request,'hospital/admin/admin_dashboard.html',context=mydict)
 
@@ -216,7 +218,7 @@ def admin_signup_view(request):
             user.save()
             my_admin_group = Group.objects.get_or_create(name='ADMIN')
             my_admin_group[0].user_set.add(user)
-            messages.success(request, "Admin successfully logged in!")
+            messages.success(request, "Admin Registered successfully! in the System")
             return HttpResponseRedirect('/')
     return render(request,'hospital/index.html',{'loginform':loginform,'signupform':signupform})
 

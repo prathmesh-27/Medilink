@@ -16,41 +16,44 @@
   <h3>Doctor List</h3>
   {% if doctors_approved%}
   <div class="panel panel-primary">
-    <table class="table table-hover" id="dev-table">
-      <thead>
-        <tr>
-
-          <th>Name</th>
-          <th>Profile Picture</th>
-          <th>Mobile</th>
-          <th>Address</th>
-          <th>Department</th>
-          <th>Update</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      {% for d in doctors_approved %}
-      <tr>
-
-        <td> {{d.get_name}}</td>
-        <td>
-          {% if doctor.profile_pic %}
-          <img src="{{ doctor.profile_pic.url }}" alt="Profile Picture" height="40px" width="40px">
-          {% else %}
-          <img src="{% static 'profile_pic\DoctorProfilePic\fire.jpg' %}" alt="Default Profile Picture" height="40px"
-            width="40px">
-          {% endif %}
-        </td>
-        <td>{{d.mobile}}</td>
-        <td>{{d.address}}</td>
-        <td>{{d.department}}</td>
-        <td><a class="btn btn-primary btn-xs" href="{% url 'update-doctor' d.id  %}"><i class="fas fa-edit"></i></a>
-        </td>
-        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-doctor-from-hospital' d.id  %}"><i
-              class="fa fa-trash-o" aria-hidden="true"></i></a></td>
-      </tr>
-      {% endfor %}
-    </table>
+    <input type="text" id="Search" class="form-control mb-3" placeholder="Search doctor by name...">
+    <div class="scrollable">
+      <table class="table table-hover dev-table" id="searchable_table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Profile Picture</th>
+            <th>Mobile</th>
+            <th>Address</th>
+            <th>Department</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for d in doctors_approved %}
+          <tr>
+            <td>{{ d.get_name }}</td>
+            <td>
+              {% if d.profile_pic %}
+              <img src="{% static d.profile_pic.url %}" alt="Profile Picture" height="40px" width="40px">
+              {% else %}
+              <img src="{% static 'images/doctor.jpg' %}" alt="Default Profile Picture" height="40px" width="40px">
+              {% endif %}
+            </td>
+            <td>{{ d.mobile }}</td>
+            <td>{{ d.address }}</td>
+            <td>{{ d.department }}</td>
+            <td><a class="btn btn-primary btn-xs" href="#"><i class="fas fa-edit"></i></a>
+              <!-- <a class="btn btn-primary btn-xs" href="{% url 'update-doctor' d.id %}"><i class="fas fa-edit"></i></a> -->
+            </td>
+            <td><a class="btn btn-danger btn-xs" href="{% url 'delete-doctor-from-hospital' d.id %}"><i
+                  class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
   {% else %}
   <p class="text-center text-muted">No records found.</p>
@@ -61,39 +64,40 @@
   <h3>Doctors Applied for Registration</h3>
   {% if doctors_not_approved %}
   <div class="panel panel-primary">
-    <table class="table table-hover" id="dev-table">
-      <thead>
+    <div class="scrollable">
+      <table class="table table-hover table" id="searchable_table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Profile Picture</th>
+            <th>Mobile</th>
+            <th>Address</th>
+            <th>Department</th>
+            <th>Approve</th>
+            <th>Reject</th>
+          </tr>
+        </thead>
+        {% for d in doctors_not_approved %}
         <tr>
-          <th>Name</th>
-          <th>Profile Picture</th>
-          <th>Mobile</th>
-          <th>Address</th>
-          <th>Department</th>
-          <th>Approve</th>
-          <th>Reject</th>
+          <td> {{d.get_name}}</td>
+          <td>
+            {% if d.profile_pic %}
+            <img src="{% static d.profile_pic.url %}" alt="Profile Picture" height="40px" width="40px">
+            {% else %}
+            <img src="{% static 'images/doctor.jpg' %}" alt="Default Profile Picture" height="40px" width="40px">
+            {% endif %}
+          </td>
+          <td>{{d.mobile}}</td>
+          <td>{{d.address}}</td>
+          <td>{{d.department}}</td>
+          <td><a class="btn btn-primary btn-xs" href="{% url 'approve-doctor' d.id  %}"><i
+                class="fa-solid fa-check"></i></a></td>
+          <td><a class="btn btn-danger btn-xs" href="{% url 'reject-doctor' d.id  %}"><i class="fa fa-trash-o"
+                aria-hidden="true"></i></span></a></td>
         </tr>
-      </thead>
-      {% for d in doctors_not_approved %}
-      <tr>
-        <td> {{d.get_name}}</td>
-        <td>
-          {% if doctor.profile_pic %}
-          <img src="{{ doctor.profile_pic.url }}" alt="Profile Picture" height="40px" width="40px">
-          {% else %}
-          <img src="{% static 'profile_pic\DoctorProfilePic\fire.jpg' %}" alt="Default Profile Picture" height="40px"
-            width="40px">
-          {% endif %}
-        </td>
-        <td>{{d.mobile}}</td>
-        <td>{{d.address}}</td>
-        <td>{{d.department}}</td>
-        <td><a class="btn btn-primary btn-xs" href="{% url 'approve-doctor' d.id  %}"><i
-              class="fa-solid fa-check"></i></a></td>
-        <td><a class="btn btn-danger btn-xs" href="{% url 'reject-doctor' d.id  %}"><i class="fa fa-trash-o"
-              aria-hidden="true"></i></span></a></td>
-      </tr>
-      {% endfor %}
-    </table>
+        {% endfor %}
+      </table>
+    </div>
   </div>
   {% else %}
   <p class="text-center text-muted">No records found.</p>
@@ -104,27 +108,27 @@
   <h3>Doctors Specialization</h3>
   {% if doctors_specialization%}
   <div class="panel panel-primary">
-
-    <table class="table table-hover" id="dev-table">
-      <thead>
+    <div class="scrollable">
+      <table class="table table-hover dev-table" id="searchable_table">
+        <thead>
+          <tr>
+            <th>Department</th>
+            <th>Doctor Name</th>
+            <th>Mobile</th>
+          </tr>
+        </thead>
+        {% for d in doctors_specialization %}
         <tr>
-          <th>Department</th>
-          <th>Doctor Name</th>
-          <th>Mobile</th>
+          <td>{{d.department}}</td>
+          <td> {{d.get_name}}</td>
+          <td>{{d.mobile}}</td>
         </tr>
-      </thead>
-      {% for d in doctors_specialization %}
-      <tr>
-        <td>{{d.department}}</td>
-        <td> {{d.get_name}}</td>
-        <td>{{d.mobile}}</td>
-      </tr>
-      {% endfor %}
-    </table>
+        {% endfor %}
+      </table>
+    </div>
+    {% else %}
+    <p class="text-center text-muted">No records found.</p>
+    {% endif %}
   </div>
-  {% else %}
-  <p class="text-center text-muted">No records found.</p>
-  {% endif %}
-
 </div>
 {% endblock content %}

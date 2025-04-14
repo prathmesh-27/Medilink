@@ -5,7 +5,8 @@
 {% block content %}
 {% include 'hospital/other/name_role_header.html' %}
 
-<h2>Admin-Appointments</h2>
+<h2 class="font-3">Admin-Appointments</h2>
+<br>
 <div class="tabs">
   <button class="tab-button active" onclick="switchTab('appointments')">Appointments</button>
   <button class="tab-button" onclick="switchTab('add')">Add Appointment</button>
@@ -19,7 +20,7 @@
     <div class="panel-heading">
       <h6 class="panel-title">Appointments</h6>
     </div>
-    <table class="table table-hover" id="dev-table">
+    <table class="table table-hover dev-table" id="searchable_table">
       <thead>
         <tr>
           <th>Doctor Name</th>
@@ -85,7 +86,7 @@
     <div class="panel-heading">
       <h6 class="panel-title">Appointment Approvals Required</h6>
     </div>
-    <table class="table table-hover" id="dev-table">
+    <table class="table table-hover dev-table" id="searchable_table">
       <thead>
         <tr>
           <th>Doctor Name</th>

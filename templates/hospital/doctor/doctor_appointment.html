@@ -4,7 +4,6 @@
 {% load widget_tweaks %}
 {%block title%}Doctor-Patient{% endblock title %}
 <style>
-
   /* Header and Titles */
   h2 {
     color: #2d3436;
@@ -136,12 +135,9 @@
 </div>
 
 <div id="appointments" class="content show">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title">Your Appointments</h6>
-    </div>
+  <div class="scrollable">
     {% if appointments %}
-    <table class="table table-hover" id="view-dev-table">
+    <table class="table table-hover dev-table" id="searchable_table">
       <thead>
         <tr>
           <th>Patient Name</th>
@@ -170,17 +166,16 @@
       {% endfor %}
     </table>
     {% else %}
-    <p>No Records Found</p>
+    <p class="text-center text-muted">No Records Found</p>
     {% endif%}
   </div>
 </div>
 
 
 <div id="delete" class="content">
-  <h3>Delete Appointment</h3>
-  <div class="panel panel-primary">
+  <div class="scrollable">
     {% if appointments %}
-    <table class="table table-hover" id="delete-dev-table">
+    <table class="table table-hover dev-table" id="searchable_table">
       <thead>
         <tr>
           <th>Patient Name</th>
@@ -200,7 +195,7 @@
       {% endfor %}
     </table>
     {% else %}
-    <p>No Records Found</p>
+    <p class="text-center text-muted">No Records Found</p>
     {% endif%}
   </div>
 </div>

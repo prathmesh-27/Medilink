@@ -19,75 +19,50 @@
 
 
 <style>
+  p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* Parent container should use flex layout */
+  #id_days_of_week {
+    display: flex;
+    flex-wrap: wrap;
+    /* Optional: wraps to next line if too many checkboxes */
+    gap: 15px;
+    /* Spacing between checkboxes */
+    align-items: center;
+  }
+
+  /* Optional: style the labels and checkboxes */
+  #id_days_of_week label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  }
 
 
-  h1, h2 {
-    color: #2c3e50;
-  }
-  
-  /* Table Styles */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  table th, table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  table th {
-    background-color: #0e7572;
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
-  table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  table td {
-    color: #333;
-  }
-  
   /* Form Styles */
   form {
-    margin-top: 20px;
+    width: 50%;
+    margin: auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
-  form button {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  form button:hover {
-    background-color: #2980b9;
-  }
-  
-  form input, form select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
+
+  form input,
+  form select {
+    margin: 13px 0px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
   }
-  
+
   /* Reset Button */
   #reset {
     background-color: #e74c3c;
@@ -99,73 +74,59 @@
     margin-bottom: 15px;
     transition: background-color 0.3s ease;
   }
-  
+
   #reset:hover {
     background-color: #c0392b;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 600px) {
-    table, form {
-      width: 100%;
-    }
-    table th, table td {
-      padding: 10px;
-    }
-  }
-  
-  </style>
+</style>
 
 {% include 'hospital/other/name_role_header.html'%}
-<h1>Hello this is the doctor availability Page</h1>
 
 {% if availabilities %}
 
-
-
 <form method="post">
-    {% csrf_token %}
-    <button id="reset" type="submit" name="reset"
-        onclick="return confirm('Are you sure you want to reset all availability?');">
-        <i class="fas fa-sync-alt"></i> <!-- Font Awesome Reset Icon -->
-    </button>
+  {% csrf_token %}
+  <button id="reset" type="submit" name="reset"
+    onclick="return confirm('Are you sure you want to reset all availability?');">
+    <i class="fas fa-sync-alt"></i> <!-- Font Awesome Reset Icon -->
+  </button>
 </form>
 
 <h2>Doctor Availability</h2>
 
-<table>
-    <thead>
-        <tr>
-            <th>Date Available</th>
-            <th>Day</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for availability in availabilities %}
-        <tr>
-            <td>{{ availability.date_available }}</td>
-            <td>{{ availability.day_of_week }}</td>
-            <td>{{ availability.start_time }}</td>
-            <td>{{ availability.end_time }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="4">No availability set yet.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+<table class="dev-table">
+  <thead>
+    <tr>
+      <th>Date Available</th>
+      <th>Day</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for availability in availabilities %}
+    <tr>
+      <td>{{ availability.date_available }}</td>
+      <td>{{ availability.day_of_week }}</td>
+      <td>{{ availability.start_time }}</td>
+      <td>{{ availability.end_time }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4">No availability set yet.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 
 {% else %}
+<h2 class="font-3 center"> Fill the Availability</h2>
+
 <form method="post" action="{% url 'doctor-availability' %}">
-    {% csrf_token %}
-    {{ availabilityform.as_p }}
-    <button type="submit">Save Availability</button>
+  {% csrf_token %}
+  {{ availabilityform.as_p }}
+  <button class="btnSubmit" type="submit">Save Availability</button>
 </form>
 {% endif %}
 
 {% endblock %}
-
-

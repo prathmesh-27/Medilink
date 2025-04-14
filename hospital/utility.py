@@ -141,9 +141,11 @@ def get_admissions_by_month():
 def get_doctors_by_departments():
     # Count doctors in each department
     department_counts = (
-        models.Doctor.objects.values('department')
-        .annotate(count=Count('id'))
-        .order_by('-count')
+    models.Doctor.objects
+    .filter(status=1)
+    .values('department')
+    .annotate(count=Count('id'))
+    .order_by('-count')
     )
 
     # Convert QuerySet to JSON-friendly format

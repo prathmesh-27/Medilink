@@ -1,57 +1,82 @@
 {%extends '../base.html' %}
 {% block title %} Medilink-Get Diet {% endblock %}
 {% block content %}
+<style>
+    thead {
+        background-color: var(--primary-color);
+    }
+</style>
 <main>
     {% if df_html %}
     <!-- Show the Diet Table if df_html is available -->
     <section class="diet-results">
-        <h2>Recommended Diet Plan</h2>
-        <div class="diet-table">
+        <h2 class="font-3 center">Recommended Diet Plan</h2>
+        <div class="diet-table scrollable">
             {{ df_html|safe }}
         </div>
-        <a href="{% url 'get_diet' %}" class="appointment-btn">Go Back</a>
+        <a href="{% url 'get_diet' %}" class="appointment-btn" style="margin: 10px auto; ">Go Back</a>
     </section>
     {% else %}
     <!-- Show the Form if No Diet Data is Available -->
-    <form id="dietForm" action="{% url 'get_diet' %}" method="POST">
+    <h2 class="font-3 center" style="text-align: center;">Select Your Preferences for a Personalized Diet Plan</h2>
+    <div class="warning-box">
+        <strong class="warning-title">⚠️Important Instructions Before Proceeding:</strong>
+        <ul class="warning-list">
+            <li>All fields are <strong>mandatory</strong> to ensure accurate and personalized diet recommendations.</li>
+            <li>Select at least one option from each section:
+                <em>(Nutrients, Health Condition, Gender, Diet Type)</em>.
+            </li>
+            <li>Avoid incompatible combinations. For example:
+                <ul>
+                    <li><em>High Protein</em> is not recommended for individuals with <em>Kidney Disease</em>.</li>
+                    <li><em>High Sodium</em> may worsen <em>Hypertension</em>.</li>
+                </ul>
+            </li>
+            <li>Consult a healthcare provider if unsure about your nutrient needs or health condition compatibility.
+            </li>
+        </ul>
+    </div>
+
+
+    <form id="dietForm" action="{% url 'get_diet' %}" method="POST" onsubmit="return validateForm()">
         {% csrf_token %}
+
         <div class="section">
-            <h2>Select Nutrients</h2>
-            <div class="grid">
-                <!-- Generate 16 nutrients checkboxes -->
+            <h2 class="font-3">Select Nutrients</h2>
+            <div class="grid font-2">
             </div>
         </div>
 
         <div class="section">
-            <h2>Select Health Condition</h2>
-            <div class="grid">
-                <!-- Generate 12 health conditions checkboxes -->
+            <h2 class="font-3">Select Health Condition</h2>
+            <div class="grid font-2">
+
             </div>
         </div>
 
         <div class="section">
-            <h2>Gender</h2>
-            <div class="grid">
+            <h2 class="font-3">Gender</h2>
+            <div class="grid font-2">
                 <div class="radio-wrapper">
-                    <input type="radio" id="male" name="gender" value="male">
+                    <input type="radio" id="male" name="gender" value="male" required>
                     <label for="male">Male</label>
                 </div>
                 <div class="radio-wrapper">
-                    <input type="radio" id="female" name="gender" value="female">
+                    <input type="radio" id="female" name="gender" value="female" required>
                     <label for="female">Female</label>
                 </div>
             </div>
         </div>
 
         <div class="section">
-            <h2>Diet Type</h2>
-            <div class="grid">
+            <h2 class="font-3">Diet Type</h2>
+            <div class="grid font-2">
                 <div class="radio-wrapper">
-                    <input type="radio" id="veg" name="diet" value="veg">
+                    <input type="radio" id="veg" name="diet" value="veg" required>
                     <label for="veg">Vegetarian</label>
                 </div>
                 <div class="radio-wrapper">
-                    <input type="radio" id="nonveg" name="diet" value="non-veg">
+                    <input type="radio" id="nonveg" name="diet" value="non-veg" required>
                     <label for="nonveg">Non Vegetarian</label>
                 </div>
             </div>
@@ -59,6 +84,60 @@
 
         <button type="submit" class="submit-btn">Get Diet Plan</button>
     </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nutrients = [
+                'calcium', 'carbohydrates', 'chloride', 'fiber', 'iron',
+                'magnesium', 'manganese', 'phosphorus', 'potassium',
+                'protein', 'selenium', 'sodium', 'vitamin_a', 'vitamin_c', 'vitamin_e'
+            ];
+
+            const health_conditions = [
+                'anemia', 'cancer', 'diabetes', 'eye_disease', 'goitre',
+                'heart_disease', 'hypertension', 'kidney_disease',
+                'obesity', 'pregnancy', 'rickets', 'scurvy'
+            ];
+
+            function generateCheckboxes(containerSelector, items, name) {
+                const grid = document.querySelector(containerSelector);
+                if (!grid) return console.error(`Error: ${containerSelector} not found!`);
+
+                grid.innerHTML = items.map(item => `
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="${item}" name="${name}" value="${item}">
+                <label for="${item}">${formatString(item)}</label>
+            </div>
+        `).join('');
+            }
+
+            function formatString(str) {
+                return str.replace(/_/g, ' ') // Replace underscores with spaces
+                    .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize first letter
+            }
+
+            generateCheckboxes('.section:nth-of-type(1) .grid', nutrients, "nutrients");
+            generateCheckboxes('.section:nth-of-type(2) .grid', health_conditions, "health_conditions");
+        });
+
+        function validateForm() {
+            // Check if at least one checkbox is checked in the Nutrients section
+            var nutrientsChecked = document.querySelectorAll('input[name="nutrients"]:checked').length > 0;
+            var healthChecked = document.querySelectorAll('input[name="health_conditions"]:checked').length > 0;
+
+            if (!nutrientsChecked) {
+                alert("Please select at least one nutrient.");
+                return false;  // Prevent form submission
+            }
+            if (!healthChecked) {
+                alert("Please select at least one health condition.");
+                return false;  // Prevent form submission
+            }
+
+            // For gender and diet, the radio button "required" attribute is enough
+            return true;  // Allow form submission if all conditions are met
+        }
+    </script>
+
     {% endif %}
 </main>
 {% endblock %}

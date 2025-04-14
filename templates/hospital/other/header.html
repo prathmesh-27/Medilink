@@ -1,16 +1,17 @@
 {%load static %}
-<header class="header common_header">
-    <div class="header_log">
-        <img src="{% static 'images/Med.png' %}" alt="Profile Picture" style="width: 50px; border-radius: 50%;">
-        <span>MediLink</span>
+<header class="common_header">
+    <div class="header_log top-bar">
+        <div class="logo_in_header">
+            <img src="{% static 'images/Med.png' %}" alt="MediLink Logo">
+            <span class="brand font-1">MEDILINK</span>
+        </div>
+        <div class="user-info font-2">
+            <span>Signed in as <a href="#">{{ request.user.email }}</a></span>
+            <div class="links">
+                <a href="#">Setttings</a> |
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+        </div>
     </div>
-
-
-    <div class="nav-links">
-        <p>Signed In as <span>{{ request.user.email }}</span> </p>
-        <a href="{% url 'logout' %}">Logout</a>
-    </div>
+    <div class="bottom-bar"></div>
 </header>
-
-
-

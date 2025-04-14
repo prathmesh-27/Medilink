@@ -14,112 +14,31 @@
 {% endblock%}
 
 {% block content %}
-<style>
-    .personal-info {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  padding: 30px 40px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  position: relative;
-  margin-top: 30px;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.personal-info h2 {
-  font-size: 18px;
-  font-weight: bold;
-  color: #222;
-  margin-bottom: 25px;
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 10px;
-}
-
-.info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px 40px;
-}
-
-.info-item {
-  font-size: 15px;
-  color: #333;
-}
-
-.info-item strong {
-  display: block;
-  font-weight: 600;
-  color: #0e7572;
-  margin-bottom: 3px;
-}
-
-/* Heartbeat image styling */
-.heartbeat {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  width: 150px;
-  height: auto;
-  opacity: 0.9;
-}
-
-.heartbeat img {
-  width: 100%;
-  animation: heartbeatPulse 1.6s ease-in-out infinite;
-}
-
-@keyframes heartbeatPulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.04);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .personal-info {
-    padding: 20px;
-  }
-
-  .heartbeat {
-    display: none;
-  }
-}
-
-</style>
-
 <div class="container">
-    <!-- #Change its class and style inside include "hospital/other/name_role_header.html" -->
-    {% include 'hospital/other/name_role_header.html'%}
+  <!-- #Change its class and style inside include "hospital/other/name_role_header.html" -->
+  {% include 'hospital/other/name_role_header.html'%}
 
-    <div class="personal-info">
-        <h2>PERSONAL INFORMATION</h2>
-        <div class="info-grid">
-            <div class="info-item"><strong>Name</strong> {{ user.first_name }} {{ user.last_name }}</div>
-            <div class="info-item"><strong>Gender</strong> {{patient.gender}} </div>
-            <div class="info-item"><strong>Date of Birth</strong> {{patient.dob}}</div>
-            <div class="info-item"><strong>Date of Admit</strong> {{patient.admitDate}}</div>
-            <div class="info-item"><strong>Symptoms</strong> {{patient.symptoms}}</div>
-            <div class="info-item"><strong>Patient Status</strong>
-                {% if patient.is_discharged%}
-                Discharged
-                {% else %}
-                Active
-                {% endif %}
-            </div>
-            <div class="info-item"><strong>Age</strong> {{patient_age}}</div>
-            <div class="info-item"><strong>Address</strong>{{patient.address}}</div>
-            <div class="info-item"><strong>Doctor</strong> {{doctorName}}</div>
-        </div>
-        <div class="heartbeat" style="width: 200px; height: 100px;">
-            <img src="{% static 'images/heart_beat_line.png' %}" alt="Heartbeat Line">
-        </div>
+  <div class="header">
+    <span class="title">PERSONAL INFORMATION</span>
+  </div>
+  <div class="info">
+    <div><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</div>
+    <div><strong>Gender:</strong> {{patient.gender}} </div>
+    <div><strong>Date of Birth:</strong> {{patient.dob}}</div>
+    <div><strong>Date of Admit:</strong> {{patient.admitDate}}</div>
+    <div><strong>Symptoms:</strong> {{patient.symptoms}}</div>
+    <div><strong>Patient Status:</strong>
+      {% if patient.is_discharged%}
+      Discharged
+      {% else %}
+      Active
+      {% endif %}
     </div>
+    <div><strong>Age:</strong> {{patient_age}}</div>
+    <div><strong>Address:</strong>{{patient.address}}</div>
+    <div><strong>Supervision Doctor:</strong> {{doctorName}}</div>
+  </div>
 </div>
+
 
 {% endblock content %}

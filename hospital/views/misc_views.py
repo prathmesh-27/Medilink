@@ -21,7 +21,7 @@ def delete_doctor_from_hospital_view(request,pk):
     user=models.User.objects.get(id=doctor.user_id)
     user.delete()
     doctor.delete()
-    return redirect('admin-view-doctor')
+    return redirect('admin-doctor')
 
 
 @login_required(login_url='adminlogin')
@@ -31,4 +31,4 @@ def delete_patient_from_hospital_view(request,pk):
     user=models.User.objects.get(id=patient.user_id)
     user.delete()
     patient.delete()
-    return redirect('admin-view-patient')
+    return redirect('admin-patient')

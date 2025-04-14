@@ -14,130 +14,6 @@
 {% block content %}
 
 {% include 'hospital/other/name_role_header.html'%}
-<style>
-
-/* Tab Navigation Styling */
-.tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.tab-button {
-    padding: 12px 24px;
-    margin: 0 5px;
-    border: none;
-    background-color: #E2E8F0;
-    color: #2D3748;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.tab-button.active, .tab-button:hover {
-    background-color: #086966;
-    color: #FFFFFF;
-}
-
-/* Content Section */
-.content {
-    display: none;
-    padding: 20px;
-    border: 1px solid #E2E8F0;
-    border-radius: 8px;
-    background-color: #FFFFFF;
-}
-
-.content.show {
-    display: block;
-}
-
-/* Table Styling */
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.table thead {
-    background-color: #EDF2F7;
-}
-
-.table thead th {
-    padding: 12px;
-    text-align: left;
-    color: #2D3748;
-    font-weight: bold;
-    border-bottom: 2px solid #E2E8F0;
-}
-
-.table tbody td {
-    padding: 12px;
-    border-bottom: 1px solid #E2E8F0;
-    color: #4A5568;
-}
-
-.table tbody tr:hover {
-    background-color: #F7FAFC;
-}
-
-/* Profile Picture Styling */
-img {
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-/* Panel Styling */
-.panel {
-    border: 1px solid #E2E8F0;
-    border-radius: 8px;
-    background-color: #FFFFFF;
-    padding: 16px;
-    margin-top: 20px;
-}
-
-.panel-heading {
-    color: #140e0e;
-    padding: 10px;
-    border-radius: 6px 6px 0 0;
-}
-
-.panel-title {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    .tab-button {
-        padding: 10px;
-        font-size: 14px;
-    }
-
-    .table thead {
-        display: none;
-    }
-
-    .table tbody td {
-        display: block;
-        padding: 10px;
-        text-align: right;
-        position: relative;
-    }
-
-    .table tbody td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 50%;
-        padding-left: 15px;
-        font-weight: bold;
-        color: #2D3748;
-        text-align: left;
-    }
-}
-
-</style>
 
 <br>
 <div class="tabs">
@@ -147,11 +23,8 @@ img {
 
 <div id="patients" class="content show">
   <h3>Patient List</h3>
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title">Patient</h6>
-    </div>
-    <table class="table table-hover" id="dev-table">
+  <div class="scrollable">
+    <table class="dev-table" id="searchable_table">
       <thead>
         <tr>
           <th>Name</th>
@@ -183,7 +56,7 @@ img {
 
 <div id="discharge" class="content">
   <h3>Your Discharge Patient</h3>
-  <table class="table table-hover" id="discharge-dev-table">
+  <table class="dev-table" id="searchable_table">
     <thead>
       <tr>
         <th>Name</th>

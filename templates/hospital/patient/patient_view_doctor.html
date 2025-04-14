@@ -17,8 +17,6 @@
 <div class="container">
   {% include 'hospital/other/name_role_header.html'%}
 
-  <h1>Doctor Information</h1>
-
   <form action="/searchdoctor" method="get" style="margin-left:70%;" class="form-inline my-2 my-lg-0">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" name="query" id="query" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -27,39 +25,41 @@
   {% if doctors %}
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h6 class="panel-title"> Total Doctor List</h6>
+      <h4 class="panel-title font-3"> Total Doctor List</h4>
     </div>
-    <table class="table table-hover" id="dev-table">
-      <thead>
+    <div class="scrollable">
+      <table class="table table-hover dev-table" id="searchable_table">
+        <thead>
+          <tr>
+
+            <th>Name</th>
+            <th>Profile Picture</th>
+            <th>Mobile</th>
+            <th>Address</th>
+            <th>Department</th>
+
+          </tr>
+        </thead>
+        {% for d in doctors %}
         <tr>
 
-          <th>Name</th>
-          <th>Profile Picture</th>
-          <th>Mobile</th>
-          <th>Address</th>
-          <th>Department</th>
+          <td> {{d.get_name}}</td>
+          {%if d.profile_pic %}
+          <td> <img src="{% static d.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+          {%else%}
+          <td> <img src="{% static 'images/patient.jpg' %}" alt="Profile Pic" height="40px" width="40px" /></td>
+          {%endif %}
 
+
+
+
+          <td>{{d.mobile}}</td>
+          <td>{{d.address}}</td>
+          <td>{{d.department}}</td>
         </tr>
-      </thead>
-      {% for d in doctors %}
-      <tr>
-
-        <td> {{d.get_name}}</td>
-        {%if d.profile_pic %}
-        <td> <img src="{% static d.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-        {%else%}
-        <td> <img src="{% static 'images/patient.jpg' %}" alt="Profile Pic" height="40px" width="40px" /></td>
-        {%endif %}
-
-
-
-
-        <td>{{d.mobile}}</td>
-        <td>{{d.address}}</td>
-        <td>{{d.department}}</td>
-      </tr>
-      {% endfor %}
-    </table>
+        {% endfor %}
+      </table>
+    </div>
   </div>
   {%else%}
   <br><br><br>

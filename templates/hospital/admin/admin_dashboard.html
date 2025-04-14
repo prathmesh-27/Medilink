@@ -1,31 +1,44 @@
 {% extends 'hospital/admin/admin_base.html' %}
 {% load static %}
 {% block content %}
-<title>Admin Dashboard</title>
 
 <head>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<style>
+  .charts>h3 {
+    text-align: center;
+  }
+</style>
+
 {% include 'hospital/other/name_role_header.html' %}
+
+
 <div class="dashboard">
   <!-- Charts Section -->
   <div class="charts">
-    <div class="card">
-      <h3>Patients per Division</h3>
-      <canvas id="patientsDivisionChart"></canvas>
+    <div class="left">
+      <div class="card">
+        <h3 class="font-3">Patients per Division</h3>
+        <canvas id="patientsDivisionChart"></canvas>
+      </div>
+      <div class="card">
+        <h3 class="font-3">Patient Admissions (Monthly)</h3>
+        <canvas id="admissionsChart"></canvas>
+      </div>
     </div>
-    <div class="card">
-      <h3>Patients By Age</h3>
-      <canvas id="patientsAgeChart"></canvas>
+    <div class="right">
+      <div class="card">
+        <h3 class="font-3">Patients By Age</h3>
+        <canvas id="patientsAgeChart"></canvas>
+      </div>
+
+      <div class="card">
+        <h3 class="font-3">Doctors per Department</h3>
+        <canvas id="doctorsChart"></canvas>
+      </div>
     </div>
-    <div class="card">
-      <h3>Patient Admissions (Monthly)</h3>
-      <canvas id="admissionsChart"></canvas>
-    </div>
-    <div class="card">
-      <h3>Doctors per Department</h3>
-      <canvas id="doctorsChart"></canvas>
-    </div>
+
   </div>
 
   <!-- Stats Section -->

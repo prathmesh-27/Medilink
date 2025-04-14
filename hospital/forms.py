@@ -106,7 +106,6 @@ class PatientAppointmentForm(forms.ModelForm):
         fields=['description','status']
 
 
-
 class ContactusForm(forms.Form):
     Name = forms.CharField(
         max_length = 50,

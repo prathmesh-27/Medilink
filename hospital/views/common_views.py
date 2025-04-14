@@ -9,6 +9,7 @@ from django.contrib.auth import logout,authenticate,login
 from datetime import datetime,timedelta,date
 from django.conf import settings
 from django.db.models import Q
+from django.contrib import messages
 
 
 def is_doctor(user):
@@ -33,7 +34,8 @@ def contactus_view(request):
             name=sub.cleaned_data['Name']
             message = sub.cleaned_data['Message']
             send_mail(str(name)+' || '+str(email),message,settings.EMAIL_HOST_USER, settings.EMAIL_RECEIVING_USER, fail_silently = False)
-            return render(request, 'hospital/other/contactussuccess.html')
+            messages.success(request, 'Your message has been successfully sent! We will get back to you soon.')
+            return render(request, 'hospital/other/contactus.html')
         
     return render(request, 'hospital/other/contactus.html', {'form':sub})
 

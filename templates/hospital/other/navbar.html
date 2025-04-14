@@ -7,16 +7,25 @@
         <span class="logo-text font-1">MEDILINK</span>
       </div>
     </li>
-    <li><button class="appointment-btn">Make Appointment</button></li>
+    <li><button class="appointment-btn" onclick="checkLoginStatus()">Make Appointment</button></li>
   </ul>
   <div class="separator"></div>
-  <ul class="home-navbar-lower">
+  <ul class="home-navbar-lower font-2">
     <li><a href="/">Home</a></li>
     <li><a href="#">About Us</a></li>
     <li><a href="{% url 'contactus' %}">Contact</a></li>
     <li><a href="{% url 'get_diet' %}">Get Diet Plan</a></li>
   </ul>
 </div>
+
+<script>
+  function checkLoginStatus() {
+    alert("You need to log in to make an appointment.")
+  }
+
+</script>
+
+
 <!--
   developed By : Prathmesh Vairale
   -->

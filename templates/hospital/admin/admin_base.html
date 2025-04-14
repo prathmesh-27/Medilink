@@ -22,12 +22,12 @@
 
 
   <!-- Sidebar and Main Content -->
-  <div class="afterlogin-wrapper">
+  <div class="afterlogin-wrapper font-2">
     <!-- Sidebar Navigation -->
     <nav class="menu">
       <header class="avatar">
-        <img src="{% static 'images/patient.jpg' %}" alt="Admin Profile" style="width: 80px; border-radius: 50%;">
-        <br><br>
+        <img src="{% static 'images/admin.jpg' %}" alt="Admin Profile" style="width: 80px; border-radius: 50%;">
+        <br>
         <h6>Admin</h6>
         <h2>{{ request.user.first_name }}</h2>
       </header>
@@ -47,7 +47,7 @@
     </main>
 
   </div>
-
+  <script src="{% static 'js/search.js' %}"></script>
 </body>
 
 </html>

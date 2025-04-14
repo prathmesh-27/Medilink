@@ -22,6 +22,7 @@ urlpatterns = [
     path('delete-appointment/<int:pk>',appointment_views.delete_appointment_view,name='delete-appointment'),
 ]
 
+#---------FOR COMMON URLS-------------------------------------
 urlpatterns+=[
     path('',common_views.home_view,name=''),
     path('aboutus', common_views.aboutus_view),

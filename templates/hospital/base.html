@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'css/admin_style.css' %}">
     <link rel="stylesheet" href="{% static 'css/diet.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="{% static 'images/Med.ico' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="{% static 'js/chatbot.js ' %}" defer></script>
 </head>
 
 <body>
@@ -19,43 +21,7 @@
 
     {% block content %}
     {% endblock content %}
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const nutrients = [
-                'calcium', 'carbohydrates', 'chloride', 'fiber', 'iron',
-                'magnesium', 'manganese', 'phosphorus', 'potassium',
-                'protein', 'selenium', 'sodium', 'vitamin_a', 'vitamin_c', 'vitamin_e'
-            ];
-
-            const health_conditions = [
-                'anemia', 'cancer', 'diabetes', 'eye_disease', 'goitre',
-                'heart_disease', 'hypertension', 'kidney_disease',
-                'obesity', 'pregnancy', 'rickets', 'scurvy'
-            ];
-
-            function generateCheckboxes(containerSelector, items, name) {
-                const grid = document.querySelector(containerSelector);
-                if (!grid) return console.error(`Error: ${containerSelector} not found!`);
-
-                grid.innerHTML = items.map(item => `
-            <div class="checkbox-wrapper">
-                <input type="checkbox" id="${item}" name="${name}" value="${item}">
-                <label for="${item}">${formatString(item)}</label>
-            </div>
-        `).join('');
-            }
-
-            function formatString(str) {
-                return str.replace(/_/g, ' ') // Replace underscores with spaces
-                    .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize first letter
-            }
-
-            generateCheckboxes('.section:nth-of-type(1) .grid', nutrients, "nutrients");
-            generateCheckboxes('.section:nth-of-type(2) .grid', health_conditions, "health_conditions");
-        });
-
-    </script>
+    {%include 'hospital/other/chatbot.html' %}
 </body>
 
 
