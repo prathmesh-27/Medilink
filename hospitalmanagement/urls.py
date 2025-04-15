@@ -47,6 +47,7 @@ urlpatterns+=[
     path('admin-notification',admin_views.admin_notification,name='admin-notification'),
     path('discharge-patient/<int:pk>', admin_views.discharge_patient_view,name='discharge-patient'),#To be Corrected
     # path('admin-discharge-patient',admin_views.admin_discharge_patient_view),
+    path('delete-appointment/<int:pk>/', appointment_views.delete_appointment,name='delete-appointment'),
 ]
 
 #---------FOR DOCTOR RELATED URLS-------------------------------------
@@ -58,7 +59,7 @@ urlpatterns +=[
     path('doctorsignup', doctor_views.doctor_signup_view,name='doctorsignup'),
     path('doctor-availability',doctor_views.doctor_availability,name='doctor-availability'),
     path('reset-availability',doctor_views.reset_availability,name='reset-availability'),
-    path('delete-appointment/<int:pk>', appointment_views.delete_appointment,name='delete-appointment'),
+    
 ]
 
 #---------FOR PATIENT RELATED URLS-------------------------------------
@@ -77,5 +78,11 @@ urlpatterns +=[
 urlpatterns+=[
     path('download-pdf/<int:pk>', report_views.download_pdf_view,name='download-pdf'),
     path('get-diet/',feature_views.get_diet,name='get_diet'),
+    path('api/departments/', common_views.get_departments, name='get_departments'),
+    path('api/doctors/<str:specialty>/', common_views.get_doctors_by_specialty, name='get_doctors_by_specialty'),
+    path('api/doctors/name/<str:selected_doc>/', common_views.get_doctor_by_name, name='get_doctor_by_name'),
+    path('api/doctors/<int:doctor_id>/available_dates/', common_views.get_available_dates, name='get_available_dates'),
+    path('api/doctors/by_user/<int:user_id>/available_dates/', common_views.get_available_dates_by_user, name='get-available-dates-by-user'),
+    path('api/schedule_appointment/', common_views.schedule_appointment, name='schedule_appointment'),
 ]
 

@@ -83,7 +83,11 @@
                 {% render_field appointmentForm.description class="form-control" placeholder="Description" %}
               </div>
               <div class="form-group">
-                {% render_field appointmentForm.doctorId class="form-control" placeholder="doctor" %}
+                {% render_field appointmentForm.doctorId class="form-control" placeholder="doctor" id="doctor-select" %}
+              </div>
+              <div class="form-group">
+                {% render_field appointmentForm.appointmentDate class="form-control" id="appointment-date" %}
+                <div id="available-dates-list" style="margin-top: 10px;"></div>
               </div>
 
             </div>
@@ -95,4 +99,5 @@
     </div>
   </form>
 </div>
+<script src="{% static 'js/availability_fetcher.js'%}"></script>
 {% endblock content %}

@@ -17,9 +17,6 @@
   <h3>Appointment List</h3>
   {% if appointments_approved %}
   <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title">Appointments</h6>
-    </div>
     <table class="table table-hover dev-table" id="searchable_table">
       <thead>
         <tr>
@@ -63,7 +60,11 @@
                 {% render_field appointmentForm.description class="form-control" placeholder="Description" %}
               </div>
               <div class="form-group">
-                {% render_field appointmentForm.doctorId class="form-control" placeholder="doctor" %}
+                {% render_field appointmentForm.doctorId class="form-control" placeholder="doctor" id="doctor-select" %}
+              </div>
+              <div class="form-group">
+                {% render_field appointmentForm.appointmentDate class="form-control" id="appointment-date" %}
+                <div id="available-dates-list" style="margin-top: 10px;"></div>
               </div>
               <div class="form-group">
                 {% render_field appointmentForm.patientId class="form-control" placeholder="patient" %}
@@ -115,7 +116,7 @@
   <p class="text-center text-muted">No records found.</p>
   {% endif %}
 </div>
-
+<script src="{% static 'js/availability_fetcher.js' %}"></script>
 
 <!--
   developed By : Prathmesh Vairale

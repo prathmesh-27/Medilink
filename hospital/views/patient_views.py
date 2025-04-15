@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
 from django.contrib import messages
+from datetime import datetime
 from ..utility import calculate_age,calculate_bmi,get_bmi_category,calculate_bmr,calculate_tdee,calories_needed
 
 
@@ -36,7 +37,6 @@ def patient_book_appointment_view(request):
         if appointmentForm.is_valid():
             print(request.POST.get('doctorId'))
             desc=request.POST.get('description')
-            
             doctor=models.Doctor.objects.get(user_id=request.POST.get('doctorId'))
             appointment=appointmentForm.save(commit=False)
             appointment.doctorId=request.POST.get('doctorId')
@@ -44,6 +44,10 @@ def patient_book_appointment_view(request):
             appointment.doctorName=models.User.objects.get(id=request.POST.get('doctorId')).first_name
             appointment.patientName=request.user.first_name #----user can choose any patient but only their info will be stored
             appointment.status=False
+            appointment_date = request.POST.get('appointmentDate')  # This is the selected date from the form
+            if appointment_date:
+                # Convert string to date
+                appointment.appointmentDate = datetime.strptime(appointment_date, '%Y-%m-%d').date()
             appointment.save()
         return HttpResponseRedirect('patient-appointment')
 

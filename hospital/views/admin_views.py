@@ -8,18 +8,21 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from datetime import date
 from django.utils.http import urlencode
 from ..utility import get_age_groups,get_admissions_by_month,get_doctors_by_departments,get_patients_division_data,get_appointment_rate
-
+from datetime import datetime
 
 
 
 def is_admin(user):
     return user.groups.filter(name='ADMIN').exists()
 
+
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_add_appointment_view(request):
     if request.method=='POST':
+
         appointmentForm=forms.AppointmentForm(request.POST)
+        print(appointmentForm)
         if appointmentForm.is_valid():
             appointment=appointmentForm.save(commit=False)
             appointment.doctorId=request.POST.get('doctorId')
@@ -27,8 +30,15 @@ def admin_add_appointment_view(request):
             appointment.doctorName=models.User.objects.get(id=request.POST.get('doctorId')).first_name
             appointment.patientName=models.User.objects.get(id=request.POST.get('patientId')).first_name
             appointment.status=True
+            appointment_date = request.POST.get('appointmentDate')  # This is the selected date from the form
+            if appointment_date:
+                # Convert string to date
+                appointment.appointmentDate = datetime.strptime(appointment_date, '%Y-%m-%d').date()
+
+
             appointment.save()
         return HttpResponseRedirect('admin-appointment')
+
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)

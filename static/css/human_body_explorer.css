@@ -1,0 +1,126 @@
+.container-human-body-explorer {
+    margin: 0 auto;
+    padding: 20px;
+    background: #008c8c4d;
+    ;
+}
+
+.header-human-body-explorer {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-bottom: 1px solid #008080;
+}
+
+.header-human-body-explorer>h1 {
+    color: var(--dark-prime);
+    margin-bottom: 10px;
+}
+
+.main-human-body-explorer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+@media (min-width: 768px) {
+    .main-human-body-explorer {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+    }
+}
+
+.body-container {
+    position: relative;
+    width: 100%;
+    max-width: 280px;
+}
+
+#body-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 128, 128, 0.3);
+}
+
+.hotspot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.hotspot-dot {
+    width: 16px;
+    height: 16px;
+    background-color: #008080;
+    border-radius: 50%;
+    box-shadow: 0 0 0 rgba(0, 128, 128, 0.6);
+    animation: pulse 2s infinite;
+}
+
+.hotspot-label {
+    position: absolute;
+    background-color: rgba(10, 25, 41, 0.8);
+    color: #008080;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    top: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.hotspot:hover .hotspot-label {
+    opacity: 1;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 128, 128, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(79, 195, 247, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(79, 195, 247, 0);
+    }
+}
+
+.info-panel {
+    background-color: rgba(30, 58, 95, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    min-height: 300px;
+    backdrop-filter: blur(10px);
+    border: 1px solid #1e3a5f;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.info-panel h2 {
+    color: var(--dark-prime);
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+.info-panel p {
+    margin-bottom: 15px;
+}
+
+
+/* Active state for hotspots */
+.hotspot.active .hotspot-dot {
+    background-color: #ff5722;
+    animation: none;
+    box-shadow: 0 0 15px rgba(255, 87, 34, 0.8);
+}

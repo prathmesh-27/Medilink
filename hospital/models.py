@@ -82,7 +82,7 @@ class Appointment(models.Model):
     doctorId=models.PositiveIntegerField(null=True)
     patientName=models.CharField(max_length=40,null=True)
     doctorName=models.CharField(max_length=40,null=True)
-    appointmentDate=models.DateField(auto_now=True)
+    appointmentDate=models.DateField(null=False,editable=True)
     appointment_day = models.CharField(max_length=10, choices=DAY_CHOICES, null=True)
     description=models.TextField(max_length=500)
     status=models.BooleanField(default=False)

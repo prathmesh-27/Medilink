@@ -89,4 +89,64 @@ def calculate_bmr(weight_kg, height_cm, age, gender):
     return round(bmr,2)    
     
 
+import requests
     
+def get_all_departments():
+    response = requests.get("http://localhost:8000/api/departments/")
+    if response.status_code == 200:
+        return response.json()  # expected to return a list of department names
+    return []
+
+def get_doctors_by_specialty(specialty):
+    try:
+        url = f"http://localhost:8000/api/doctors/{specialty}/"
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.json()  # This is a list of doctors
+        return []
+    except Exception as e:
+        print("Error:", e)
+        return []
+
+def get_doctor_by_name(selected_doc):
+    try:
+        url = f"http://localhost:8000/api/doctors/name/{selected_doc}/"
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.json()  # This will return a list of doctor details
+        elif response.status_code == 404:
+            return {"response": "No doctor found with that name."}
+        return {"response": "Error fetching doctor details."}
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"response": "Error occurred while fetching doctor details."}
+
+
+def get_available_dates(doctor_id):
+    try:
+        url = f"http://localhost:8000/api/doctors/{doctor_id}/available_dates/"
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            return response.json()  # Return the available dates list
+        elif response.status_code == 404:
+            return {"response": "No available dates found for this doctor."}
+        return {"response": "Error fetching available dates."}
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"response": "Error occurred while fetching available dates."}
+
+def get_doctor_by_id(doctor_id):
+    return None
+
+from datetime import datetime    
+# Function to convert date to day of week
+def get_day_of_week(date_str):
+    return datetime.strptime(date_str, "%Y-%m-%d").strftime("%A")
+
+def is_valid_date_format(date_str):
+    try:
+        datetime.strptime(date_str, "%Y-%m-%d")
+        return True
+    except ValueError:
+        return False

@@ -86,3 +86,7 @@ def delete_appointment(request,pk):
     appointment=models.Appointment.objects.get(id=pk)
     appointment.delete()
     return redirect('admin-appointment')
+
+
+
+

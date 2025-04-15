@@ -86,9 +86,9 @@
       <tbody>
         {% for a, p in upcoming_appointments %}
         <tr>
-          <td>{{ p.name }}</td>
+          <td>{{ p.get_name }}</td>
           <td>
-            {% if p.profile_pic.url %}
+            {% if p.profile_pic %}
             <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" />
             {% else %}
             <img src="{% static 'images/patient.jpg' %}" alt="Profile Picture" height="40px" width="40px">

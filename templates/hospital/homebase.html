@@ -10,16 +10,77 @@
   <link rel="stylesheet" href="{% static 'css/home.css' %}">
   <link rel="stylesheet" href="{% static 'css/form.css' %}">
   <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
+  <link rel="stylesheet" href="{% static 'css/human_body_explorer.css' %}">
   <link rel="icon" type="image/x-icon" href="{% static 'images/Med.ico' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="{% static 'js/chatbot.js ' %}" defer></script>
+  <script src="{% static 'js/human_body_explorer.js ' %}" defer></script>
 </head>
 
 <body>
   <main>
     {% block content %}
     {% endblock content %}
+    <section class="container-human-body-explorer">
+      <header class="header-human-body-explorer">
+        <h1 class="font-3">Medilink - Human Body Explorer</h1>
+        <p>Click on different body parts to learn more about them</p>
+      </header>
+
+      <div class="main-human-body-explorer font-2">
+        <div class="body-container">
+          <img src="{% static 'images/human_body_abstract.jpg' %}" alt="Human Body Model" id="body-image">
+
+          <!-- Hotspots for different body parts -->
+          <div class="hotspot" id="head" data-part="head" style="top: 15%; left: 50%;">
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-label">Head</div>
+          </div>
+
+          <div class="hotspot" id="chest" data-part="chest" style="top: 30%; left: 50%;">
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-label">Chest</div>
+          </div>
+
+          <div class="hotspot" id="abdomen" data-part="abdomen" style="top: 42%; left: 50%;">
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-label">Abdomen</div>
+          </div>
+
+          <div class="hotspot" id="right-arm" data-part="right-arm" style="top: 44%; left: 33%;">
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-label">Right Arm</div>
+          </div>
+
+          <div class="hotspot" id="left-arm" data-part="left-arm" style="top: 44%; left: 67%;">
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-label">Left Arm</div>
+          </div>
+
+          <div class="hotspot" id="right-leg" data-part="right-leg" style="top: 72%; left: 43%;">
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-label">Right Leg</div>
+          </div>
+
+          <div class="hotspot" id="left-leg" data-part="left-leg" style="top: 72%; left: 58%;">
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-label">Left Leg</div>
+          </div>
+        </div>
+
+        <div class="info-panel" id="info-panel">
+          <h2 id="part-title" class="font-3">Select a body part</h2>
+          <div id="part-content">
+            Click on any highlighted area of the body to learn more about it.
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+
     <!-- Second Section: Mission, Vision, Motto -->
     <section class="section-cards">
       <div class="card font-2">
@@ -59,7 +120,6 @@
 
       </div>
     </section>
-
     <!-- Section containing image and other info about medilink -->
     <section class="section background-primary">
       <div class="image-container">
