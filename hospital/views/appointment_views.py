@@ -87,6 +87,12 @@ def delete_appointment(request,pk):
     appointment.delete()
     return redirect('admin-appointment')
 
+@login_required(login_url='doctorlogin')
+@user_passes_test(is_doctor)
+def delete_appointment_doctor(request,pk):
+    appointment=models.Appointment.objects.get(id=pk)
+    appointment.delete()
+    return redirect('doctor-appointment')
 
 
 

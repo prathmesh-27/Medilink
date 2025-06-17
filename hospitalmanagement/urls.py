@@ -47,7 +47,7 @@ urlpatterns+=[
     path('admin-notification',admin_views.admin_notification,name='admin-notification'),
     path('discharge-patient/<int:pk>', admin_views.discharge_patient_view,name='discharge-patient'),#To be Corrected
     # path('admin-discharge-patient',admin_views.admin_discharge_patient_view),
-    path('delete-appointment/<int:pk>/', appointment_views.delete_appointment,name='delete-appointment'),
+    path('delete-appointment/<int:pk>/', appointment_views.delete_appointment_doctor,name='delete-appointment-doctor'),
 ]
 
 #---------FOR DOCTOR RELATED URLS-------------------------------------
@@ -59,6 +59,7 @@ urlpatterns +=[
     path('doctorsignup', doctor_views.doctor_signup_view,name='doctorsignup'),
     path('doctor-availability',doctor_views.doctor_availability,name='doctor-availability'),
     path('reset-availability',doctor_views.reset_availability,name='reset-availability'),
+    path('delete-appointment-doctor/<int:pk>/', appointment_views.delete_appointment,name='delete-appointment'),
     
 ]
 
